@@ -1,0 +1,5 @@
+permissionsAnalyzer.json
+.vscode/.alcache/*.json
+.altemplates/*
+.alpackages/*
+*.app
