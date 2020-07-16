@@ -1,20 +1,24 @@
-PageExtension 50113 pageextension50113 extends "Apply Customer Entries" 
+PageExtension 50113 pageextension50113 extends "Apply Customer Entries"
 {
     layout
     {
-        addafter("ApplyingCustLedgEntry.Description")
+
+        addafter(ApplyingDescription)
         {
-            field("ApplyingCustLedgEntry.""Allocated Type""";ApplyingCustLedgEntry."Allocated Type")
+            field(ApplyingAllocatedType; ApplyingCustLedgEntry."Allocated Type")
+            {
+               ApplicationArea = Basic;
+                Caption = 'Applying Allocated Type'; 
+            }
+        }
+
+
+        addafter(Description)
+        {
+            field("Allocated Type"; "Allocated Type")
             {
                 ApplicationArea = Basic;
                 Caption = 'Allocated Type';
-            }
-        }
-        addafter(Description)
-        {
-            field("Allocated Type";"Allocated Type")
-            {
-                ApplicationArea = Basic;
             }
         }
     }

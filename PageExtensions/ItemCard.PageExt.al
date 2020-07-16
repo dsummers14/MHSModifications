@@ -9,7 +9,7 @@ PageExtension 50105 pageextension50105 extends "Item Card"
                 ApplicationArea = Basic;
             }
         }
-        addafter(Control1907509201)
+        addafter(Warehouse)
         {
             group(Custom)
             {
