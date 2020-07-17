@@ -2,7 +2,7 @@ PageExtension 50113 pageextension50113 extends "Apply Customer Entries"
 {
     layout
     {
-
+/* DRS 07/17/20 - Cannot access Global ApplyingCustLedgEntry in extension
         addafter(ApplyingDescription)
         {
             field(ApplyingAllocatedType; ApplyingCustLedgEntry."Allocated Type")
@@ -11,7 +11,7 @@ PageExtension 50113 pageextension50113 extends "Apply Customer Entries"
                 Caption = 'Applying Allocated Type'; 
             }
         }
-
+ */
 
         addafter(Description)
         {

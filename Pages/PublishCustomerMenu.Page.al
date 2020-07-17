@@ -1,6 +1,8 @@
 Page 50098 "Publish Customer Menu"
 {
-    // //iCepts 09.23.13 DXD Upgrade2013                     iCepts1.00
+    //DRS 07/17.20 - Rem'd out code that accesses Insight Tables
+    
+    //iCepts 09.23.13 DXD Upgrade2013                     iCepts1.00
 
     PageType = NavigatePage;
 
@@ -66,8 +68,8 @@ Page 50098 "Publish Customer Menu"
 
         procedure gPublish()
     var
-        iTemplateHeader: Record InsightTemplateHeader;
-        iTemplateDetail: Record InsightTemplateDetails;
+      /*   iTemplateHeader: Record InsightTemplateHeader;
+        iTemplateDetail: Record InsightTemplateDetails; */
         iCustHeader: Record "Customer Menu Header";
         iCustDetail: Record "Customer Menu Details";
         iListName: Text[50];
@@ -99,7 +101,7 @@ Page 50098 "Publish Customer Menu"
               iDescription := Format(iCustDetail.Meal) + ' for ' +
                               Format(iDate,0,'<Weekday Text> <Month Text> <Day>') + ' - ' +
                               iCustHeader.Description;
-
+/* 
               iTemplateHeader.Reset;
               iTemplateHeader.SetRange(CustomerNo,vCustomerNo);
               iTemplateHeader.SetRange(ListName,iListName);
@@ -114,11 +116,11 @@ Page 50098 "Publish Customer Menu"
               iTemplateHeader.CustomerNo := vCustomerNo;
               iTemplateHeader.ListName := iListName;
               iTemplateHeader.Description := iDescription;
-              iTemplateHeader.Insert;
+              iTemplateHeader.Insert; */
             end;
 
 
-            iTemplateDetail.Init;
+           /*  iTemplateDetail.Init;
             iTemplateDetail.CustomerNo := vCustomerNo;
             iTemplateDetail.ListName := iListName;
             iTemplateDetail.SeqNo := iCustDetail.SeqNo;
@@ -126,7 +128,7 @@ Page 50098 "Publish Customer Menu"
             iTemplateDetail.OrderQty := iCustDetail.Quantity;
             iTemplateDetail.RequestDate := iDate;
             iTemplateDetail.UOM := iCustDetail.Uom;
-            iTemplateDetail.Insert;
+            iTemplateDetail.Insert; */
           until iCustDetail.Next = 0;
           Message('Menu Published');
         end;

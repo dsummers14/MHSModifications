@@ -1,6 +1,7 @@
 Page 50099 "Publish Standard Menu"
 {
-    // //iCepts 09.23.13 DXD Upgrade2013                     iCepts1.00
+     //DRS 07/17.20 - Rem'd out code that accesses Insight Tables
+    //iCepts 09.23.13 DXD Upgrade2013                     iCepts1.00
 
     PageType = NavigatePage;
 
@@ -63,8 +64,8 @@ Page 50099 "Publish Standard Menu"
 
         procedure gPublish()
     var
-        iTemplateHeader: Record InsightTemplateHeader;
-        iTemplateDetail: Record InsightTemplateDetails;
+      /*   iTemplateHeader: Record InsightTemplateHeader;
+        iTemplateDetail: Record InsightTemplateDetails; */
         iListName: Text[50];
         iDescription: Text[100];
         iDate: Date;
@@ -101,7 +102,7 @@ Page 50099 "Publish Standard Menu"
                                 Format(iDate,0,'<Weekday Text> <Month Text> <Day>') + ' - ' +
                                 iStdHeader.Description;
 
-                iTemplateHeader.Reset;
+              /*   iTemplateHeader.Reset;
                 iTemplateHeader.SetRange(CustomerNo,vCustomerNo);
                 iTemplateHeader.SetRange(ListName,iListName);
                 iTemplateHeader.DeleteAll;
@@ -115,10 +116,10 @@ Page 50099 "Publish Standard Menu"
                 iTemplateHeader.CustomerNo := vCustomerNo;
                 iTemplateHeader.ListName := iListName;
                 iTemplateHeader.Description := iDescription;
-                iTemplateHeader.Insert;
+                iTemplateHeader.Insert; */
               end;
 
-              iTemplateDetail.Init;
+           /*    iTemplateDetail.Init;
               iTemplateDetail.CustomerNo := vCustomerNo;
               iTemplateDetail.ListName := iListName;
               iTemplateDetail.SeqNo := iStdDetail.SeqNo;
@@ -126,7 +127,7 @@ Page 50099 "Publish Standard Menu"
               iTemplateDetail.OrderQty := iStdDetail.Quantity;
               iTemplateDetail.RequestDate := iDate;
               iTemplateDetail.UOM := iStdDetail.Uom;
-              iTemplateDetail.Insert;
+              iTemplateDetail.Insert; */
             until iStdDetail.Next = 0;
 
           until iCustomer.Next = 0;

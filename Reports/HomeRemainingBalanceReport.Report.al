@@ -72,11 +72,11 @@ Report 50094 "Home Remaining Balance Report"
             }
             column(EmptyString;'%')
             {
-                DecimalPlaces = 1:1;
+              //  DecimalPlaces = 1:1;
             }
             column(EmptyString_Control1000000022;'%')
             {
-                DecimalPlaces = 1:1;
+                // DecimalPlaces = 1:1;
             }
             column(Home_Remaining_Balance_ReportCaption;Home_Remaining_Balance_ReportCaptionLbl)
             {

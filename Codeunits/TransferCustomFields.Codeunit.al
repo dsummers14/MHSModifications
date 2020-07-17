@@ -1,4 +1,4 @@
-Codeunit 70010201 "Transfer Custom Fields10201"
+Codeunit 50149 "Transfer Custom Fields10201"
 {
 
     trigger OnRun()
