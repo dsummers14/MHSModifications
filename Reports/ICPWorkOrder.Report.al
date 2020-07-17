@@ -1,10 +1,12 @@
-Report 50073 "Work Order by shelf"
+Report 50147 "ICPWorkOrder"
 {
     // // iCepts BRB 09.24.13dxd - Add Required Filters Allocated Type, Order Date, and item Category Code  iCepts1.00
+    // // iCepts DXD 01.16.20DXD - RFM9695 Print in Shelf No. insteadd of Item Category Code
     DefaultLayout = RDLC;
-    RDLCLayout = './Layouts/WorkOrderbyshelf.rdlc';
+    RDLCLayout = './Layouts/WorkOrder.rdlc';
 
     Caption = 'Work Order';
+    UsageCategory = ReportsandAnalysis;
 
     dataset
     {
@@ -15,6 +17,33 @@ Report 50073 "Work Order by shelf"
             RequestFilterHeading = 'Sales Order';
             column(ReportForNavId_6640; 6640)
             {
+            }
+            dataitem("Sales Line"; "Sales Line")
+            {
+                DataItemLink = "Document Type" = field("Document Type"), "Document No." = field("No.");
+                DataItemLinkReference = "Sales Header";
+                DataItemTableView = sorting("Document Type", "Document No.", "Line No.");
+                column(ReportForNavId_1000000010; 1000000010)
+                {
+                }
+
+                trigger OnAfterGetRecord()
+                begin
+                    //IF PrintToExcel THEN
+                    //MakeWOLine;
+                    SalesLineT.Init;
+                    SalesLineT := "Sales Line";
+                    if not ItemR.Get("Sales Line"."No.") then
+                        Clear(ItemR);
+                    SalesLineT."Item Category Code" := ItemR."Shelf No.";
+                    SalesLineT.Insert;
+                end;
+
+                trigger OnPreDataItem()
+                begin
+                    SalesLineT.Reset;
+                    SalesLineT.DeleteAll;
+                end;
             }
             dataitem(PageLoop; "Integer")
             {
@@ -67,86 +96,46 @@ Report 50073 "Work Order by shelf"
                 column(WorkOrderCaption; WorkOrderCaptionLbl)
                 {
                 }
-                dataitem("Sales Line"; "Sales Line")
-                {
-                    DataItemLink = "Document Type" = field("Document Type"), "Document No." = field("No.");
-                    DataItemLinkReference = "Sales Header";
-                    DataItemTableView = sorting("Document Type", "Document No.", "Line No.");
-                    column(ReportForNavId_2844; 2844)
-                    {
-                    }
-
-                    trigger OnAfterGetRecord()
-                    begin
-                        TempSalesLine.Init;
-                        TempSalesLine := "Sales Line";
-                        if not ItemR.Get("Sales Line"."No.") then
-                            Clear(ItemR);
-                        TempSalesLine."Item Category Code" := ItemR."Shelf No.";
-                        //MESSAGE('KEY %1 %2 %3 Shelf %4',TempSalesLine."Document Type",TempSalesLine."Document No.",TempSalesLine."Line No.",TempSalesLine."Item Category Code");
-                        TempSalesLine.Insert;
-                        /*IF PrintToExcel THEN
-                          MakeWOLine; */
-
-                    end;
-
-                    trigger OnPreDataItem()
-                    begin
-                        /*IF PrintToExcel THEN
-                          MakeWOLineHeader;*/
-                        TempSalesLine.Reset;
-                        TempSalesLine.DeleteAll;
-
-                    end;
-                }
-                dataitem(PrintSalesLine; "Integer")
+                dataitem(SalesLinebyShelfNo; "Integer")
                 {
                     DataItemTableView = sorting(Number);
                     column(ReportForNavId_1000000000; 1000000000)
                     {
                     }
-                    column(No_SalesLine; TempSalesLine."No.")
-                    {
-                        IncludeCaption = true;
-                    }
-                    column(Description_SalesLine; TempSalesLine.Description)
-                    {
-                        IncludeCaption = true;
-                    }
-                    column(Quantity_SalesLine; TempSalesLine.Quantity)
-                    {
-                        IncludeCaption = true;
-                    }
-                    column(UnitofMeasure_SalesLine; TempSalesLine."Unit of Measure")
-                    {
-                        IncludeCaption = true;
-                    }
-                    column(Type_SalesLine; TempSalesLine.Type)
-                    {
-                        IncludeCaption = true;
-                    }
-                    column(ShelfNo_SalesLine; TempSalesLine."Item Category Code")
-                    {
-                    }
                     column(QtyworkPostSalesOrderCptn; QtyworkPostSalesOrderCptnLbl)
                     {
                     }
-                    column(QuantityUsedCaption; QuantityUsedCaptionLbl)
+                    column(UnitofMeasureCaption; UnitofMeasureCaptionLbl)
                     {
                     }
-                    column(UnitofMeasureCaption; UnitofMeasureCaptionLbl)
+                    column(No_SalesLine; SalesLineT."No.")
+                    {
+                    }
+                    column(Description_SalesLine; SalesLineT.Description)
+                    {
+                    }
+                    column(Quantity_SalesLine; SalesLineT.Quantity)
+                    {
+                    }
+                    column(UnitofMeasure_SalesLine; SalesLineT."Unit of Measure")
+                    {
+                    }
+                    column(Type_SalesLine; SalesLineT.Type)
+                    {
+                    }
+                    column(ShelfNo_SalesLine; SalesLineT."Item Category Code")
                     {
                     }
 
                     trigger OnAfterGetRecord()
                     begin
                         OnLineNum := OnLineNum + 1;
-                        with TempSalesLine do begin
+                        with SalesLineT do begin
                             if OnLineNum = 1 then
-                                Find('-')
+                                SalesLineT.Find('-')
                             else
-                                Next;
-                            Message('Doc %1 Shelf %2', TempSalesLine."Document No.", TempSalesLine."Item Category Code");
+                                SalesLineT.Next;
+
                             if PrintToExcel then
                                 MakeWOLine;
                         end;
@@ -163,13 +152,15 @@ Report 50073 "Work Order by shelf"
 
                     trigger OnPreDataItem()
                     begin
-                        TempSalesLine.Reset;
-                        NoOfLines := TempSalesLine.Count;
-                        SetRange(Number, 1, NoOfLines);
-                        OnLineNum := 0;
-                        //MESSAGE('nolines %1',NoOfLines);
                         if PrintToExcel then
                             MakeWOLineHeader;
+
+                        //item Category Code has Shelf No. Value
+                        SalesLineT.SetCurrentkey("Document Type", "Document No.", "Item Category Code");
+                        //SalesLineT.RESET;
+                        NoOfLines := SalesLineT.Count;
+                        SetRange(Number, 1, NoOfLines);
+                        OnLineNum := 0;
                     end;
                 }
                 dataitem("Sales Comment Line"; "Sales Comment Line")
@@ -315,14 +306,14 @@ Report 50073 "Work Order by shelf"
             ExcelBuf.OpenExcel;
 
             if not "Sales Header".IsEmpty then begin
-                /*   if not "Sales Line".IsEmpty then
-                    ExcelBuf.AutoFit('WorkOrderLineRange');
-                  if not "Sales Line".IsEmpty then
-                    ExcelBuf.BorderAround('WorkOrderLineRange');
-                  if not "Sales Comment Line".IsEmpty then
-                    ExcelBuf.BorderAround('WorkOrderCommentLineRange');
-                  if not "Sales Line".IsEmpty then
-                    ExcelBuf.BorderAround('WorkOrderExtraLineRange'); */
+                /*  if not "Sales Line".IsEmpty then
+                     ExcelBuf.AutoFit('WorkOrderLineRange');
+                 if not "Sales Line".IsEmpty then
+                     ExcelBuf.BorderAround('WorkOrderLineRange');
+                 if not "Sales Comment Line".IsEmpty then
+                     ExcelBuf.BorderAround('WorkOrderCommentLineRange');
+                 if not "Sales Line".IsEmpty then
+                     ExcelBuf.BorderAround('WorkOrderExtraLineRange'); */
             end;
 
             //  ExcelBuf.GiveUserControl;
@@ -333,11 +324,11 @@ Report 50073 "Work Order by shelf"
     trigger OnPreReport()
     begin
         // if PrintToExcel then
-        //   ExcelBuf.CreateBook(Text000);
+        //     ExcelBuf.CreateBook(Text000);
     end;
 
     var
-        Text000: label 'Work Order in Shelf No. Order';
+        Text000: label 'Work Order';
         Text001: label 'Sales Order No.';
         Text002: label 'Quantity used during work (Posted with the Sales Order)';
         Text003: label 'Quantity Used';
@@ -351,6 +342,7 @@ Report 50073 "Work Order by shelf"
         HasWorkOrderExtraLineRange: Boolean;
         HasWorkOrderCommentLineRange: Boolean;
         HasWorkOrderLineRange: Boolean;
+        Text50000: label 'Shelf No.';
         ShipmentDateCaptionLbl: label 'Shipment Date';
         SalesOrderNoCaptionLbl: label 'Sales Order No.';
         PageNoCaptionLbl: label 'Page';
@@ -367,10 +359,10 @@ Report 50073 "Work Order by shelf"
         DateCaptionLbl: label 'Date';
         workPostdItemorResJnlCptnLbl: label 'Extra Item/Resource used during work (Posted with Item or Resource Journals)';
         TypeCaptionLbl: label 'Type';
-        TempSalesLine: Record "Sales Line" temporary;
-        ItemR: Record Item;
+        SalesLineT: Record "Sales Line" temporary;
         NoOfLines: Integer;
         OnLineNum: Integer;
+        ItemR: Record Item;
 
     local procedure MakeWOHeader()
     begin
@@ -434,11 +426,11 @@ Report 50073 "Work Order by shelf"
         ExcelBuf.AddColumn("Sales Line".FieldCaption(Type), false, '', true, false, true, '', ExcelBuf."cell type"::Text);
 
         ExcelBuf.StartRange;
-        ExcelBuf.AddColumn("Sales Line".FieldCaption("No."), false, '', true, false, true, '', ExcelBuf."cell type"::Text);
+        ExcelBuf.AddColumn(Format('No.'), false, '', true, false, true, '', ExcelBuf."cell type"::Text);
         ExcelBuf.AddColumn("Sales Line".FieldCaption(Description), false, '', true, false, true, '', ExcelBuf."cell type"::Text);
         ExcelBuf.AddColumn("Sales Line".FieldCaption(Quantity), false, '', true, false, true, '', ExcelBuf."cell type"::Text);
         ExcelBuf.AddColumn("Sales Line".FieldCaption("Unit of Measure"), false, '', true, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn(Format(Text003), false, '', true, false, true, '', ExcelBuf."cell type"::Text);
+        ExcelBuf.AddColumn(Format(Text50000), false, '', true, false, true, '', ExcelBuf."cell type"::Text);
         ExcelBuf.AddColumn("Sales Line".FieldCaption("Unit of Measure"), false, '', true, false, true, '', ExcelBuf."cell type"::Text);
     end;
 
@@ -448,12 +440,12 @@ Report 50073 "Work Order by shelf"
             exit;
 
         ExcelBuf.NewRow;
-        ExcelBuf.AddColumn(Format("Sales Line".Type), false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn("Sales Line"."No.", false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn("Sales Line".Description, false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn("Sales Line".Quantity, false, '', false, false, true, '', ExcelBuf."cell type"::Number);
-        ExcelBuf.AddColumn("Sales Line"."Unit of Measure", false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
+        ExcelBuf.AddColumn(SalesLineT.Type, false, '', false, false, true, '', ExcelBuf."cell type"::Text);
+        ExcelBuf.AddColumn(SalesLineT."No.", false, '', false, false, true, '', ExcelBuf."cell type"::Text);
+        ExcelBuf.AddColumn(SalesLineT.Description, false, '', false, false, true, '', ExcelBuf."cell type"::Text);
+        ExcelBuf.AddColumn(SalesLineT.Quantity, false, '', false, false, true, '', ExcelBuf."cell type"::Number);
+        ExcelBuf.AddColumn(SalesLineT."Unit of Measure", false, '', false, false, true, '', ExcelBuf."cell type"::Text);
+        ExcelBuf.AddColumn(SalesLineT."Item Category Code", false, '', false, false, true, '', ExcelBuf."cell type"::Text);
         ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
     end;
 
