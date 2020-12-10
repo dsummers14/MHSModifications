@@ -141,15 +141,14 @@ Report 50073 "Work Order by shelf"
                     trigger OnAfterGetRecord()
                     begin
                         OnLineNum := OnLineNum + 1;
-                        with TempSalesLine do begin
-                            if OnLineNum = 1 then
-                                Find('-')
-                            else
-                                Next;
-                            Message('Doc %1 Shelf %2', TempSalesLine."Document No.", TempSalesLine."Item Category Code");
-                            if PrintToExcel then
-                                MakeWOLine;
-                        end;
+
+                        if OnLineNum = 1 then
+                            TempSalesLine.Find('-')
+                        else
+                            TempSalesLine.Next;
+                        Message('Doc %1 Shelf %2', TempSalesLine."Document No.", TempSalesLine."Item Category Code");
+                        if PrintToExcel then
+                            MakeWOLine
                     end;
 
                     trigger OnPostDataItem()

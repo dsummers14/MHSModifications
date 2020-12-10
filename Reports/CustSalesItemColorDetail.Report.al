@@ -16,10 +16,10 @@ Report 50095 "Cust Sales Item Color Detail"
 
     dataset
     {
-        dataitem("Item Ledger Entry";"Item Ledger Entry")
+        dataitem("Item Ledger Entry"; "Item Ledger Entry")
         {
-            DataItemTableView = sorting("Posting Date","Entry Type") where("Entry Type"=filter(Sale));
-            RequestFilterFields = "Source No.","Posting Date";
+            DataItemTableView = sorting("Posting Date", "Entry Type") where("Entry Type" = filter(Sale));
+            RequestFilterFields = "Source No.", "Posting Date";
             column(ReportForNavId_7209; 7209)
             {
             }
@@ -27,189 +27,186 @@ Report 50095 "Cust Sales Item Color Detail"
             trigger OnAfterGetRecord()
             begin
                 if not ItemRec.Get("Item No.") then
-                  Clear(ItemRec);
+                    Clear(ItemRec);
                 if (SkipNonFood) and (ItemRec.DisplayColor = 0) then
-                  CurrReport.Skip;
-                CalcFields("Sales Amount (Actual)",Supervisor,Division,Gender);
+                    CurrReport.Skip;
+                CalcFields("Sales Amount (Actual)", Supervisor, Division, Gender);
                 if ColorSummary then
-                  "Item No." := '';
+                    "Item No." := '';
 
-                if not CustSaleBuffer.Get(Supervisor,Division,Gender,"Source No.",ItemRec.DisplayColor,"Item No.") then begin
-                  CustSaleBuffer.Init;
-                  CustSaleBuffer."Cust No" := "Source No.";
-                  CustSaleBuffer.DisplayColor := ItemRec.DisplayColor;
-                  CustSaleBuffer."Item No." := "Item No.";
-                  CustSaleBuffer."Sales Amount" := "Sales Amount (Actual)";
-                  CustSaleBuffer."Sales Amount Sort" := Format(9999999999.0 - ROUND("Sales Amount (Actual)",0.01));
-                  CustSaleBuffer.RanBy := CurrUser;
+                if not CustSaleBuffer.Get(Supervisor, Division, Gender, "Source No.", ItemRec.DisplayColor, "Item No.") then begin
+                    CustSaleBuffer.Init;
+                    CustSaleBuffer."Cust No" := "Source No.";
+                    CustSaleBuffer.DisplayColor := ItemRec.DisplayColor;
+                    CustSaleBuffer."Item No." := "Item No.";
+                    CustSaleBuffer."Sales Amount" := "Sales Amount (Actual)";
+                    CustSaleBuffer."Sales Amount Sort" := Format(9999999999.0 - ROUND("Sales Amount (Actual)", 0.01));
+                    CustSaleBuffer.RanBy := CurrUser;
 
-                  // iCepts BRB 05.21.12 - RFM7490 Populate New fields :START
-                  CustSaleBuffer.Division := Division;
-                  CustSaleBuffer.Gender := Gender;
-                  // iCepts BRB 05.21.12 - RFM7490 Populate New fields :END
+                    // iCepts BRB 05.21.12 - RFM7490 Populate New fields :START
+                    CustSaleBuffer.Division := Division;
+                    CustSaleBuffer.Gender := Gender;
+                    // iCepts BRB 05.21.12 - RFM7490 Populate New fields :END
 
-                  // iCepts BRB 07.02.12 - RFM7557 Add Supervisor :START
-                  CustSaleBuffer.Supervisor := Supervisor;
-                  //MESSAGE('Supervisor %1',Supervisor); //10.21.13
-                  // iCepts BRB 07.02.12 - RFM7557 Add Supervisor :START
+                    // iCepts BRB 07.02.12 - RFM7557 Add Supervisor :START
+                    CustSaleBuffer.Supervisor := Supervisor;
+                    //MESSAGE('Supervisor %1',Supervisor); //10.21.13
+                    // iCepts BRB 07.02.12 - RFM7557 Add Supervisor :START
 
-                  CustSaleBuffer.Insert;
+                    CustSaleBuffer.Insert;
                 end else begin
-                  CustSaleBuffer."Sales Amount" := CustSaleBuffer."Sales Amount" + "Sales Amount (Actual)";
-                  CustSaleBuffer."Sales Amount Sort" := Format(9999999999.0 - ROUND(CustSaleBuffer."Sales Amount",0.01));
-                  CustSaleBuffer.RanBy := CurrUser;
-                  CustSaleBuffer.Modify;
+                    CustSaleBuffer."Sales Amount" := CustSaleBuffer."Sales Amount" + "Sales Amount (Actual)";
+                    CustSaleBuffer."Sales Amount Sort" := Format(9999999999.0 - ROUND(CustSaleBuffer."Sales Amount", 0.01));
+                    CustSaleBuffer.RanBy := CurrUser;
+                    CustSaleBuffer.Modify;
                 end;
 
                 if not CustSaleTotalTemp.Get("Source No.") then begin
-                  CustSaleTotalTemp.Init;
-                  CustSaleTotalTemp."No." := "Source No.";
-                  CustSaleTotalTemp.Amount := "Sales Amount (Actual)";
-                  CustSaleTotalTemp.Insert;
-                  end else begin
-                  CustSaleTotalTemp.Amount := CustSaleTotalTemp.Amount + "Sales Amount (Actual)";
-                  CustSaleTotalTemp.Modify;
+                    CustSaleTotalTemp.Init;
+                    CustSaleTotalTemp."No." := "Source No.";
+                    CustSaleTotalTemp.Amount := "Sales Amount (Actual)";
+                    CustSaleTotalTemp.Insert;
+                end else begin
+                    CustSaleTotalTemp.Amount := CustSaleTotalTemp.Amount + "Sales Amount (Actual)";
+                    CustSaleTotalTemp.Modify;
                 end;
             end;
         }
-        dataitem(PrintCustSaleColorBuffer;"Customer Sale Color Buffer")
+        dataitem(PrintCustSaleColorBuffer; "Customer Sale Color Buffer")
         {
-            DataItemTableView = sorting(RanBy,Supervisor,Division,Gender,"Cust No","Sales Amount Sort",DisplayColor);
+            DataItemTableView = sorting(RanBy, Supervisor, Division, Gender, "Cust No", "Sales Amount Sort", DisplayColor);
             PrintOnlyIfDetail = false;
             column(ReportForNavId_6803; 6803)
             {
             }
-            column(COMPANYNAME;COMPANYNAME)
+            column(COMPANYNAME; COMPANYNAME)
             {
             }
-            column(FORMAT_TODAY_0_4_;Format(Today,0,4))
+            column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {
             }
-            column(UserId;UserId)
+            column(UserId; UserId)
             {
             }
-            column(Color_Summary;ColorSummary)
+            column(Color_Summary; ColorSummary)
             {
             }
-            column(CurrReport_PAGENO;CurrReport.PageNo)
+            column(Item_Ledger_Entry__TABLECAPTION______FilterStr; "Item Ledger Entry".TableCaption + ': ' + FilterStr)
             {
             }
-            column(Item_Ledger_Entry__TABLECAPTION______FilterStr;"Item Ledger Entry".TableCaption+': '+FilterStr)
+            column(PrintCustSaleColorBuffer_DisplayColor; DisplayColor)
             {
             }
-            column(PrintCustSaleColorBuffer_DisplayColor;DisplayColor)
+            column(PrintCustSaleColorBuffer__Cust_No_; "Cust No")
             {
             }
-            column(PrintCustSaleColorBuffer__Cust_No_;"Cust No")
+            column(CustRec_Name; CustRec.Name)
             {
             }
-            column(CustRec_Name;CustRec.Name)
+            column(PrintCustSaleColorBuffer__Cust_No__Control1000000006; "Cust No")
             {
             }
-            column(PrintCustSaleColorBuffer__Cust_No__Control1000000006;"Cust No")
+            column(CustRec_Name_Control1000000012; CustRec.Name)
             {
             }
-            column(CustRec_Name_Control1000000012;CustRec.Name)
+            column(Gender____FORMAT_Gender_; 'Gender: ' + Format(Gender))
             {
             }
-            column(Gender____FORMAT_Gender_;'Gender: '+Format(Gender))
+            column(Division____FORMAT_Division_; 'Division: ' + Format(Division))
             {
             }
-            column(Division____FORMAT_Division_;'Division: '+Format(Division))
+            column(Supervisor____FORMAT_Supervisor_; 'Supervisor: ' + Format(Supervisor))
             {
             }
-            column(Supervisor____FORMAT_Supervisor_;'Supervisor: '+Format(Supervisor))
+            column(PrintCustSaleColorBuffer__Item_No__; "Item No.")
             {
             }
-            column(PrintCustSaleColorBuffer__Item_No__;"Item No.")
+            column(PrintCustSaleColorBuffer__Sales_Amount_; "Sales Amount")
             {
             }
-            column(PrintCustSaleColorBuffer__Sales_Amount_;"Sales Amount")
+            column(ItemRec_Description; ItemRec.Description)
             {
             }
-            column(ItemRec_Description;ItemRec.Description)
+            column(PrintCustSaleColorBuffer_DisplayColor_Control1000000008; DisplayColor)
             {
             }
-            column(PrintCustSaleColorBuffer_DisplayColor_Control1000000008;DisplayColor)
+            column(FORMAT_DisplayColor____DispTotal; Format(DisplayColor) + DispTotal)
             {
             }
-            column(FORMAT_DisplayColor____DispTotal;Format(DisplayColor) + DispTotal)
+            column(PrintCustSaleColorBuffer__Sales_Amount__Control1000000018; "Sales Amount")
             {
             }
-            column(PrintCustSaleColorBuffer__Sales_Amount__Control1000000018;"Sales Amount")
+            column(Percent; Percent)
+            {
+                DecimalPlaces = 2 : 2;
+            }
+            column(Cust____Cust_No____Totals___; 'Cust ' + "Cust No" + ' Totals: ')
             {
             }
-            column(Percent;Percent)
-            {
-                DecimalPlaces = 2:2;
-            }
-            column(Cust____Cust_No____Totals___;'Cust '+"Cust No"+' Totals: ')
+            column(PrintCustSaleColorBuffer__Sales_Amount__Control1000000022; "Sales Amount")
             {
             }
-            column(PrintCustSaleColorBuffer__Sales_Amount__Control1000000022;"Sales Amount")
+            column(Report_Total__; 'Report Total:')
             {
             }
-            column(Report_Total__;'Report Total:')
+            column(PrintCustSaleColorBuffer__Sales_Amount__Control1000000020; "Sales Amount")
             {
             }
-            column(PrintCustSaleColorBuffer__Sales_Amount__Control1000000020;"Sales Amount")
+            column(Customer_Sales_Item_Color_DetailCaption; Customer_Sales_Item_Color_DetailCaptionLbl)
             {
             }
-            column(Customer_Sales_Item_Color_DetailCaption;Customer_Sales_Item_Color_DetailCaptionLbl)
+            column(CurrReport_PAGENOCaption; CurrReport_PAGENOCaptionLbl)
             {
             }
-            column(CurrReport_PAGENOCaption;CurrReport_PAGENOCaptionLbl)
+            column(Cust_NoCaption; Cust_NoCaptionLbl)
             {
             }
-            column(Cust_NoCaption;Cust_NoCaptionLbl)
+            column(Customer_NameCaption; Customer_NameCaptionLbl)
             {
             }
-            column(Customer_NameCaption;Customer_NameCaptionLbl)
+            column(Display_ColorCaption; Display_ColorCaptionLbl)
             {
             }
-            column(Display_ColorCaption;Display_ColorCaptionLbl)
+            column(Sales_AmountCaption; Sales_AmountCaptionLbl)
             {
             }
-            column(Sales_AmountCaption;Sales_AmountCaptionLbl)
+            column(PercentCaption; PercentCaptionLbl)
             {
             }
-            column(PercentCaption;PercentCaptionLbl)
+            column(PrintCustSaleColorBuffer__Item_No__Caption; FieldCaption("Item No."))
             {
             }
-            column(PrintCustSaleColorBuffer__Item_No__Caption;FieldCaption("Item No."))
+            column(PrintCustSaleColorBuffer_DisplayColor_Control1000000008Caption; FieldCaption(DisplayColor))
             {
             }
-            column(PrintCustSaleColorBuffer_DisplayColor_Control1000000008Caption;FieldCaption(DisplayColor))
+            column(PrintCustSaleColorBuffer__Cust_No__Control1000000006Caption; FieldCaption("Cust No"))
             {
             }
-            column(PrintCustSaleColorBuffer__Cust_No__Control1000000006Caption;FieldCaption("Cust No"))
+            column(Customer_NameCaption_Control1000000013; Customer_NameCaption_Control1000000013Lbl)
             {
             }
-            column(Customer_NameCaption_Control1000000013;Customer_NameCaption_Control1000000013Lbl)
+            column(PrintCustSaleColorBuffer__Sales_Amount_Caption; FieldCaption("Sales Amount"))
             {
             }
-            column(PrintCustSaleColorBuffer__Sales_Amount_Caption;FieldCaption("Sales Amount"))
+            column(DescriptionCaption; DescriptionCaptionLbl)
             {
             }
-            column(DescriptionCaption;DescriptionCaptionLbl)
+            column(EmptyStringCaption; EmptyStringCaptionLbl)
             {
             }
-            column(EmptyStringCaption;EmptyStringCaptionLbl)
+            column(ItemNoCaption; ItemNoCaptionLbl)
             {
             }
-            column(ItemNoCaption;ItemNoCaptionLbl)
+            column(PrintCustSaleColorBuffer_Supervisor; Supervisor)
             {
             }
-            column(PrintCustSaleColorBuffer_Supervisor;Supervisor)
+            column(PrintCustSaleColorBuffer_Division; Division)
             {
             }
-            column(PrintCustSaleColorBuffer_Division;Division)
+            column(PrintCustSaleColorBuffer_Gender; Gender)
             {
             }
-            column(PrintCustSaleColorBuffer_Gender;Gender)
-            {
-            }
-            column(PrintCustSaleColorBuffer_SalesAmount_Sort;"Sales Amount Sort")
+            column(PrintCustSaleColorBuffer_SalesAmount_Sort; "Sales Amount Sort")
             {
             }
 
@@ -217,13 +214,13 @@ Report 50095 "Cust Sales Item Color Detail"
             begin
                 Percent := 0;
                 if not CustRec.Get("Cust No") then
-                  Clear(CustRec);
+                    Clear(CustRec);
                 if not ItemRec.Get("Item No.") then
-                  Clear(ItemRec);
+                    Clear(ItemRec);
 
                 if CustSaleTotalTemp.Get("Cust No") then begin
-                  if CustSaleTotalTemp.Amount <> 0 then
-                     Percent := ("Sales Amount" / CustSaleTotalTemp.Amount) * 100;
+                    if CustSaleTotalTemp.Amount <> 0 then
+                        Percent := ("Sales Amount" / CustSaleTotalTemp.Amount) * 100;
                 end;
             end;
 
@@ -233,11 +230,11 @@ Report 50095 "Cust Sales Item Color Detail"
                 Commit;
                 Reset;
                 if not ColorSummary then
-                  SetCurrentkey(RanBy,Supervisor,Division,Gender,"Cust No",DisplayColor,"Sales Amount Sort","Item No.")
+                    SetCurrentkey(RanBy, Supervisor, Division, Gender, "Cust No", DisplayColor, "Sales Amount Sort", "Item No.")
                 else
-                  SetCurrentkey(RanBy,Supervisor,Division,Gender,"Cust No","Sales Amount Sort",DisplayColor);
-                SetRange(RanBy,CurrUser);
-                CurrReport.CreateTotals("Sales Amount");
+                    SetCurrentkey(RanBy, Supervisor, Division, Gender, "Cust No", "Sales Amount Sort", DisplayColor);
+                SetRange(RanBy, CurrUser);
+                //CurrReport.CreateTotals("Sales Amount");
             end;
         }
     }
@@ -252,11 +249,11 @@ Report 50095 "Cust Sales Item Color Detail"
             {
                 group(Options)
                 {
-                    field("Display Color Summary";ColorSummary)
+                    field("Display Color Summary"; ColorSummary)
                     {
                         ApplicationArea = Basic;
                     }
-                    field("Skip Non-Food";SkipNonFood)
+                    field("Skip Non-Food"; SkipNonFood)
                     {
                         ApplicationArea = Basic;
                     }
@@ -277,7 +274,7 @@ Report 50095 "Cust Sales Item Color Detail"
     begin
         CustSaleBuffer.Reset;
         CustSaleBuffer.SetCurrentkey(RanBy);
-        CustSaleBuffer.SetRange(RanBy,CurrUser);
+        CustSaleBuffer.SetRange(RanBy, CurrUser);
         CustSaleBuffer.DeleteAll;
     end;
 

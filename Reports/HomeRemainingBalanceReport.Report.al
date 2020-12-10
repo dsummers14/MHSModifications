@@ -23,9 +23,6 @@ Report 50094 "Home Remaining Balance Report"
             column(COMPANYNAME;COMPANYNAME)
             {
             }
-            column(CurrReport_PAGENO;CurrReport.PageNo)
-            {
-            }
             column(UserId;UserId)
             {
             }

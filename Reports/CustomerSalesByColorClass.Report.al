@@ -105,9 +105,6 @@ Report 50096 "Customer Sales By Color Class"
             column(UserId;UserId)
             {
             }
-            column(CurrReport_PAGENO;CurrReport.PageNo)
-            {
-            }
             column(Item_Ledger_Entry__TABLECAPTION______FilterStr;"Item Ledger Entry".TableCaption+': '+FilterStr)
             {
             }

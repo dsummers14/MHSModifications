@@ -22,15 +22,15 @@ PageExtension 50105 ICPItemCard extends "Item Card"
                     begin
                         if not Rec.FoodItem then begin
                             Rec."Menu-Only" := false;
-                            FoodItemFlag := false;
+                            vFoodItemFlag := false;
                         end else
-                            FoodItemFlag := true;
+                            vFoodItemFlag := true;
                     end;
                 }
                 field("Menu-Only"; Rec."Menu-Only")
                 {
                     ApplicationArea = Basic;
-                    Editable = FoodItemFlag;
+                    Editable = vFoodItemFlag;
                 }
                 field("Maximum Sales Order Qty."; Rec."Maximum Sales Order Qty.")
                 {
@@ -53,30 +53,12 @@ PageExtension 50105 ICPItemCard extends "Item Card"
     }
 
     var
-        FoodItemFlag: Boolean;
+        vFoodItemFlag: Boolean;
 
-    //Unsupported feature: Code Modification on "OnAfterGetRecord".
+    trigger OnAfterGetRecord()
+    begin
+        vFoodItemFlag := rec.FoodItem;
+    end;
 
-    //trigger OnAfterGetRecord()
-    //>>>> ORIGINAL CODE:
-    //begin
-    /*
-    EnablePlanningControls;
-    EnableCostingControls;
-    */
-    //end;
-    //>>>> MODIFIED CODE:
-    //begin
-    /*
-    EnablePlanningControls;
-    EnableCostingControls;
-
-    IF NOT FoodItem THEN BEGIN
-      "Menu-Only" := FALSE;
-      FoodItemFlag := FALSE;
-    END ELSE
-      FoodItemFlag := TRUE;
-    */
-    //end;
 }
 

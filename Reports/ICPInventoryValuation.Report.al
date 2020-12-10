@@ -23,9 +23,6 @@ Report 50139 "ICPInventoryValuation"
             column(CompanyInformation_Name; CompanyInformation.Name)
             {
             }
-            column(CurrReport_PAGENO; CurrReport.PageNo)
-            {
-            }
             column(UserId; UserId)
             {
             }
@@ -243,7 +240,7 @@ Report 50139 "ICPInventoryValuation"
 
                 trigger OnPreDataItem()
                 begin
-                    CurrReport.CreateTotals(RemainingQty, InventoryValue);
+                    // CurrReport.CreateTotals(RemainingQty, InventoryValue);
                     SetRange("Posting Date", 0D, AsOfDate);
                 end;
             }
@@ -256,7 +253,7 @@ Report 50139 "ICPInventoryValuation"
 
             trigger OnPreDataItem()
             begin
-                CurrReport.CreateTotals(RemainingQty, InventoryValue);
+                //  CurrReport.CreateTotals(RemainingQty, InventoryValue);
                 SetRange("Date Filter", 0D, AsOfDate);
             end;
         }
@@ -377,55 +374,55 @@ Report 50139 "ICPInventoryValuation"
         ExpectedValue: Decimal;
         ExpectedValueACY: Decimal;
     begin
-        with ItemLedgEntry do begin
-            // adjust remaining quantity
-            "Remaining Quantity" := Quantity;
-            if Positive then begin
-                ItemApplnEntry.Reset;
-                ItemApplnEntry.SetCurrentkey(
-                  "Inbound Item Entry No.", "Item Ledger Entry No.", "Outbound Item Entry No.", "Cost Application");
-                ItemApplnEntry.SetRange("Inbound Item Entry No.", "Entry No.");
-                ItemApplnEntry.SetRange("Posting Date", 0D, AsOfDate);
-                ItemApplnEntry.SetFilter("Outbound Item Entry No.", '<>%1', 0);
-                ItemApplnEntry.SetFilter("Item Ledger Entry No.", '<>%1', "Entry No.");
-                if ItemApplnEntry.Find('-') then
-                    repeat
-                        if ItemLedgEntry2.Get(ItemApplnEntry."Item Ledger Entry No.") and
-                           (ItemLedgEntry2."Posting Date" <= AsOfDate)
-                        then
-                            "Remaining Quantity" := "Remaining Quantity" + ItemApplnEntry.Quantity;
-                    until ItemApplnEntry.Next = 0;
-            end else begin
-                ItemApplnEntry.Reset;
-                ItemApplnEntry.SetCurrentkey(
-                  "Outbound Item Entry No.", "Item Ledger Entry No.", "Cost Application", "Transferred-from Entry No.");
-                ItemApplnEntry.SetRange("Item Ledger Entry No.", "Entry No.");
-                ItemApplnEntry.SetRange("Outbound Item Entry No.", "Entry No.");
-                ItemApplnEntry.SetRange("Posting Date", 0D, AsOfDate);
-                if ItemApplnEntry.Find('-') then
-                    repeat
-                        if ItemLedgEntry2.Get(ItemApplnEntry."Inbound Item Entry No.") and
-                           (ItemLedgEntry2."Posting Date" <= AsOfDate)
-                        then
-                            "Remaining Quantity" := "Remaining Quantity" - ItemApplnEntry.Quantity;
-                    until ItemApplnEntry.Next = 0;
-            end;
 
-            // calculate adjusted cost of entry
-            ValueEntry.Reset;
-            ValueEntry.SetCurrentkey("Item Ledger Entry No.", "Entry Type");
-            ValueEntry.SetRange("Item Ledger Entry No.", "Entry No.");
-            ValueEntry.SetRange("Posting Date", 0D, AsOfDate);
-            if ValueEntry.Find('-') then
+        // adjust remaining quantity
+        ItemLedgEntry."Remaining Quantity" := ItemLedgEntry.Quantity;
+        if ItemLedgEntry.Positive then begin
+            ItemApplnEntry.Reset;
+            ItemApplnEntry.SetCurrentkey(
+              "Inbound Item Entry No.", "Item Ledger Entry No.", "Outbound Item Entry No.", "Cost Application");
+            ItemApplnEntry.SetRange("Inbound Item Entry No.", ItemLedgEntry."Entry No.");
+            ItemApplnEntry.SetRange("Posting Date", 0D, AsOfDate);
+            ItemApplnEntry.SetFilter("Outbound Item Entry No.", '<>%1', 0);
+            ItemApplnEntry.SetFilter("Item Ledger Entry No.", '<>%1', ItemLedgEntry."Entry No.");
+            if ItemApplnEntry.Find('-') then
                 repeat
-                    ExpectedValue := ExpectedValue + ValueEntry."Cost Amount (Expected)";
-                    ExpectedValueACY := ExpectedValueACY + ValueEntry."Cost Amount (Expected) (ACY)";
-                    InvoicedValue := InvoicedValue + ValueEntry."Cost Amount (Actual)";
-                    InvoicedValueACY := InvoicedValueACY + ValueEntry."Cost Amount (Actual) (ACY)";
-                until ValueEntry.Next = 0;
-            "Cost Amount (Actual)" := ROUND(InvoicedValue + ExpectedValue);
-            "Cost Amount (Actual) (ACY)" := ROUND(InvoicedValueACY + ExpectedValueACY, Currency."Amount Rounding Precision");
+                    if ItemLedgEntry2.Get(ItemApplnEntry."Item Ledger Entry No.") and
+                       (ItemLedgEntry2."Posting Date" <= AsOfDate)
+                    then
+                        ItemLedgEntry."Remaining Quantity" := ItemLedgEntry."Remaining Quantity" + ItemApplnEntry.Quantity;
+                until ItemApplnEntry.Next = 0;
+        end else begin
+            ItemApplnEntry.Reset;
+            ItemApplnEntry.SetCurrentkey(
+              "Outbound Item Entry No.", "Item Ledger Entry No.", "Cost Application", "Transferred-from Entry No.");
+            ItemApplnEntry.SetRange("Item Ledger Entry No.", ItemLedgEntry."Entry No.");
+            ItemApplnEntry.SetRange("Outbound Item Entry No.", ItemLedgEntry."Entry No.");
+            ItemApplnEntry.SetRange("Posting Date", 0D, AsOfDate);
+            if ItemApplnEntry.Find('-') then
+                repeat
+                    if ItemLedgEntry2.Get(ItemApplnEntry."Inbound Item Entry No.") and
+                       (ItemLedgEntry2."Posting Date" <= AsOfDate)
+                    then
+                        ItemLedgEntry."Remaining Quantity" := ItemLedgEntry."Remaining Quantity" - ItemApplnEntry.Quantity;
+                until ItemApplnEntry.Next = 0;
         end;
+
+        // calculate adjusted cost of entry
+        ValueEntry.Reset;
+        ValueEntry.SetCurrentkey("Item Ledger Entry No.", "Entry Type");
+        ValueEntry.SetRange("Item Ledger Entry No.", ItemLedgEntry."Entry No.");
+        ValueEntry.SetRange("Posting Date", 0D, AsOfDate);
+        if ValueEntry.Find('-') then
+            repeat
+                ExpectedValue := ExpectedValue + ValueEntry."Cost Amount (Expected)";
+                ExpectedValueACY := ExpectedValueACY + ValueEntry."Cost Amount (Expected) (ACY)";
+                InvoicedValue := InvoicedValue + ValueEntry."Cost Amount (Actual)";
+                InvoicedValueACY := InvoicedValueACY + ValueEntry."Cost Amount (Actual) (ACY)";
+            until ValueEntry.Next = 0;
+        ItemLedgEntry."Cost Amount (Actual)" := ROUND(InvoicedValue + ExpectedValue);
+        ItemLedgEntry."Cost Amount (Actual) (ACY)" := ROUND(InvoicedValueACY + ExpectedValueACY, Currency."Amount Rounding Precision");
+
     end;
 }
 

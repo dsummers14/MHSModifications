@@ -130,15 +130,13 @@ Report 50147 "ICPWorkOrder"
                     trigger OnAfterGetRecord()
                     begin
                         OnLineNum := OnLineNum + 1;
-                        with SalesLineT do begin
-                            if OnLineNum = 1 then
-                                SalesLineT.Find('-')
-                            else
-                                SalesLineT.Next;
+                        if OnLineNum = 1 then
+                            SalesLineT.Find('-')
+                        else
+                            SalesLineT.Next;
 
-                            if PrintToExcel then
-                                MakeWOLine;
-                        end;
+                        if PrintToExcel then
+                            MakeWOLine;
                     end;
 
                     trigger OnPostDataItem()

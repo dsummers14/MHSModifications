@@ -16,9 +16,6 @@ Report 50138 "ICPInventorytoG/LReconcile"
             column(CompanyInformation_Name; CompanyInformation.Name)
             {
             }
-            column(CurrReport_PAGENO; CurrReport.PageNo)
-            {
-            }
             column(STRSUBSTNO_Text003_AsOfDate_; StrSubstNo(Text003, AsOfDate))
             {
             }
@@ -428,61 +425,60 @@ Report 50138 "ICPInventorytoG/LReconcile"
         ExpectedPostedToGL := 0;
         ExpectedPostedToGLACY := 0;
 
-        with ItemLedgEntry do begin
-            // calculate adjusted cost of entry
-            ValueEntry.Reset;
-            ValueEntry.SetCurrentkey("Item Ledger Entry No.");
-            ValueEntry.SetRange("Item Ledger Entry No.", "Entry No.");
-            ValueEntry.SetRange("Posting Date", 0D, AsOfDate);
-            if ValueEntry.Find('-') then
-                repeat
-                    ExpectedValue := ExpectedValue + ValueEntry."Cost Amount (Expected)";
-                    ExpectedValueACY := ExpectedValueACY + ValueEntry."Cost Amount (Expected) (ACY)";
-                    ExpectedPostedToGL := ExpectedPostedToGL + ValueEntry."Expected Cost Posted to G/L";
-                    ExpectedPostedToGLACY := ExpectedPostedToGLACY + ValueEntry."Exp. Cost Posted to G/L (ACY)";
-                    if ValueEntry."Expected Cost" and (ValuedQty = 0) then
-                        ValuedQty := ValueEntry."Valued Quantity";
-                    InvoicedQty := InvoicedQty + ValueEntry."Invoiced Quantity";
-                    InvoicedValue := InvoicedValue + ValueEntry."Cost Amount (Actual)";
-                    InvoicedValueACY := InvoicedValueACY + ValueEntry."Cost Amount (Actual) (ACY)";
-                    InvoicedPostedToGL := InvoicedPostedToGL + ValueEntry."Cost Posted to G/L";
-                    InvoicedPostedToGLACY := InvoicedPostedToGLACY + ValueEntry."Cost Posted to G/L (ACY)";
-                until ValueEntry.Next = 0;
+        // calculate adjusted cost of entry
+        ValueEntry.Reset;
+        ValueEntry.SetCurrentkey("Item Ledger Entry No.");
+        ValueEntry.SetRange("Item Ledger Entry No.", ItemLedgEntry."Entry No.");
+        ValueEntry.SetRange("Posting Date", 0D, AsOfDate);
+        if ValueEntry.Find('-') then
+            repeat
+                ExpectedValue := ExpectedValue + ValueEntry."Cost Amount (Expected)";
+                ExpectedValueACY := ExpectedValueACY + ValueEntry."Cost Amount (Expected) (ACY)";
+                ExpectedPostedToGL := ExpectedPostedToGL + ValueEntry."Expected Cost Posted to G/L";
+                ExpectedPostedToGLACY := ExpectedPostedToGLACY + ValueEntry."Exp. Cost Posted to G/L (ACY)";
+                if ValueEntry."Expected Cost" and (ValuedQty = 0) then
+                    ValuedQty := ValueEntry."Valued Quantity";
+                InvoicedQty := InvoicedQty + ValueEntry."Invoiced Quantity";
+                InvoicedValue := InvoicedValue + ValueEntry."Cost Amount (Actual)";
+                InvoicedValueACY := InvoicedValueACY + ValueEntry."Cost Amount (Actual) (ACY)";
+                InvoicedPostedToGL := InvoicedPostedToGL + ValueEntry."Cost Posted to G/L";
+                InvoicedPostedToGLACY := InvoicedPostedToGLACY + ValueEntry."Cost Posted to G/L (ACY)";
+            until ValueEntry.Next = 0;
 
-            if ValuedQty = 0 then
-                ValuedQty := InvoicedQty
-            else
-                if ValuedQty > 0 then begin
+        if ValuedQty = 0 then
+            ValuedQty := InvoicedQty
+        else
+            if ValuedQty > 0 then begin
+                if ShowACY then begin
+                    ReceivedNotInvoiced := ExpectedValueACY;
+                    ReceivedNotInvoicedPosted := ExpectedPostedToGLACY;
+                end else begin
+                    ReceivedNotInvoiced := ExpectedValue;
+                    ReceivedNotInvoicedPosted := ExpectedPostedToGL;
+                end;
+            end else
+                if ValuedQty < 0 then begin
                     if ShowACY then begin
-                        ReceivedNotInvoiced := ExpectedValueACY;
-                        ReceivedNotInvoicedPosted := ExpectedPostedToGLACY;
+                        ShippedNotInvoiced := ExpectedValueACY;
+                        ShippedNotInvoicedPosted := ExpectedPostedToGLACY;
                     end else begin
-                        ReceivedNotInvoiced := ExpectedValue;
-                        ReceivedNotInvoicedPosted := ExpectedPostedToGL;
+                        ShippedNotInvoiced := ExpectedValue;
+                        ShippedNotInvoicedPosted := ExpectedPostedToGL;
                     end;
-                end else
-                    if ValuedQty < 0 then begin
-                        if ShowACY then begin
-                            ShippedNotInvoiced := ExpectedValueACY;
-                            ShippedNotInvoicedPosted := ExpectedPostedToGLACY;
-                        end else begin
-                            ShippedNotInvoiced := ExpectedValue;
-                            ShippedNotInvoicedPosted := ExpectedPostedToGL;
-                        end;
-                    end;
-            TotalExpectedCost := ReceivedNotInvoiced + ShippedNotInvoiced;
-            NetExpectedCostPosted := ReceivedNotInvoicedPosted + ShippedNotInvoicedPosted;
-            NetExpectedCostNotPosted := TotalExpectedCost - NetExpectedCostPosted;
-            if ShowACY then begin
-                TotalInvoicedValue := InvoicedValueACY;
-                InvoicedValuePosted := InvoicedPostedToGLACY;
-            end else begin
-                TotalInvoicedValue := InvoicedValue;
-                InvoicedValuePosted := InvoicedPostedToGL;
-            end;
-            InvoicedValueNotPosted := TotalInvoicedValue - InvoicedValuePosted;
-            InventoryValue := TotalInvoicedValue + TotalExpectedCost;
+                end;
+        TotalExpectedCost := ReceivedNotInvoiced + ShippedNotInvoiced;
+        NetExpectedCostPosted := ReceivedNotInvoicedPosted + ShippedNotInvoicedPosted;
+        NetExpectedCostNotPosted := TotalExpectedCost - NetExpectedCostPosted;
+        if ShowACY then begin
+            TotalInvoicedValue := InvoicedValueACY;
+            InvoicedValuePosted := InvoicedPostedToGLACY;
+        end else begin
+            TotalInvoicedValue := InvoicedValue;
+            InvoicedValuePosted := InvoicedPostedToGL;
         end;
+        InvoicedValueNotPosted := TotalInvoicedValue - InvoicedValuePosted;
+        InventoryValue := TotalInvoicedValue + TotalExpectedCost;
+
     end;
 
     local procedure UpdateBuffer(ItemLedgEntry: Record "Item Ledger Entry")
@@ -523,32 +519,30 @@ Report 50138 "ICPInventorytoG/LReconcile"
         if NewRow then
             UpdateTempBuffer();
 
-        with TempBuffer do begin
-            if ShowACY then begin
-                Value1 += ROUND(InventoryValue, Currency."Amount Rounding Precision");
-                Value2 += ROUND(ReceivedNotInvoiced, Currency."Amount Rounding Precision");
-                Value3 += ROUND(ShippedNotInvoiced, Currency."Amount Rounding Precision");
-                Value4 += ROUND(TotalExpectedCost, Currency."Amount Rounding Precision");
-                Value5 += ROUND(ReceivedNotInvoicedPosted, Currency."Amount Rounding Precision");
-                Value6 += ROUND(ShippedNotInvoicedPosted, Currency."Amount Rounding Precision");
-                Value7 += ROUND(NetExpectedCostPosted, Currency."Amount Rounding Precision");
-                Value8 += ROUND(NetExpectedCostNotPosted, Currency."Amount Rounding Precision");
-                Value9 += ROUND(TotalInvoicedValue, Currency."Amount Rounding Precision");
-                Value10 += ROUND(InvoicedValuePosted, Currency."Amount Rounding Precision");
-                Value11 += ROUND(InvoicedValueNotPosted, Currency."Amount Rounding Precision");
-            end else begin
-                Value1 += ROUND(InventoryValue);
-                Value2 += ROUND(ReceivedNotInvoiced);
-                Value3 += ROUND(ShippedNotInvoiced);
-                Value4 += ROUND(TotalExpectedCost);
-                Value5 += ROUND(ReceivedNotInvoicedPosted);
-                Value6 += ROUND(ShippedNotInvoicedPosted);
-                Value7 += ROUND(NetExpectedCostPosted);
-                Value8 += ROUND(NetExpectedCostNotPosted);
-                Value9 += ROUND(TotalInvoicedValue);
-                Value10 += ROUND(InvoicedValuePosted);
-                Value11 += ROUND(InvoicedValueNotPosted);
-            end;
+        if ShowACY then begin
+            TempBuffer.Value1 += ROUND(InventoryValue, Currency."Amount Rounding Precision");
+            TempBuffer.Value2 += ROUND(ReceivedNotInvoiced, Currency."Amount Rounding Precision");
+            TempBuffer.Value3 += ROUND(ShippedNotInvoiced, Currency."Amount Rounding Precision");
+            TempBuffer.Value4 += ROUND(TotalExpectedCost, Currency."Amount Rounding Precision");
+            TempBuffer.Value5 += ROUND(ReceivedNotInvoicedPosted, Currency."Amount Rounding Precision");
+            TempBuffer.Value6 += ROUND(ShippedNotInvoicedPosted, Currency."Amount Rounding Precision");
+            TempBuffer.Value7 += ROUND(NetExpectedCostPosted, Currency."Amount Rounding Precision");
+            TempBuffer.Value8 += ROUND(NetExpectedCostNotPosted, Currency."Amount Rounding Precision");
+            TempBuffer.Value9 += ROUND(TotalInvoicedValue, Currency."Amount Rounding Precision");
+            TempBuffer.Value10 += ROUND(InvoicedValuePosted, Currency."Amount Rounding Precision");
+            TempBuffer.Value11 += ROUND(InvoicedValueNotPosted, Currency."Amount Rounding Precision");
+        end else begin
+            TempBuffer.Value1 += ROUND(InventoryValue);
+            TempBuffer.Value2 += ROUND(ReceivedNotInvoiced);
+            TempBuffer.Value3 += ROUND(ShippedNotInvoiced);
+            TempBuffer.Value4 += ROUND(TotalExpectedCost);
+            TempBuffer.Value5 += ROUND(ReceivedNotInvoicedPosted);
+            TempBuffer.Value6 += ROUND(ShippedNotInvoicedPosted);
+            TempBuffer.Value7 += ROUND(NetExpectedCostPosted);
+            TempBuffer.Value8 += ROUND(NetExpectedCostNotPosted);
+            TempBuffer.Value9 += ROUND(TotalInvoicedValue);
+            TempBuffer.Value10 += ROUND(InvoicedValuePosted);
+            TempBuffer.Value11 += ROUND(InvoicedValueNotPosted);
         end;
 
         TempBuffer."Item No." := ItemLedgEntry."Item No.";
@@ -574,22 +568,20 @@ Report 50138 "ICPInventorytoG/LReconcile"
     begin
         if IsCollecting then begin
             if not TempBuffer.Insert then begin
-                with AlreadyInsertedTempBuffer do begin
-                    Copy(TempBuffer, true);
-                    Get(TempBuffer."Item No.", TempBuffer."Variant Code", TempBuffer."Location Code");
-                    Value1 += TempBuffer.Value1;
-                    Value2 += TempBuffer.Value2;
-                    Value3 += TempBuffer.Value3;
-                    Value4 += TempBuffer.Value4;
-                    Value5 += TempBuffer.Value5;
-                    Value6 += TempBuffer.Value6;
-                    Value7 += TempBuffer.Value7;
-                    Value8 += TempBuffer.Value8;
-                    Value9 += TempBuffer.Value9;
-                    Value10 += TempBuffer.Value10;
-                    Value11 += TempBuffer.Value11;
-                    Modify;
-                end;
+                AlreadyInsertedTempBuffer.Copy(TempBuffer, true);
+                AlreadyInsertedTempBuffer.Get(TempBuffer."Item No.", TempBuffer."Variant Code", TempBuffer."Location Code");
+                AlreadyInsertedTempBuffer.Value1 += TempBuffer.Value1;
+                AlreadyInsertedTempBuffer.Value2 += TempBuffer.Value2;
+                AlreadyInsertedTempBuffer.Value3 += TempBuffer.Value3;
+                AlreadyInsertedTempBuffer.Value4 += TempBuffer.Value4;
+                AlreadyInsertedTempBuffer.Value5 += TempBuffer.Value5;
+                AlreadyInsertedTempBuffer.Value6 += TempBuffer.Value6;
+                AlreadyInsertedTempBuffer.Value7 += TempBuffer.Value7;
+                AlreadyInsertedTempBuffer.Value8 += TempBuffer.Value8;
+                AlreadyInsertedTempBuffer.Value9 += TempBuffer.Value9;
+                AlreadyInsertedTempBuffer.Value10 += TempBuffer.Value10;
+                AlreadyInsertedTempBuffer.Value11 += TempBuffer.Value11;
+                AlreadyInsertedTempBuffer.Modify();
             end;
         end;
 

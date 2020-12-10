@@ -26,9 +26,6 @@ Report 50146 "ICPPickingListbyItem"
             column(CompanyInformation_Name; CompanyInformation.Name)
             {
             }
-            column(CurrReport_PAGENO; CurrReport.PageNo)
-            {
-            }
             column(UserId; UserId)
             {
             }
@@ -246,7 +243,7 @@ Report 50146 "ICPPickingListbyItem"
 
                 trigger OnPreDataItem()
                 begin
-                    CurrReport.CreateTotals(Quantity, "Quantity Shipped", "Qty. to Ship");
+                   // CurrReport.CreateTotals(Quantity, "Quantity Shipped", "Qty. to Ship");
                     // Initialize Variables ;
                     TotalQuantity := 0;
                     TotalQuantity_Shipped := 0;
