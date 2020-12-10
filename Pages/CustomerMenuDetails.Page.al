@@ -16,15 +16,18 @@ Page 50097 "Customer Menu Details"
             {
                 field(WeekNo;Rec.WeekNo)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                 }
                 field(Meal;Rec.Meal)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                 }
                 field(ItemNo;Rec.ItemNo)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
 
                     trigger OnValidate()
                     begin
@@ -33,20 +36,24 @@ Page 50097 "Customer Menu Details"
                 }
                 field(ItemDesc;Rec.ItemDesc)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                     Caption = 'Description';
                 }
                 field(Quantity;Rec.Quantity)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                 }
                 field(Uom;Rec.Uom)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                 }
                 field(Day;Rec.Day)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                 }
             }
         }
@@ -57,6 +64,6 @@ Page 50097 "Customer Menu Details"
     }
 
     var
-        Item: Record Item;
+       
 }
 

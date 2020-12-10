@@ -6,7 +6,8 @@ PageExtension 50101 ICPGeneralLedgerEntries extends "General Ledger Entries"
         {
             field("Allocated Type"; Rec."Allocated Type")
             {
-                ApplicationArea = Basic;
+                ApplicationArea = All;
+                ToolTip = 'ToolTip';
             }
         }
     }

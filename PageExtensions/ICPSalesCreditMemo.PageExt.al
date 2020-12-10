@@ -9,7 +9,8 @@ PageExtension 50110 ICPSalesCreditMemo extends "Sales Credit Memo"
                 Caption = 'Custom';
                 field("Allocated Type";Rec."Allocated Type")
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                 }
             }
         }

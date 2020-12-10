@@ -6,7 +6,8 @@ PageExtension 50114 ICPSalesJournal extends "Sales Journal"
         {
             field("Allocated Type"; Rec."Allocated Type")
             {
-                ApplicationArea = Basic;
+                ApplicationArea = All;
+                ToolTip = 'Tooltip';
             }
         }
     }

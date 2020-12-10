@@ -1,6 +1,6 @@
 Page 50025 "Meal Routes"
 {
-    ApplicationArea = Basic;
+    ApplicationArea = All;
     PageType = Card;
     SourceTable = "Meal Routes";
     UsageCategory = Tasks;
@@ -13,15 +13,18 @@ Page 50025 "Meal Routes"
             {
                 field("Route No.";Rec."Route No.")
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                 }
                 field("Delivery Stop";Rec."Delivery Stop")
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                 }
                 field(Description;Rec.Description)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                 }
             }
         }

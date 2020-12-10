@@ -1,4 +1,4 @@
-TableExtension 50103 tableextension50103 extends "Cust. Ledger Entry" 
+TableExtension 50103 ICPCustomerLedgerEntry extends "Cust. Ledger Entry" 
 {
     fields
     {

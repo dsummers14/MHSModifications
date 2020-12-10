@@ -1,4 +1,4 @@
-PageExtension 50116 DetailedCustLedgEntries extends "Detailed Cust. Ledg. Entries" 
+PageExtension 50116 ICPDetailedCustLedgEntries extends "Detailed Cust. Ledg. Entries" 
 {
     layout
     {
@@ -6,7 +6,8 @@ PageExtension 50116 DetailedCustLedgEntries extends "Detailed Cust. Ledg. Entrie
         {
             field("Allocated Type";Rec."Allocated Type")
             {
-                ApplicationArea = Basic;
+                ApplicationArea = All;
+                ToolTip = 'ToolTip';
             }
         }
     }

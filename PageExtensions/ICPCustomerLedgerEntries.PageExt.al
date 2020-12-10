@@ -6,7 +6,8 @@ PageExtension 50104 ICPCustomerLedgerEntries extends "Customer Ledger Entries"
         {
             field("Allocated Type"; Rec."Allocated Type")
             {
-                ApplicationArea = Basic;
+                ApplicationArea = All;
+                ToolTip = 'ToolTip';
             }
         }
     }

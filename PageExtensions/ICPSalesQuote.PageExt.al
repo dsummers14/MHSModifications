@@ -1,4 +1,4 @@
-PageExtension 50109 ICPSalesInvoice extends "Sales Invoice"
+PageExtension 50107 ICPSalesQuote extends "Sales Quote"
 {
     layout
     {
@@ -9,7 +9,8 @@ PageExtension 50109 ICPSalesInvoice extends "Sales Invoice"
                 Caption = 'Custom';
                 field("Allocated Type"; Rec."Allocated Type")
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                 }
             }
         }

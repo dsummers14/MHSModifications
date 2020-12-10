@@ -14,7 +14,8 @@ Page 50096 "Customer Menu"
             {
                 field(CustomerNo;Rec.CustomerNo)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                     Editable = false;
 
                     trigger OnValidate()
@@ -25,18 +26,21 @@ Page 50096 "Customer Menu"
                 }
                 field(CustName;Cust.Name)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                     Caption = 'Cust Name';
                     Editable = false;
                 }
                 field(MenuID;Rec.MenuID)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                     Editable = false;
                 }
                 field(Description;Rec.Description)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                     Editable = false;
                 }
             }
@@ -54,15 +58,16 @@ Page 50096 "Customer Menu"
         {
             action(Publish)
             {
-                ApplicationArea = Basic;
+                ApplicationArea = All;
                 Promoted = true;
                 PromotedCategory = Process;
+                ToolTip = 'Tooltip';
 
                 trigger OnAction()
                 begin
                     Clear(vPublish);
                     vPublish.PassParameters(Rec.CustomerNo,Rec.MenuID);
-                    vPublish.Run;
+                    vPublish.Run();
                 end;
             }
         }

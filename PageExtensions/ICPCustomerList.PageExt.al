@@ -6,15 +6,18 @@ PageExtension 50103 ICPCustomerList extends "Customer List"
         {
             field(Supervisor; Rec.Supervisor)
             {
-                ApplicationArea = Basic;
+                ApplicationArea = All;
+                ToolTip = 'ToolTip';
             }
             field(Gender; Gender)
             {
-                ApplicationArea = Basic;
+                ApplicationArea = All;
+                ToolTip = 'ToolTip';
             }
             field(Division; Rec.Division)
             {
-                ApplicationArea = Basic;
+                ApplicationArea = All;
+                ToolTip = 'ToolTip';
             }
         }
     }

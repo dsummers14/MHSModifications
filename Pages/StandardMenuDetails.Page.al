@@ -16,19 +16,23 @@ Page 50093 "Standard Menu Details"
             {
                 field(WeekNo;Rec.WeekNo)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                 }
                 field(Day;Rec.Day)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                 }
                 field(Meal;Rec.Meal)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                 }
                 field(ItemNo;Rec.ItemNo)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
 
                     trigger OnValidate()
                     begin
@@ -37,16 +41,19 @@ Page 50093 "Standard Menu Details"
                 }
                 field(ItemDesc;Rec.ItemDesc)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
                     Caption = 'Description';
+                    ToolTip = 'Tooltip';
                 }
                 field(Quantity;Rec.Quantity)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                 }
                 field(Uom;Rec.Uom)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                 }
             }
         }

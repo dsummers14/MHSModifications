@@ -7,8 +7,9 @@ PageExtension 50113 ICPApplyCustomerEntries extends "Apply Customer Entries"
                 {
                     field(ApplyingAllocatedType; ApplyingCustLedgEntry."Allocated Type")
                     {
-                       ApplicationArea = Basic;
+                       ApplicationArea = All;
                         Caption = 'Applying Allocated Type'; 
+                        ToolTip = 'ToolTip';
                     }
                 }
          */
@@ -17,8 +18,9 @@ PageExtension 50113 ICPApplyCustomerEntries extends "Apply Customer Entries"
         {
             field("Allocated Type"; Rec."Allocated Type")
             {
-                ApplicationArea = Basic;
+                ApplicationArea = All;
                 Caption = 'Allocated Type';
+                ToolTip = 'ToolTip';
             }
         }
     }

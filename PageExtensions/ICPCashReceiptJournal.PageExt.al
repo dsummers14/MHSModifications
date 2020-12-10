@@ -6,7 +6,8 @@ PageExtension 50115 ICPCashReceiptJournal extends "Cash Receipt Journal"
         {
             field("Allocated Type"; Rec."Allocated Type")
             {
-                ApplicationArea = Basic;
+                ApplicationArea = All;
+                ToolTip = 'ToolTip';
             }
         }
     }

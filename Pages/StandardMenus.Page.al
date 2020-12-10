@@ -2,7 +2,7 @@ Page 50091 "Standard Menus"
 {
     // //iCepts 09.20.13 DXD Upgrade2013                     iCepts1.00
 
-    ApplicationArea = Basic;
+    ApplicationArea = All;
     CardPageID = "Standard Menu";
     PageType = List;
     SourceTable = "Standard Menu Master";
@@ -16,11 +16,13 @@ Page 50091 "Standard Menus"
             {
                 field(MenuID;Rec.MenuID)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                 }
                 field(Description;Rec.Description)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                 }
             }
         }

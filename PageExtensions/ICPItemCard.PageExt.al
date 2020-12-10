@@ -6,7 +6,8 @@ PageExtension 50105 ICPItemCard extends "Item Card"
         {
             field("Description 2"; Rec."Description 2")
             {
-                ApplicationArea = Basic;
+                ApplicationArea = All;
+                ToolTip = 'ToolTip';
             }
         }
         addafter(Warehouse)
@@ -16,7 +17,8 @@ PageExtension 50105 ICPItemCard extends "Item Card"
                 Caption = 'Custom';
                 field(FoodItem; Rec.FoodItem)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
 
                     trigger OnValidate()
                     begin
@@ -29,24 +31,29 @@ PageExtension 50105 ICPItemCard extends "Item Card"
                 }
                 field("Menu-Only"; Rec."Menu-Only")
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                     Editable = vFoodItemFlag;
                 }
                 field("Maximum Sales Order Qty."; Rec."Maximum Sales Order Qty.")
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                 }
                 field("Minimum Sales Order Qty."; Rec."Minimum Sales Order Qty.")
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                 }
                 field(DisplayColor; Rec.DisplayColor)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                 }
                 field("Food Allergen"; Rec."Food Allergen")
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                 }
             }
         }

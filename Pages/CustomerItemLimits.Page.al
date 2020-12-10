@@ -11,17 +11,20 @@ Page 50050 "Customer/Item Limits"
         {
             repeater(Group)
             {
-                field(ItemNo;Rec.ItemNo)
+                field(ItemNo; Rec.ItemNo)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                 }
-                field(MinimumQty;Rec.MinimumQty)
+                field(MinimumQty; Rec.MinimumQty)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                 }
-                field(MaximumQty;Rec.MaximumQty)
+                field(MaximumQty; Rec.MaximumQty)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                 }
             }
         }

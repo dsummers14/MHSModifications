@@ -1,4 +1,4 @@
-TableExtension 50109 tableextension50109 extends "General Ledger Setup" 
+TableExtension 50109 ICPGeneralLedgerSetup extends "General Ledger Setup" 
 {
     fields
     {

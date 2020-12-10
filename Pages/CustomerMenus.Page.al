@@ -2,7 +2,7 @@ Page 50095 "Customer Menus"
 {
     // //iCepts 09.20.13 DXD Upgrade2013                     iCepts1.00
 
-    ApplicationArea = Basic;
+    ApplicationArea = All;
     CardPageID = "Customer Menu";
     PageType = List;
     SourceTable = "Customer Menu Header";
@@ -16,15 +16,18 @@ Page 50095 "Customer Menus"
             {
                 field(CustomerNo;Rec.CustomerNo)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                 }
                 field(MenuID;MenuID)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                 }
                 field(Description;Rec.Description)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                 }
             }
         }

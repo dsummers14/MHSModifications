@@ -1,15 +1,16 @@
-PageExtension 50108 ICPSalesOrder extends "Sales Order"
+PageExtension 50109 ICPSalesInvoice extends "Sales Invoice"
 {
     layout
     {
-        addafter(Control1900201301)
+        addafter("Foreign Trade")
         {
             group(Custom)
             {
                 Caption = 'Custom';
                 field("Allocated Type"; Rec."Allocated Type")
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                 }
             }
         }

@@ -14,12 +14,14 @@ Page 50092 "Standard Menu"
             {
                 field(MenuID;Rec.MenuID)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                     Editable = false;
                 }
                 field(Description;Rec.Description)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
                     Editable = false;
                 }
             }
@@ -36,31 +38,33 @@ Page 50092 "Standard Menu"
         {
             action(Publish)
             {
-                ApplicationArea = Basic;
+                ApplicationArea = All;
                 Caption = 'Publish';
                 Promoted = true;
                 PromotedCategory = Process;
+                ToolTip = 'Tooltip';
 
                 trigger OnAction()
                 begin
 
                     Clear(vPublish);
                     vPublish.PassParameters(Rec.MenuID);
-                    vPublish.Run;
+                    vPublish.Run();
                 end;
             }
             action("Copy to Customer")
             {
-                ApplicationArea = Basic;
+                ApplicationArea = All;
                 Caption = 'Copy to Customer';
                 Promoted = true;
                 PromotedCategory = Process;
+                ToolTip = 'Tooltip';
 
                 trigger OnAction()
                 begin
                     Clear(vCopyFrom);
                     vCopyFrom.PassVariables(Rec.MenuID);
-                    vCopyFrom.Run;
+                    vCopyFrom.Run();
                 end;
             }
         }

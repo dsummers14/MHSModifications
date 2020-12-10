@@ -1,4 +1,4 @@
-TableExtension 50102 tableextension50102 extends Customer 
+TableExtension 50102 ICPCustomer extends Customer 
 {
     fields
     {

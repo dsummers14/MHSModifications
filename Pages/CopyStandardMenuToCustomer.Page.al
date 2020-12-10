@@ -10,14 +10,18 @@ Page 50094 "Copy Standard Menu To Customer"
         {
             group(Control1000000001)
             {
-                field(MenuID;vMenuID)
+                field(MenuID; vMenuID)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
+                    Caption = 'Menu Id';
                 }
-                field(CustomerNo;vCustomerNo)
+                field(CustomerNo; vCustomerNo)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
                     TableRelation = Customer."No.";
+                    ToolTip = 'Tooltip';
+                    Caption = 'Customer No';
                 }
             }
         }
@@ -29,14 +33,15 @@ Page 50094 "Copy Standard Menu To Customer"
         {
             action(Copy)
             {
-                ApplicationArea = Basic;
+                ApplicationArea = All;
                 Caption = 'Copy';
                 Promoted = true;
                 PromotedCategory = Process;
+                ToolTip = 'Tooltip';
 
                 trigger OnAction()
                 begin
-                    if vCustomerNo <> '' then CopyToCustomer;
+                    if vCustomerNo <> '' then CopyToCustomer();
                 end;
             }
         }
@@ -44,61 +49,58 @@ Page 50094 "Copy Standard Menu To Customer"
 
     var
         vCustomerNo: Code[20];
-        vStartDate: Date;
         vMenuID: Code[20];
-        Customer: Record Customer;
 
-        procedure PassVariables(var MenuId: Code[20])
+    procedure PassVariables(MenuId: Code[20])
     begin
         vMenuID := MenuId;
     end;
 
-        procedure CopyToCustomer()
+    procedure CopyToCustomer()
     var
-        iCustHeader: Record "Customer Menu Header";
-        iCustDetail: Record "Customer Menu Details";
-        iStdHeader: Record "Standard Menu Master";
-        iStdDetail: Record "Standard Menu Details";
+        iCustomerMenuHeader: Record "Customer Menu Header";
+        iCustomerMenuDetails: Record "Customer Menu Details";
+        iStandardMenuMaster: Record "Standard Menu Master";
+        iStandardMenuDetails: Record "Standard Menu Details";
     begin
-        iCustHeader.Reset;
-        iCustHeader.SetRange(CustomerNo,vCustomerNo);
-        iCustHeader.SetRange(MenuID,vMenuID);
-        iCustHeader.DeleteAll;
+        iCustomerMenuHeader.Reset();
+        iCustomerMenuHeader.SetRange(CustomerNo, vCustomerNo);
+        iCustomerMenuHeader.SetRange(MenuID, vMenuID);
+        iCustomerMenuHeader.DeleteAll();
 
-        iCustDetail.Reset;
-        iCustDetail.SetRange(CustomerNo,vCustomerNo);
-        iCustDetail.SetRange(MenuID,vMenuID);
-        iCustDetail.DeleteAll;
+        iCustomerMenuDetails.Reset();
+        iCustomerMenuDetails.SetRange(CustomerNo, vCustomerNo);
+        iCustomerMenuDetails.SetRange(MenuID, vMenuID);
+        iCustomerMenuDetails.DeleteAll();
 
-        iStdHeader.Reset;
-        iStdHeader.SetRange(MenuID,vMenuID);
-        iStdDetail.Reset;
-        iStdDetail.SetRange(MenuID,vMenuID);
+        iStandardMenuMaster.Reset();
+        iStandardMenuMaster.SetRange(MenuID, vMenuID);
+        iStandardMenuDetails.Reset();
+        iStandardMenuDetails.SetRange(MenuID, vMenuID);
 
-        if iStdHeader.FindFirst then
-        begin
-          iCustHeader.Init;
-          iCustHeader.CustomerNo := vCustomerNo;
-          iCustHeader.MenuID := vMenuID;
-          iCustHeader.Description := iStdHeader.Description;
-          iCustHeader.Insert;
+        if iStandardMenuMaster.FindFirst() then begin
+            iCustomerMenuHeader.Init();
+            iCustomerMenuHeader.CustomerNo := vCustomerNo;
+            iCustomerMenuHeader.MenuID := vMenuID;
+            iCustomerMenuHeader.Description := iStandardMenuMaster.Description;
+            iCustomerMenuHeader.Insert();
 
-          if iStdDetail.FindFirst then
-          repeat
-            iCustDetail.Init;
-            iCustDetail.CustomerNo := vCustomerNo;
-            iCustDetail.MenuID := iStdDetail.MenuID;
-            iCustDetail.WeekNo := iStdDetail.WeekNo;
-            iCustDetail.Day := iStdDetail.Day;
-            iCustDetail.Meal := iStdDetail.Meal;
-            iCustDetail.SeqNo := iStdDetail.SeqNo;
-            iCustDetail.ItemNo := iStdDetail.ItemNo;
-            iCustDetail.Quantity := iStdDetail.Quantity;
-            iCustDetail.Uom := iStdDetail.Uom;
-            iCustDetail.Insert;
-          until iStdDetail.Next = 0;
+            if iStandardMenuDetails.FindSet() then
+                repeat
+                    iCustomerMenuDetails.Init();
+                    iCustomerMenuDetails.CustomerNo := vCustomerNo;
+                    iCustomerMenuDetails.MenuID := iStandardMenuDetails.MenuID;
+                    iCustomerMenuDetails.WeekNo := iStandardMenuDetails.WeekNo;
+                    iCustomerMenuDetails.Day := iStandardMenuDetails.Day;
+                    iCustomerMenuDetails.Meal := iStandardMenuDetails.Meal;
+                    iCustomerMenuDetails.SeqNo := iStandardMenuDetails.SeqNo;
+                    iCustomerMenuDetails.ItemNo := iStandardMenuDetails.ItemNo;
+                    iCustomerMenuDetails.Quantity := iStandardMenuDetails.Quantity;
+                    iCustomerMenuDetails.Uom := iStandardMenuDetails.Uom;
+                    iCustomerMenuDetails.Insert();
+                until iStandardMenuDetails.Next() = 0;
 
-          Message ('Menu Copied');
+            Message('Menu Copied');
         end;
     end;
 }

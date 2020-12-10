@@ -6,43 +6,53 @@ PageExtension 50106 ICPItemList extends "Item List"
         {
             field("Description 2"; Rec."Description 2")
             {
-                ApplicationArea = Basic;
+                ApplicationArea = All;
+                ToolTip = 'Tooltip';
             }
             field(Inventory; Rec.Inventory)
             {
-                ApplicationArea = Basic;
+                ApplicationArea = All;
+                ToolTip = 'Tooltip';
             }
             field("Qty. on Purch. Order"; Rec."Qty. on Purch. Order")
             {
-                ApplicationArea = Basic;
+                ApplicationArea = All;
+                ToolTip = 'Tooltip';
             }
             field("Qty. on Sales Order"; Rec."Qty. on Sales Order")
             {
-                ApplicationArea = Basic;
+                ApplicationArea = All;
+                ToolTip = 'Tooltip';
             }
             field("Order Multiple"; Rec."Order Multiple")
             {
-                ApplicationArea = Basic;
+                ApplicationArea = All;
+                ToolTip = 'Tooltip';
             }
             field("Minimum Order Quantity"; Rec."Minimum Order Quantity")
             {
-                ApplicationArea = Basic;
+                ApplicationArea = All;
+                ToolTip = 'Tooltip';
             }
             field("Maximum Order Quantity"; Rec."Maximum Order Quantity")
             {
-                ApplicationArea = Basic;
+                ApplicationArea = All;
+                ToolTip = 'Tooltip';
             }
             field("Reorder Point"; Rec."Reorder Point")
             {
-                ApplicationArea = Basic;
+                ApplicationArea = All;
+                ToolTip = 'Tooltip';
             }
             field("Reorder Quantity"; Rec."Reorder Quantity")
             {
-                ApplicationArea = Basic;
+                ApplicationArea = All;
+                ToolTip = 'Tooltip';
             }
             field("Maximum Inventory"; Rec."Maximum Inventory")
             {
-                ApplicationArea = Basic;
+                ApplicationArea = All;
+                ToolTip = 'Tooltip';
             }
         }
     }

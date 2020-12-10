@@ -1,7 +1,7 @@
 Page 50098 "Publish Customer Menu"
 {
     //DRS 07/17.20 - Rem'd out code that accesses Insight Tables
-    
+
     //iCepts 09.23.13 DXD Upgrade2013                     iCepts1.00
 
     PageType = NavigatePage;
@@ -12,17 +12,23 @@ Page 50098 "Publish Customer Menu"
         {
             group(Control1000000005)
             {
-                field("Customer Number";vCustomerNo)
+                field("Customer Number"; vCustomerNo)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
+                    Caption = 'Customer No';
                 }
-                field(MenuID;vMenuID)
+                field(MenuID; vMenuID)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
+                    Caption = 'Menu Id';
                 }
-                field("Start Date";vStartDate)
+                field("Start Date"; vStartDate)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    ToolTip = 'Tooltip';
+                    Caption = 'Start Date';
                 }
             }
         }
@@ -34,22 +40,22 @@ Page 50098 "Publish Customer Menu"
         {
             action(Publish)
             {
-                ApplicationArea = Basic;
+                ApplicationArea = All;
                 Caption = 'Publish';
                 Promoted = true;
                 PromotedCategory = Process;
+                ToolTip = 'Tooltip';
 
                 trigger OnAction()
                 var
                     iDay: Text[30];
                 begin
-                    iDay := Format(vStartDate,0,'<WeekDay>');
+                    iDay := Format(vStartDate, 0, '<WeekDay>');
                     if iDay <> '1' then begin
-                      if GuiAllowed then begin
-                         Message ('The Starting Date must be a Monday!')
-                      end;
+                        if GuiAllowed then
+                            Message('The Starting Date must be a Monday!')
                     end else
-                        gPublish;
+                        gPublish();
                 end;
             }
         }
@@ -60,77 +66,74 @@ Page 50098 "Publish Customer Menu"
         vMenuID: Code[20];
         vStartDate: Date;
 
-        procedure PassParameters(var pCustomerNo: Code[20];var pMenuID: Code[20])
+    procedure PassParameters(pCustomerNo: Code[20]; pMenuID: Code[20])
     begin
         vCustomerNo := pCustomerNo;
         vMenuID := pMenuID;
     end;
 
-        procedure gPublish()
+    procedure gPublish()
     var
-      /*   iTemplateHeader: Record InsightTemplateHeader;
-        iTemplateDetail: Record InsightTemplateDetails; */
-        iCustHeader: Record "Customer Menu Header";
-        iCustDetail: Record "Customer Menu Details";
+        /*   iTemplateHeader: Record InsightTemplateHeader;
+          iTemplateDetail: Record InsightTemplateDetails; */
+        iCustomerMenuHeader: Record "Customer Menu Header";
+        iCustomerMenuDetails: Record "Customer Menu Details";
         iListName: Text[50];
         iDescription: Text[100];
         iDate: Date;
         iMeal: Integer;
-        iItem: Record Item;
     begin
-        iCustHeader.Reset;
-        iCustHeader.SetRange(CustomerNo,vCustomerNo);
-        iCustHeader.SetRange(MenuID,vMenuID);
+        iCustomerMenuHeader.Reset();
+        iCustomerMenuHeader.SetRange(CustomerNo, vCustomerNo);
+        iCustomerMenuHeader.SetRange(MenuID, vMenuID);
 
-        iCustDetail.Reset;
-        iCustDetail.SetRange(CustomerNo,vCustomerNo);
-        iCustDetail.SetRange(MenuID,vMenuID);
+        iCustomerMenuDetails.Reset();
+        iCustomerMenuDetails.SetRange(CustomerNo, vCustomerNo);
+        iCustomerMenuDetails.SetRange(MenuID, vMenuID);
 
-        if iCustHeader.FindFirst then
-        begin
-          if iCustDetail.FindFirst then
-          repeat
-            // Check for new day, meal or menu id
-            iDate := vStartDate + (7 * (iCustDetail.WeekNo - 1)) + iCustDetail.Day;
-            iMeal := iCustDetail.Meal;
+        if iCustomerMenuHeader.FindFirst() then begin
+            if iCustomerMenuDetails.FindSet() then
+                repeat
+                    // Check for new day, meal or menu id
+                    iDate := vStartDate + (7 * (iCustomerMenuDetails.WeekNo - 1)) + iCustomerMenuDetails.Day;
+                    iMeal := iCustomerMenuDetails.Meal;
 
-            if Format(iDate,0,'<Year4><Month,2><Day,2>') + Format(iMeal)
-               + iCustDetail.MenuID <> iListName then
-            begin
-              iListName := Format(iDate,0,'<Year4><Month,2><Day,2>') + Format(iMeal) + iCustDetail.MenuID;
-              iDescription := Format(iCustDetail.Meal) + ' for ' +
-                              Format(iDate,0,'<Weekday Text> <Month Text> <Day>') + ' - ' +
-                              iCustHeader.Description;
-/* 
-              iTemplateHeader.Reset;
-              iTemplateHeader.SetRange(CustomerNo,vCustomerNo);
-              iTemplateHeader.SetRange(ListName,iListName);
-              iTemplateHeader.DeleteAll;
+                    if Format(iDate, 0, '<Year4><Month,2><Day,2>') + Format(iMeal)
+                       + iCustomerMenuDetails.MenuID <> iListName then begin
+                        iListName := Format(iDate, 0, '<Year4><Month,2><Day,2>') + Format(iMeal) + iCustomerMenuDetails.MenuID;
+                        iDescription := Format(iCustomerMenuDetails.Meal) + ' for ' +
+                                        Format(iDate, 0, '<Weekday Text> <Month Text> <Day>') + ' - ' +
+                                        iCustomerMenuHeader.Description;
+                        /* 
+                                      iTemplateHeader.Reset;
+                                      iTemplateHeader.SetRange(CustomerNo,vCustomerNo);
+                                      iTemplateHeader.SetRange(ListName,iListName);
+                                      iTemplateHeader.DeleteAll;
 
-              iTemplateDetail.Reset;
-              iTemplateDetail.SetRange(CustomerNo,vCustomerNo);
-              iTemplateDetail.SetRange(ListName,iListName);
-              iTemplateDetail.DeleteAll;
+                                      iTemplateDetail.Reset;
+                                      iTemplateDetail.SetRange(CustomerNo,vCustomerNo);
+                                      iTemplateDetail.SetRange(ListName,iListName);
+                                      iTemplateDetail.DeleteAll;
 
-              iTemplateHeader.Init;
-              iTemplateHeader.CustomerNo := vCustomerNo;
-              iTemplateHeader.ListName := iListName;
-              iTemplateHeader.Description := iDescription;
-              iTemplateHeader.Insert; */
-            end;
+                                      iTemplateHeader.Init;
+                                      iTemplateHeader.CustomerNo := vCustomerNo;
+                                      iTemplateHeader.ListName := iListName;
+                                      iTemplateHeader.Description := iDescription;
+                                      iTemplateHeader.Insert; */
+                    end;
 
 
-           /*  iTemplateDetail.Init;
-            iTemplateDetail.CustomerNo := vCustomerNo;
-            iTemplateDetail.ListName := iListName;
-            iTemplateDetail.SeqNo := iCustDetail.SeqNo;
-            iTemplateDetail.ItemNo := iCustDetail.ItemNo;
-            iTemplateDetail.OrderQty := iCustDetail.Quantity;
-            iTemplateDetail.RequestDate := iDate;
-            iTemplateDetail.UOM := iCustDetail.Uom;
-            iTemplateDetail.Insert; */
-          until iCustDetail.Next = 0;
-          Message('Menu Published');
+                /*  iTemplateDetail.Init;
+                 iTemplateDetail.CustomerNo := vCustomerNo;
+                 iTemplateDetail.ListName := iListName;
+                 iTemplateDetail.SeqNo := iCustDetail.SeqNo;
+                 iTemplateDetail.ItemNo := iCustDetail.ItemNo;
+                 iTemplateDetail.OrderQty := iCustDetail.Quantity;
+                 iTemplateDetail.RequestDate := iDate;
+                 iTemplateDetail.UOM := iCustDetail.Uom;
+                 iTemplateDetail.Insert; */
+                until iCustomerMenuDetails.Next() = 0;
+            Message('Menu Published');
         end;
     end;
 }

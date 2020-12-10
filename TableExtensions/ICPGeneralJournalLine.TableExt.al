@@ -1,4 +1,4 @@
-TableExtension 50108 tableextension50108 extends "Gen. Journal Line" 
+TableExtension 50108 ICPGeneralJournalLine extends "Gen. Journal Line" 
 {
     fields
     {

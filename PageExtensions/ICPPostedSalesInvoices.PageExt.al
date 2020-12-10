@@ -6,7 +6,8 @@ PageExtension 50112 ICPPostedSalesInvoices extends "Posted Sales Invoices"
         {
             field("Allocated Type";Rec."Allocated Type")
             {
-                ApplicationArea = Basic;
+                ApplicationArea = All;
+                ToolTip = 'Tooltip';
             }
         }
     }

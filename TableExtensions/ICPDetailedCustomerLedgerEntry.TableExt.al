@@ -1,4 +1,4 @@
-TableExtension 50113 tableextension50113 extends "Detailed Cust. Ledg. Entry" 
+TableExtension 50113 ICPDetailedCustomerLedgerEntry extends "Detailed Cust. Ledg. Entry" 
 {
     fields
     {
