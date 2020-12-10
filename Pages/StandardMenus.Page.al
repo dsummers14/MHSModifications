@@ -14,11 +14,11 @@ Page 50091 "Standard Menus"
         {
             repeater(Group)
             {
-                field(MenuID;MenuID)
+                field(MenuID;Rec.MenuID)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description;Description)
+                field(Description;Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }

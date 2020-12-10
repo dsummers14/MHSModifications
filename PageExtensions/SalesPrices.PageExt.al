@@ -1,14 +1,14 @@
-PageExtension 50117 pageextension50117 extends "Sales Prices" 
+PageExtension 50117 ICPSalesPrices extends "Sales Prices"
 {
     layout
     {
         addafter("Currency Code")
         {
-            field("Minimum Sales Order Qty.";"Minimum Sales Order Qty.")
+            field("Minimum Sales Order Qty."; Rec."Minimum Sales Order Qty.")
             {
                 ApplicationArea = Basic;
             }
-            field("Maximum Sales Order Qty.";"Maximum Sales Order Qty.")
+            field("Maximum Sales Order Qty."; Rec."Maximum Sales Order Qty.")
             {
                 ApplicationArea = Basic;
             }

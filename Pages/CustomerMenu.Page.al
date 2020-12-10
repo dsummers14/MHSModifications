@@ -12,7 +12,7 @@ Page 50096 "Customer Menu"
         {
             group(General)
             {
-                field(CustomerNo;CustomerNo)
+                field(CustomerNo;Rec.CustomerNo)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -29,12 +29,12 @@ Page 50096 "Customer Menu"
                     Caption = 'Cust Name';
                     Editable = false;
                 }
-                field(MenuID;MenuID)
+                field(MenuID;Rec.MenuID)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Description;Description)
+                field(Description;Rec.Description)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -61,7 +61,7 @@ Page 50096 "Customer Menu"
                 trigger OnAction()
                 begin
                     Clear(vPublish);
-                    vPublish.PassParameters(CustomerNo,MenuID);
+                    vPublish.PassParameters(Rec.CustomerNo,Rec.MenuID);
                     vPublish.Run;
                 end;
             }
@@ -70,7 +70,7 @@ Page 50096 "Customer Menu"
 
     trigger OnAfterGetRecord()
     begin
-        if not Cust.Get(CustomerNo) then
+        if not Cust.Get(Rec.CustomerNo) then
           Clear(Cust);
     end;
 

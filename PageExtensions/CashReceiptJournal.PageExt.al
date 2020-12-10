@@ -1,10 +1,10 @@
-PageExtension 50115 pageextension50115 extends "Cash Receipt Journal" 
+PageExtension 50115 ICPCashReceiptJournal extends "Cash Receipt Journal"
 {
     layout
     {
         addafter("Account No.")
         {
-            field("Allocated Type";"Allocated Type")
+            field("Allocated Type"; Rec."Allocated Type")
             {
                 ApplicationArea = Basic;
             }

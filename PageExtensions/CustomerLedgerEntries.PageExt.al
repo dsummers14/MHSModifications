@@ -1,10 +1,10 @@
-PageExtension 50104 pageextension50104 extends "Customer Ledger Entries" 
+PageExtension 50104 ICPCustomerLedgerEntries extends "Customer Ledger Entries"
 {
     layout
     {
         addafter("Customer No.")
         {
-            field("Allocated Type";"Allocated Type")
+            field("Allocated Type"; Rec."Allocated Type")
             {
                 ApplicationArea = Basic;
             }

@@ -1,4 +1,4 @@
-PageExtension 50109 pageextension50109 extends "Sales Invoice" 
+PageExtension 50109 ICPSalesInvoice extends "Sales Invoice"
 {
     layout
     {
@@ -7,7 +7,7 @@ PageExtension 50109 pageextension50109 extends "Sales Invoice"
             group(Custom)
             {
                 Caption = 'Custom';
-                field("Allocated Type";"Allocated Type")
+                field("Allocated Type"; Rec."Allocated Type")
                 {
                     ApplicationArea = Basic;
                 }

@@ -1,18 +1,18 @@
-PageExtension 50103 pageextension50103 extends "Customer List" 
+PageExtension 50103 ICPCustomerList extends "Customer List"
 {
     layout
     {
         addafter(Name)
         {
-            field(Supervisor;Supervisor)
+            field(Supervisor; Rec.Supervisor)
             {
                 ApplicationArea = Basic;
             }
-            field(Gender;Gender)
+            field(Gender; Gender)
             {
                 ApplicationArea = Basic;
             }
-            field(Division;Division)
+            field(Division; Rec.Division)
             {
                 ApplicationArea = Basic;
             }

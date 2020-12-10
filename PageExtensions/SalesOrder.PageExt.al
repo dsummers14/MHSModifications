@@ -1,4 +1,4 @@
-PageExtension 50108 pageextension50108 extends "Sales Order" 
+PageExtension 50108 ICPSalesOrder extends "Sales Order"
 {
     layout
     {
@@ -7,7 +7,7 @@ PageExtension 50108 pageextension50108 extends "Sales Order"
             group(Custom)
             {
                 Caption = 'Custom';
-                field("Allocated Type";"Allocated Type")
+                field("Allocated Type"; Rec."Allocated Type")
                 {
                     ApplicationArea = Basic;
                 }

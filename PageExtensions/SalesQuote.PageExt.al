@@ -1,4 +1,4 @@
-PageExtension 50107 pageextension50107 extends "Sales Quote" 
+PageExtension 50107 ICPSalesQuote extends "Sales Quote"
 {
     layout
     {
@@ -7,7 +7,7 @@ PageExtension 50107 pageextension50107 extends "Sales Quote"
             group(Custom)
             {
                 Caption = 'Custom';
-                field("Allocated Type";"Allocated Type")
+                field("Allocated Type"; Rec."Allocated Type")
                 {
                     ApplicationArea = Basic;
                 }

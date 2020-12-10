@@ -1,10 +1,10 @@
-PageExtension 50116 pageextension50116 extends "Detailed Cust. Ledg. Entries" 
+PageExtension 50116 DetailedCustLedgEntries extends "Detailed Cust. Ledg. Entries" 
 {
     layout
     {
         addafter("Customer No.")
         {
-            field("Allocated Type";"Allocated Type")
+            field("Allocated Type";Rec."Allocated Type")
             {
                 ApplicationArea = Basic;
             }

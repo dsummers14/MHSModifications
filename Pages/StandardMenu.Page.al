@@ -12,12 +12,12 @@ Page 50092 "Standard Menu"
         {
             group(General)
             {
-                field(MenuID;MenuID)
+                field(MenuID;Rec.MenuID)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Description;Description)
+                field(Description;Rec.Description)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -45,7 +45,7 @@ Page 50092 "Standard Menu"
                 begin
 
                     Clear(vPublish);
-                    vPublish.PassParameters(MenuID);
+                    vPublish.PassParameters(Rec.MenuID);
                     vPublish.Run;
                 end;
             }
@@ -59,7 +59,7 @@ Page 50092 "Standard Menu"
                 trigger OnAction()
                 begin
                     Clear(vCopyFrom);
-                    vCopyFrom.PassVariables(MenuID);
+                    vCopyFrom.PassVariables(Rec.MenuID);
                     vCopyFrom.Run;
                 end;
             }

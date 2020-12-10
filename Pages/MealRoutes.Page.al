@@ -11,15 +11,15 @@ Page 50025 "Meal Routes"
         {
             group(General)
             {
-                field("Route No.";"Route No.")
+                field("Route No.";Rec."Route No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Delivery Stop";"Delivery Stop")
+                field("Delivery Stop";Rec."Delivery Stop")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description;Description)
+                field(Description;Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }

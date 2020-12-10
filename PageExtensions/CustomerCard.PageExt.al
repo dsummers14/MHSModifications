@@ -1,25 +1,25 @@
-PageExtension 50102 pageextension50102 extends "Customer Card"
+PageExtension 50102 ICPCustomerCard extends "Customer Card"
 {
     layout
     {
         addafter("Phone No.")
         {
-            field("Student Home Initials"; "Student Home Initials")
+            field("Student Home Initials"; Rec."Student Home Initials")
             {
                 ApplicationArea = Basic;
             }
-            field("Student Allergies"; "Student Allergies")
+            field("Student Allergies"; Rec."Student Allergies")
             {
                 ApplicationArea = Basic;
             }
         }
         addafter("Last Date Modified")
         {
-            field("Route No."; "Route No.")
+            field("Route No."; Rec."Route No.")
             {
                 ApplicationArea = Basic;
             }
-            field("Delivery Stop"; "Delivery Stop")
+            field("Delivery Stop"; Rec."Delivery Stop")
             {
                 ApplicationArea = Basic;
             }
@@ -29,34 +29,34 @@ PageExtension 50102 pageextension50102 extends "Customer Card"
             group(Custom)
             {
                 Caption = 'Custom';
-                field(Allocation; Allocation)
+                field(Allocation; Rec.Allocation)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Supervisor; Supervisor)
+                field(Supervisor; Rec.Supervisor)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Division; Division)
+                field(Division; Rec.Division)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Gender; Gender)
+                field(Gender; Rec.Gender)
                 {
                     ApplicationArea = Basic;
                 }
                 group(Food)
                 {
                     Caption = 'Food';
-                    field("Food Allocation Amount"; "Food Allocation Amount")
+                    field("Food Allocation Amount"; Rec."Food Allocation Amount")
                     {
                         ApplicationArea = Basic;
                     }
-                    field("Food Max Forward Amount"; "Food Max Forward Amount")
+                    field("Food Max Forward Amount"; Rec."Food Max Forward Amount")
                     {
                         ApplicationArea = Basic;
                     }
-                    field("Food Balance"; "Food Balance")
+                    field("Food Balance"; Rec."Food Balance")
                     {
                         ApplicationArea = Basic;
                     }
@@ -64,15 +64,15 @@ PageExtension 50102 pageextension50102 extends "Customer Card"
                 group("Non-Food")
                 {
                     Caption = 'Non-Food';
-                    field("Non-Food Allocation Amount"; "Non-Food Allocation Amount")
+                    field("Non-Food Allocation Amount"; Rec."Non-Food Allocation Amount")
                     {
                         ApplicationArea = Basic;
                     }
-                    field("Non-Food Max Forward Amount"; "Non-Food Max Forward Amount")
+                    field("Non-Food Max Forward Amount"; Rec."Non-Food Max Forward Amount")
                     {
                         ApplicationArea = Basic;
                     }
-                    field("Non-Food Balance"; "Non-Food Balance")
+                    field("Non-Food Balance"; Rec."Non-Food Balance")
                     {
                         ApplicationArea = Basic;
                     }

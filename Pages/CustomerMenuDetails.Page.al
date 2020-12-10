@@ -14,15 +14,15 @@ Page 50097 "Customer Menu Details"
         {
             repeater(Group)
             {
-                field(WeekNo;WeekNo)
+                field(WeekNo;Rec.WeekNo)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Meal;Meal)
+                field(Meal;Rec.Meal)
                 {
                     ApplicationArea = Basic;
                 }
-                field(ItemNo;ItemNo)
+                field(ItemNo;Rec.ItemNo)
                 {
                     ApplicationArea = Basic;
 
@@ -31,20 +31,20 @@ Page 50097 "Customer Menu Details"
                         CalcFields(ItemDesc);
                     end;
                 }
-                field(ItemDesc;ItemDesc)
+                field(ItemDesc;Rec.ItemDesc)
                 {
                     ApplicationArea = Basic;
                     Caption = 'Description';
                 }
-                field(Quantity;Quantity)
+                field(Quantity;Rec.Quantity)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Uom;Uom)
+                field(Uom;Rec.Uom)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Day;Day)
+                field(Day;Rec.Day)
                 {
                     ApplicationArea = Basic;
                 }

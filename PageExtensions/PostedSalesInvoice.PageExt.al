@@ -1,4 +1,4 @@
-PageExtension 50111 pageextension50111 extends "Posted Sales Invoice" 
+PageExtension 50111 ICPPostedSalesInvoice extends "Posted Sales Invoice"
 {
     layout
     {
@@ -7,7 +7,8 @@ PageExtension 50111 pageextension50111 extends "Posted Sales Invoice"
             group(Custom)
             {
                 Caption = 'Custom';
-                field("Allocated Type";"Allocated Type")
+                
+                field("Allocated Type"; Rec."Allocated Type")
                 {
                     ApplicationArea = Basic;
                 }

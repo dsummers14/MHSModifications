@@ -14,7 +14,7 @@ Page 50095 "Customer Menus"
         {
             repeater(Group)
             {
-                field(CustomerNo;CustomerNo)
+                field(CustomerNo;Rec.CustomerNo)
                 {
                     ApplicationArea = Basic;
                 }
@@ -22,7 +22,7 @@ Page 50095 "Customer Menus"
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description;Description)
+                field(Description;Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }

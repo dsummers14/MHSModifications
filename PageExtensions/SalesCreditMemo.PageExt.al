@@ -1,4 +1,4 @@
-PageExtension 50110 pageextension50110 extends "Sales Credit Memo" 
+PageExtension 50110 ICPSalesCreditMemo extends "Sales Credit Memo" 
 {
     layout
     {
@@ -7,7 +7,7 @@ PageExtension 50110 pageextension50110 extends "Sales Credit Memo"
             group(Custom)
             {
                 Caption = 'Custom';
-                field("Allocated Type";"Allocated Type")
+                field("Allocated Type";Rec."Allocated Type")
                 {
                     ApplicationArea = Basic;
                 }

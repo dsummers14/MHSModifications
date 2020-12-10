@@ -1,10 +1,10 @@
-PageExtension 50105 pageextension50105 extends "Item Card" 
+PageExtension 50105 ICPItemCard extends "Item Card"
 {
     layout
     {
         addafter(Description)
         {
-            field("Description 2";"Description 2")
+            field("Description 2"; Rec."Description 2")
             {
                 ApplicationArea = Basic;
             }
@@ -14,37 +14,37 @@ PageExtension 50105 pageextension50105 extends "Item Card"
             group(Custom)
             {
                 Caption = 'Custom';
-                field(FoodItem;FoodItem)
+                field(FoodItem; Rec.FoodItem)
                 {
                     ApplicationArea = Basic;
 
                     trigger OnValidate()
                     begin
-                        if not FoodItem then begin
-                          "Menu-Only" := false;
-                          FoodItemFlag := false;
+                        if not Rec.FoodItem then begin
+                            Rec."Menu-Only" := false;
+                            FoodItemFlag := false;
                         end else
-                          FoodItemFlag := true;
+                            FoodItemFlag := true;
                     end;
                 }
-                field("Menu-Only";"Menu-Only")
+                field("Menu-Only"; Rec."Menu-Only")
                 {
                     ApplicationArea = Basic;
                     Editable = FoodItemFlag;
                 }
-                field("Maximum Sales Order Qty.";"Maximum Sales Order Qty.")
+                field("Maximum Sales Order Qty."; Rec."Maximum Sales Order Qty.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Minimum Sales Order Qty.";"Minimum Sales Order Qty.")
+                field("Minimum Sales Order Qty."; Rec."Minimum Sales Order Qty.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(DisplayColor;DisplayColor)
+                field(DisplayColor; Rec.DisplayColor)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Food Allergen";"Food Allergen")
+                field("Food Allergen"; Rec."Food Allergen")
                 {
                     ApplicationArea = Basic;
                 }
@@ -55,29 +55,28 @@ PageExtension 50105 pageextension50105 extends "Item Card"
     var
         FoodItemFlag: Boolean;
 
-
     //Unsupported feature: Code Modification on "OnAfterGetRecord".
 
     //trigger OnAfterGetRecord()
     //>>>> ORIGINAL CODE:
     //begin
-        /*
-        EnablePlanningControls;
-        EnableCostingControls;
-        */
+    /*
+    EnablePlanningControls;
+    EnableCostingControls;
+    */
     //end;
     //>>>> MODIFIED CODE:
     //begin
-        /*
-        EnablePlanningControls;
-        EnableCostingControls;
+    /*
+    EnablePlanningControls;
+    EnableCostingControls;
 
-        IF NOT FoodItem THEN BEGIN
-          "Menu-Only" := FALSE;
-          FoodItemFlag := FALSE;
-        END ELSE
-          FoodItemFlag := TRUE;
-        */
+    IF NOT FoodItem THEN BEGIN
+      "Menu-Only" := FALSE;
+      FoodItemFlag := FALSE;
+    END ELSE
+      FoodItemFlag := TRUE;
+    */
     //end;
 }
 
