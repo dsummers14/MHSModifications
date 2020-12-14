@@ -53,13 +53,13 @@ Report 50099 "Open Orders"
             column(Sales_Line_Amount; Amount)
             {
             }
-            column(TotalFor___FIELDCAPTION__Document_No___; TotalFor + FieldCaption("Document No."))
+            column(TotalFor___FIELDCAPTION__Document_No___; TotalForTxt + FieldCaption("Document No."))
             {
             }
             column(Sales_Line_Amount_Control1000000038; Amount)
             {
             }
-            column(TotalFor___FIELDCAPTION__Document_Type__; TotalFor + FieldCaption("Document Type"))
+            column(TotalFor___FIELDCAPTION__Document_Type__; TotalForTxt + FieldCaption("Document Type"))
             {
             }
             column(Sales_Line_Amount_Control1000000040; Amount)
@@ -104,7 +104,6 @@ Report 50099 "Open Orders"
 
             trigger OnPreDataItem()
             begin
-                LastFieldNo := FieldNo("Document No.");
             end;
         }
     }
@@ -126,9 +125,7 @@ Report 50099 "Open Orders"
     }
 
     var
-        LastFieldNo: Integer;
-        FooterPrinted: Boolean;
-        TotalFor: label 'Total for ';
+        TotalForTxt: label 'Total for ';
         Sales_LineCaptionLbl: label 'Sales Line';
         CurrReport_PAGENOCaptionLbl: label 'Page';
 }

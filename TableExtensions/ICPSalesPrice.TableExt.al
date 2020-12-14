@@ -1,4 +1,4 @@
-TableExtension 50115 tableextension50115 extends "Sales Price" 
+TableExtension 50115 ICPSalesPrice extends "Sales Price" 
 {
     fields
     {

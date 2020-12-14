@@ -1,4 +1,4 @@
-TableExtension 50110 tableextension50110 extends "Sales Invoice Header" 
+TableExtension 50110 ICPSalesInvoiceHeader extends "Sales Invoice Header" 
 {
     fields
     {

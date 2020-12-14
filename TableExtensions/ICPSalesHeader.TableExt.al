@@ -1,4 +1,4 @@
-TableExtension 50106 tableextension50106 extends "Sales Header"
+TableExtension 50106 ICPSalesHeader extends "Sales Header"
 {
     fields
     {

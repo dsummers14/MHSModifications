@@ -6,53 +6,53 @@ Report 50093 "Meal Routing Report"
 
     dataset
     {
-        dataitem("Sales Line";"Sales Line")
+        dataitem("Sales Line"; "Sales Line")
         {
-            DataItemTableView = sorting("Shipment Date","Sell-to Customer No.",Type,"No.");
-            RequestFilterFields = "Shipment Date","Sell-to Customer No.",Type,"No.";
+            DataItemTableView = sorting("Shipment Date", "Sell-to Customer No.", Type, "No.");
+            RequestFilterFields = "Shipment Date", "Sell-to Customer No.", Type, "No.";
             column(ReportForNavId_1000000000; 1000000000)
             {
             }
-            column(ShipmentDate;"Sales Line"."Shipment Date")
+            column(ShipmentDate; "Sales Line"."Shipment Date")
             {
             }
-            column(RouteNo;"Sales Line"."Route No.")
+            column(RouteNo; "Sales Line"."Route No.")
             {
             }
-            column(DeliveryStop;"Sales Line"."Delivery Stop")
+            column(DeliveryStop; "Sales Line"."Delivery Stop")
             {
             }
-            column(StudentHomeInitials;"Sales Line"."Student Home Initials")
+            column(StudentHomeInitials; "Sales Line"."Student Home Initials")
             {
             }
-            column(StudnetAllergies;"Sales Line"."Student Allergies")
+            column(StudnetAllergies; "Sales Line"."Student Allergies")
             {
             }
-            column(SellToCustomer;"Sales Line"."Sell-to Customer No.")
+            column(SellToCustomer; "Sales Line"."Sell-to Customer No.")
             {
             }
-            column(UnitofMeasure;"Sales Line"."Unit of Measure")
+            column(UnitofMeasure; "Sales Line"."Unit of Measure")
             {
             }
-            column(Quantity;"Sales Line".Quantity)
+            column(Quantity; "Sales Line".Quantity)
             {
             }
-            column(CustomerName;CustomerName)
+            column(CustomerName; CustomerName)
             {
             }
-            column(ItemNo;"Sales Line"."No.")
+            column(ItemNo; "Sales Line"."No.")
             {
             }
-            column(ItemDescription;"Sales Line".Description)
+            column(ItemDescription; "Sales Line".Description)
             {
             }
-            column(Full;Full)
+            column(Full; Full)
             {
             }
-            column(Half;Half)
+            column(Half; Half)
             {
             }
-            column(DocumentNumber;"Sales Line"."Document No.")
+            column(DocumentNumber; "Sales Line"."Document No.")
             {
             }
 
@@ -61,24 +61,27 @@ Report 50093 "Meal Routing Report"
                 Full := 0;
                 Half := 0;
 
-                if not CustomerRec.Get("Sales Line"."Sell-to Customer No.") then
-                  Clear(CustomerRec)
-                 else begin
-                   CustomerName := CustomerRec.Name;
-                   "Sales Line"."Route No." := CustomerRec."Route No.";
-                   "Sales Line"."Delivery Stop" := CustomerRec."Delivery Stop";
-                   "Sales Line"."Student Allergies" := CustomerRec."Student Allergies";
-                   "Sales Line"."Student Home Initials" := CustomerRec."Student Home Initials";
-                   end;
+                if not Customer.Get("Sales Line"."Sell-to Customer No.") then
+                    Clear(Customer)
+                else begin
+                    CustomerName := CopyStr(Customer.Name, 1, 30);
+                    "Sales Line"."Route No." := Customer."Route No.";
+                    "Sales Line"."Delivery Stop" := Customer."Delivery Stop";
+                    "Sales Line"."Student Allergies" := Customer."Student Allergies";
+                    "Sales Line"."Student Home Initials" := Customer."Student Home Initials";
+                end;
 
-                if "Sales Line"."Unit of Measure" = 'Full Pan' then begin
-                   Full := "Sales Line".Quantity;
-                  end else if "Sales Line"."Unit of Measure" = 'Half Pan' then begin
-                    Half := "Sales Line".Quantity;
-                    end else if PrepardMealsOnly then CurrReport.Skip
-                             else Half := "Sales Line".Quantity;
+                if "Sales Line"."Unit of Measure" = 'Full Pan' then
+                    Full := "Sales Line".Quantity
+                else
+                    if "Sales Line"."Unit of Measure" = 'Half Pan' then
+                        Half := "Sales Line".Quantity
+                    else
+                        if PrepardMealsOnly then
+                            CurrReport.Skip()
+                        else
+                            Half := "Sales Line".Quantity;
 
-                SaveCustomer := "Sales Line"."Sell-to Customer No.";
             end;
         }
     }
@@ -92,10 +95,11 @@ Report 50093 "Meal Routing Report"
             {
                 group(Options)
                 {
-                    field(PreparedMeails;PrepardMealsOnly)
+                    field(PreparedMeails; PrepardMealsOnly)
                     {
-                        ApplicationArea = Basic;
+                        ApplicationArea = All;
                         Caption = 'Prepared Meals Only';
+                        ToolTip = 'Tooltip';
                     }
                 }
             }
@@ -111,19 +115,10 @@ Report 50093 "Meal Routing Report"
     }
 
     var
-        CustomerRec: Record Customer;
+        Customer: Record Customer;
         CustomerName: Text[30];
-        FullTotal: Integer;
-        HalfTotal: Integer;
-        TempSalesInvoiceLine: Record "Sales Line" temporary;
-        SaveCustomer: Code[20];
-        SubFullTotal: Integer;
-        SubHalfTotal: Integer;
         Full: Integer;
         Half: Integer;
-        PrintToExcel: Boolean;
-        Text101: label 'Data';
-        Text102: label 'Meal Route Report';
         PrepardMealsOnly: Boolean;
 }
 

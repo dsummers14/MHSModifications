@@ -78,13 +78,13 @@ Report 50073 "Work Order by shelf"
 
                     trigger OnAfterGetRecord()
                     begin
-                        TempSalesLine.Init;
+                        TempSalesLine.Init();
                         TempSalesLine := "Sales Line";
-                        if not ItemR.Get("Sales Line"."No.") then
-                            Clear(ItemR);
-                        TempSalesLine."Item Category Code" := ItemR."Shelf No.";
+                        if not Item.Get("Sales Line"."No.") then
+                            Clear(Item);
+                        TempSalesLine."Item Category Code" := Item."Shelf No.";
                         //MESSAGE('KEY %1 %2 %3 Shelf %4',TempSalesLine."Document Type",TempSalesLine."Document No.",TempSalesLine."Line No.",TempSalesLine."Item Category Code");
-                        TempSalesLine.Insert;
+                        TempSalesLine.Insert();
                         /*IF PrintToExcel THEN
                           MakeWOLine; */
 
@@ -94,8 +94,8 @@ Report 50073 "Work Order by shelf"
                     begin
                         /*IF PrintToExcel THEN
                           MakeWOLineHeader;*/
-                        TempSalesLine.Reset;
-                        TempSalesLine.DeleteAll;
+                        TempSalesLine.Reset();
+                        TempSalesLine.DeleteAll();
 
                     end;
                 }
@@ -145,30 +145,30 @@ Report 50073 "Work Order by shelf"
                         if OnLineNum = 1 then
                             TempSalesLine.Find('-')
                         else
-                            TempSalesLine.Next;
+                            TempSalesLine.Next();
                         Message('Doc %1 Shelf %2', TempSalesLine."Document No.", TempSalesLine."Item Category Code");
-                        if PrintToExcel then
-                            MakeWOLine
+                        if vPrintToExcel then
+                            MakeWOLine()
                     end;
 
                     trigger OnPostDataItem()
                     begin
-                        if PrintToExcel and not HasWorkOrderLineRange and not IsEmpty then begin
-                            ExcelBuf.EndRange;
-                            ExcelBuf.CreateRange('WorkOrderLineRange');
+                        if vPrintToExcel and not HasWorkOrderLineRange and not IsEmpty then begin
+                            TempExcelBuffer.EndRange();
+                            TempExcelBuffer.CreateRange('WorkOrderLineRange');
                             HasWorkOrderLineRange := true;
                         end;
                     end;
 
                     trigger OnPreDataItem()
                     begin
-                        TempSalesLine.Reset;
+                        TempSalesLine.Reset();
                         NoOfLines := TempSalesLine.Count;
                         SetRange(Number, 1, NoOfLines);
                         OnLineNum := 0;
                         //MESSAGE('nolines %1',NoOfLines);
-                        if PrintToExcel then
-                            MakeWOLineHeader;
+                        if vPrintToExcel then
+                            MakeWOLineHeader();
                     end;
                 }
                 dataitem("Sales Comment Line"; "Sales Comment Line")
@@ -199,23 +199,23 @@ Report 50073 "Work Order by shelf"
 
                     trigger OnAfterGetRecord()
                     begin
-                        if PrintToExcel then
-                            MakeWOCommentLine;
+                        if vPrintToExcel then
+                            MakeWOCommentLine();
                     end;
 
                     trigger OnPostDataItem()
                     begin
-                        if PrintToExcel and not HasWorkOrderCommentLineRange and not IsEmpty then begin
-                            ExcelBuf.EndRange;
-                            ExcelBuf.CreateRange('WorkOrderCommentLineRange');
+                        if vPrintToExcel and not HasWorkOrderCommentLineRange and not IsEmpty then begin
+                            TempExcelBuffer.EndRange();
+                            TempExcelBuffer.CreateRange('WorkOrderCommentLineRange');
                             HasWorkOrderCommentLineRange := true;
                         end;
                     end;
 
                     trigger OnPreDataItem()
                     begin
-                        if PrintToExcel then
-                            MakeWOCommentLineHeader;
+                        if vPrintToExcel then
+                            MakeWOCommentLineHeader();
                     end;
                 }
                 dataitem("Extra Lines"; "Integer")
@@ -248,32 +248,32 @@ Report 50073 "Work Order by shelf"
 
                     trigger OnPostDataItem()
                     begin
-                        if PrintToExcel and not HasWorkOrderExtraLineRange and not IsEmpty then begin
-                            ExcelBuf.EndRange;
-                            ExcelBuf.CreateRange('WorkOrderExtraLineRange');
+                        if vPrintToExcel and not HasWorkOrderExtraLineRange and not IsEmpty then begin
+                            TempExcelBuffer.EndRange();
+                            TempExcelBuffer.CreateRange('WorkOrderExtraLineRange');
                             HasWorkOrderExtraLineRange := true;
 
-                            ExcelBuf.NewRow;
-                            ExcelBuf.NewRow;
-                            ExcelBuf.NewRow;
-                            ExcelBuf.NewRow;
+                            TempExcelBuffer.NewRow();
+                            TempExcelBuffer.NewRow();
+                            TempExcelBuffer.NewRow();
+                            TempExcelBuffer.NewRow();
                         end;
                     end;
 
                     trigger OnPreDataItem()
                     begin
-                        if PrintToExcel then
-                            MakeWOExtraLineHeader;
+                        if vPrintToExcel then
+                            MakeWOExtraLineHeader();
                     end;
                 }
             }
 
             trigger OnAfterGetRecord()
             begin
-                FormatAddr.SalesHeaderBillTo(CustAddr, "Sales Header");
+                FormatAddress.SalesHeaderBillTo(CustAddr, "Sales Header");
 
-                if PrintToExcel then
-                    MakeWOHeader;
+                if vPrintToExcel then
+                    MakeWOHeader();
             end;
         }
     }
@@ -288,10 +288,11 @@ Report 50073 "Work Order by shelf"
                 group(Options)
                 {
                     Caption = 'Options';
-                    field(PrintToExcel; PrintToExcel)
+                    field(PrintToExcel; vPrintToExcel)
                     {
-                        ApplicationArea = Basic;
+                        ApplicationArea = All;
                         Caption = 'Print to Excel';
+                        ToolTip = 'Tooltip';
                     }
                 }
             }
@@ -308,24 +309,24 @@ Report 50073 "Work Order by shelf"
 
     trigger OnPostReport()
     begin
-        if PrintToExcel then begin
-            ExcelBuf.WriteSheet(Text000, COMPANYNAME, UserId);
-            ExcelBuf.CloseBook;
-            ExcelBuf.OpenExcel;
+        if vPrintToExcel then begin
+            TempExcelBuffer.WriteSheet(Text000Txt, COMPANYNAME, UserId);
+            TempExcelBuffer.CloseBook();
+            TempExcelBuffer.OpenExcel();
 
-            if not "Sales Header".IsEmpty then begin
-                /*   if not "Sales Line".IsEmpty then
+            if not "Sales Header".IsEmpty then /*   
+            if not "Sales Line".IsEmpty then
                     ExcelBuf.AutoFit('WorkOrderLineRange');
                   if not "Sales Line".IsEmpty then
                     ExcelBuf.BorderAround('WorkOrderLineRange');
                   if not "Sales Comment Line".IsEmpty then
                     ExcelBuf.BorderAround('WorkOrderCommentLineRange');
                   if not "Sales Line".IsEmpty then
-                    ExcelBuf.BorderAround('WorkOrderExtraLineRange'); */
-            end;
+                    ExcelBuf.BorderAround('WorkOrderExtraLineRange'  
+            end;*/
 
-            //  ExcelBuf.GiveUserControl;
-            Error('');
+                //  ExcelBuf.GiveUserControl;
+                Error('');
         end;
     end;
 
@@ -336,17 +337,19 @@ Report 50073 "Work Order by shelf"
     end;
 
     var
-        Text000: label 'Work Order in Shelf No. Order';
-        Text001: label 'Sales Order No.';
-        Text002: label 'Quantity used during work (Posted with the Sales Order)';
-        Text003: label 'Quantity Used';
-        Text004: label 'Comments';
-        Text005: label 'Extra Item/Resource used during work (Posted with Item or Resource Journals)';
-        ExcelBuf: Record "Excel Buffer" temporary;
-        FormatAddr: Codeunit "Format Address";
+        TempExcelBuffer: Record "Excel Buffer" temporary;
+        TempSalesLine: Record "Sales Line" temporary;
+        Item: Record Item;
+        FormatAddress: Codeunit "Format Address";
+        Text000Txt: label 'Work Order in Shelf No. Order';
+        Text001Txt: label 'Sales Order No.';
+        Text002Txt: label 'Quantity used during work (Posted with the Sales Order)';
+        Text003Txt: label 'Quantity Used';
+        Text004Txt: label 'Comments';
+        Text005Txt: label 'Extra Item/Resource used during work (Posted with Item or Resource Journals)';
         CustAddr: array[8] of Text[50];
-        PrintToExcel: Boolean;
-        Text006: label 'Date';
+        vPrintToExcel: Boolean;
+        Text006Txt: label 'Date';
         HasWorkOrderExtraLineRange: Boolean;
         HasWorkOrderCommentLineRange: Boolean;
         HasWorkOrderLineRange: Boolean;
@@ -366,192 +369,190 @@ Report 50073 "Work Order by shelf"
         DateCaptionLbl: label 'Date';
         workPostdItemorResJnlCptnLbl: label 'Extra Item/Resource used during work (Posted with Item or Resource Journals)';
         TypeCaptionLbl: label 'Type';
-        TempSalesLine: Record "Sales Line" temporary;
-        ItemR: Record Item;
         NoOfLines: Integer;
         OnLineNum: Integer;
 
     local procedure MakeWOHeader()
     begin
-        ExcelBuf.NewRow;
+        TempExcelBuffer.NewRow();
 
-        ExcelBuf.NewRow;
-        ExcelBuf.AddColumn(CustAddr[1], false, '', false, false, false, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, false, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, false, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, false, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, false, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn(Format(Text001), false, '', true, false, false, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn("Sales Header"."No.", false, '', true, false, false, '', ExcelBuf."cell type"::Text);
+        TempExcelBuffer.NewRow();
+        TempExcelBuffer.AddColumn(CustAddr[1], false, '', false, false, false, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, false, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, false, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, false, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, false, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn(Format(Text001Txt), false, '', true, false, false, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn("Sales Header"."No.", false, '', true, false, false, '', TempExcelBuffer."cell type"::Text);
 
-        ExcelBuf.NewRow;
-        ExcelBuf.AddColumn(CustAddr[2], false, '', false, false, false, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, false, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, false, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, false, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, false, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn("Sales Header".FieldCaption("Shipment Date"), false, '', false, false, false, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn("Sales Header"."Shipment Date", false, '', false, false, false, '', ExcelBuf."cell type"::Date);
+        TempExcelBuffer.NewRow();
+        TempExcelBuffer.AddColumn(CustAddr[2], false, '', false, false, false, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, false, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, false, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, false, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, false, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn("Sales Header".FieldCaption("Shipment Date"), false, '', false, false, false, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn("Sales Header"."Shipment Date", false, '', false, false, false, '', TempExcelBuffer."cell type"::Date);
 
-        ExcelBuf.NewRow;
-        ExcelBuf.AddColumn(CustAddr[3], false, '', false, false, false, '', ExcelBuf."cell type"::Text);
+        TempExcelBuffer.NewRow();
+        TempExcelBuffer.AddColumn(CustAddr[3], false, '', false, false, false, '', TempExcelBuffer."cell type"::Text);
 
-        ExcelBuf.NewRow;
-        ExcelBuf.AddColumn(CustAddr[4], false, '', false, false, false, '', ExcelBuf."cell type"::Text);
+        TempExcelBuffer.NewRow();
+        TempExcelBuffer.AddColumn(CustAddr[4], false, '', false, false, false, '', TempExcelBuffer."cell type"::Text);
 
-        ExcelBuf.NewRow;
-        ExcelBuf.AddColumn(CustAddr[5], false, '', false, false, false, '', ExcelBuf."cell type"::Text);
+        TempExcelBuffer.NewRow();
+        TempExcelBuffer.AddColumn(CustAddr[5], false, '', false, false, false, '', TempExcelBuffer."cell type"::Text);
 
-        ExcelBuf.NewRow;
-        ExcelBuf.AddColumn(CustAddr[6], false, '', false, false, false, '', ExcelBuf."cell type"::Text);
+        TempExcelBuffer.NewRow();
+        TempExcelBuffer.AddColumn(CustAddr[6], false, '', false, false, false, '', TempExcelBuffer."cell type"::Text);
 
-        ExcelBuf.NewRow;
-        ExcelBuf.AddColumn(CustAddr[7], false, '', false, false, false, '', ExcelBuf."cell type"::Text);
+        TempExcelBuffer.NewRow();
+        TempExcelBuffer.AddColumn(CustAddr[7], false, '', false, false, false, '', TempExcelBuffer."cell type"::Text);
 
-        ExcelBuf.NewRow;
-        ExcelBuf.AddColumn(CustAddr[8], false, '', false, false, false, '', ExcelBuf."cell type"::Text);
+        TempExcelBuffer.NewRow();
+        TempExcelBuffer.AddColumn(CustAddr[8], false, '', false, false, false, '', TempExcelBuffer."cell type"::Text);
     end;
 
     local procedure MakeWOLineHeader()
     begin
-        if "Sales Line".IsEmpty then
+        if "Sales Line".IsEmpty() then
             exit;
 
-        ExcelBuf.NewRow;
-        ExcelBuf.NewRow;
+        TempExcelBuffer.NewRow();
+        TempExcelBuffer.NewRow();
 
-        ExcelBuf.NewRow;
-        ExcelBuf.AddColumn(Format(Text002), false, '', true, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
+        TempExcelBuffer.NewRow();
+        TempExcelBuffer.AddColumn(Format(Text002Txt), false, '', true, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
 
-        ExcelBuf.NewRow;
-        ExcelBuf.AddColumn("Sales Line".FieldCaption(Type), false, '', true, false, true, '', ExcelBuf."cell type"::Text);
+        TempExcelBuffer.NewRow();
+        TempExcelBuffer.AddColumn("Sales Line".FieldCaption(Type), false, '', true, false, true, '', TempExcelBuffer."cell type"::Text);
 
-        ExcelBuf.StartRange;
-        ExcelBuf.AddColumn("Sales Line".FieldCaption("No."), false, '', true, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn("Sales Line".FieldCaption(Description), false, '', true, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn("Sales Line".FieldCaption(Quantity), false, '', true, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn("Sales Line".FieldCaption("Unit of Measure"), false, '', true, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn(Format(Text003), false, '', true, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn("Sales Line".FieldCaption("Unit of Measure"), false, '', true, false, true, '', ExcelBuf."cell type"::Text);
+        TempExcelBuffer.StartRange();
+        TempExcelBuffer.AddColumn("Sales Line".FieldCaption("No."), false, '', true, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn("Sales Line".FieldCaption(Description), false, '', true, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn("Sales Line".FieldCaption(Quantity), false, '', true, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn("Sales Line".FieldCaption("Unit of Measure"), false, '', true, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn(Format(Text003Txt), false, '', true, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn("Sales Line".FieldCaption("Unit of Measure"), false, '', true, false, true, '', TempExcelBuffer."cell type"::Text);
     end;
 
     local procedure MakeWOLine()
     begin
-        if "Sales Line".IsEmpty then
+        if "Sales Line".IsEmpty() then
             exit;
 
-        ExcelBuf.NewRow;
-        ExcelBuf.AddColumn(Format("Sales Line".Type), false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn("Sales Line"."No.", false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn("Sales Line".Description, false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn("Sales Line".Quantity, false, '', false, false, true, '', ExcelBuf."cell type"::Number);
-        ExcelBuf.AddColumn("Sales Line"."Unit of Measure", false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
+        TempExcelBuffer.NewRow();
+        TempExcelBuffer.AddColumn(Format("Sales Line".Type), false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn("Sales Line"."No.", false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn("Sales Line".Description, false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn("Sales Line".Quantity, false, '', false, false, true, '', TempExcelBuffer."cell type"::Number);
+        TempExcelBuffer.AddColumn("Sales Line"."Unit of Measure", false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
     end;
 
     local procedure MakeWOCommentLineHeader()
     begin
-        if "Sales Comment Line".IsEmpty then
+        if "Sales Comment Line".IsEmpty() then
             exit;
 
-        ExcelBuf.NewRow;
-        ExcelBuf.NewRow;
+        TempExcelBuffer.NewRow();
+        TempExcelBuffer.NewRow();
 
-        ExcelBuf.NewRow;
-        ExcelBuf.AddColumn(Format(Text004), false, '', true, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
+        TempExcelBuffer.NewRow();
+        TempExcelBuffer.AddColumn(Format(Text004Txt), false, '', true, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
 
-        ExcelBuf.NewRow;
-        ExcelBuf.AddColumn("Sales Comment Line".FieldCaption(Code), false, '', true, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.StartRange;
+        TempExcelBuffer.NewRow();
+        TempExcelBuffer.AddColumn("Sales Comment Line".FieldCaption(Code), false, '', true, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.StartRange();
 
-        ExcelBuf.AddColumn("Sales Comment Line".FieldCaption(Comment), false, '', true, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn("Sales Comment Line".FieldCaption(Date), false, '', true, false, true, '', ExcelBuf."cell type"::Text);
+        TempExcelBuffer.AddColumn("Sales Comment Line".FieldCaption(Comment), false, '', true, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn("Sales Comment Line".FieldCaption(Date), false, '', true, false, true, '', TempExcelBuffer."cell type"::Text);
     end;
 
     local procedure MakeWOCommentLine()
     begin
-        if "Sales Comment Line".IsEmpty then
+        if "Sales Comment Line".IsEmpty() then
             exit;
 
-        ExcelBuf.NewRow;
-        ExcelBuf.AddColumn("Sales Comment Line".Code, false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn("Sales Comment Line".Comment, false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn("Sales Comment Line".Date, false, '', false, false, true, '', ExcelBuf."cell type"::Date);
+        TempExcelBuffer.NewRow();
+        TempExcelBuffer.AddColumn("Sales Comment Line".Code, false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn("Sales Comment Line".Comment, false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn("Sales Comment Line".Date, false, '', false, false, true, '', TempExcelBuffer."cell type"::Date);
     end;
 
     local procedure MakeWOExtraLineHeader()
     begin
-        if "Sales Line".IsEmpty then
+        if "Sales Line".IsEmpty() then
             exit;
 
-        ExcelBuf.NewRow;
-        ExcelBuf.NewRow;
+        TempExcelBuffer.NewRow();
+        TempExcelBuffer.NewRow();
 
-        ExcelBuf.NewRow;
-        ExcelBuf.AddColumn(Format(Text005), false, '', true, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
+        TempExcelBuffer.NewRow();
+        TempExcelBuffer.AddColumn(Format(Text005Txt), false, '', true, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
 
-        ExcelBuf.NewRow;
-        ExcelBuf.AddColumn("Sales Line".FieldCaption(Type), false, '', true, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.StartRange;
-        ExcelBuf.AddColumn("Sales Line".FieldCaption("No."), false, '', true, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn("Sales Line".FieldCaption(Description), false, '', true, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn("Sales Line".FieldCaption(Quantity), false, '', true, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn("Sales Line".FieldCaption("Unit of Measure"), false, '', true, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn(Format(Text006), false, '', true, false, true, '', ExcelBuf."cell type"::Text);
+        TempExcelBuffer.NewRow();
+        TempExcelBuffer.AddColumn("Sales Line".FieldCaption(Type), false, '', true, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.StartRange();
+        TempExcelBuffer.AddColumn("Sales Line".FieldCaption("No."), false, '', true, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn("Sales Line".FieldCaption(Description), false, '', true, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn("Sales Line".FieldCaption(Quantity), false, '', true, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn("Sales Line".FieldCaption("Unit of Measure"), false, '', true, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn(Format(Text006Txt), false, '', true, false, true, '', TempExcelBuffer."cell type"::Text);
 
-        ExcelBuf.NewRow;
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
+        TempExcelBuffer.NewRow();
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
 
-        ExcelBuf.NewRow;
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
+        TempExcelBuffer.NewRow();
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
 
-        ExcelBuf.NewRow;
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
+        TempExcelBuffer.NewRow();
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
 
-        ExcelBuf.NewRow;
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
+        TempExcelBuffer.NewRow();
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
 
-        ExcelBuf.NewRow;
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
-        ExcelBuf.AddColumn('', false, '', false, false, true, '', ExcelBuf."cell type"::Text);
+        TempExcelBuffer.NewRow();
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
+        TempExcelBuffer.AddColumn('', false, '', false, false, true, '', TempExcelBuffer."cell type"::Text);
     end;
 }
 

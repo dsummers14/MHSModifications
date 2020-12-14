@@ -1,4 +1,4 @@
-TableExtension 50104 tableextension50104 extends Item 
+TableExtension 50104 ICPItem extends Item 
 {
     fields
     {

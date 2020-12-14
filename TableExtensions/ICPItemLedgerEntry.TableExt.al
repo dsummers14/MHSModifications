@@ -1,4 +1,4 @@
-TableExtension 50105 ICPLedgerEntry extends "Item Ledger Entry" 
+TableExtension 50105 ICPItemLedgerEntry extends "Item Ledger Entry" 
 {
     fields
     {

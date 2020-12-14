@@ -1,4 +1,4 @@
-TableExtension 50107 tableextension50107 extends "Sales Line" 
+TableExtension 50107 ICPSalesLine extends "Sales Line" 
 {
     fields
     {

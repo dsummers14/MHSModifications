@@ -16,10 +16,10 @@ Report 50138 "ICPInventorytoG/LReconcile"
             column(CompanyInformation_Name; CompanyInformation.Name)
             {
             }
-            column(STRSUBSTNO_Text003_AsOfDate_; StrSubstNo(Text003, AsOfDate))
+            column(STRSUBSTNO_Text003_AsOfDate_; StrSubstNo(Text003Txt, vAsOfDate))
             {
             }
-            column(STRSUBSTNO_Text006_Currency_Description_; StrSubstNo(Text006, Currency.Description))
+            column(STRSUBSTNO_Text006_Currency_Description_; StrSubstNo(Text006Txt, Currency.Description))
             {
             }
             column(Item_TABLECAPTION__________ItemFilter; Item.TableCaption + ': ' + ItemFilter)
@@ -37,7 +37,7 @@ Report 50138 "ICPInventorytoG/LReconcile"
             column(ItemFilter; ItemFilter)
             {
             }
-            column(STRSUBSTNO_Text004_InvPostingGroup_TABLECAPTION_InvPostingGroup_Code_InvPostingGroup_Description_; StrSubstNo(Text004, InvPostingGroup.TableCaption, InvPostingGroup.Code, InvPostingGroup.Description))
+            column(STRSUBSTNO_Text004_InvPostingGroup_TABLECAPTION_InvPostingGroup_Code_InvPostingGroup_Description_; StrSubstNo(Text004Txt, InventoryPostingGroup.TableCaption, InventoryPostingGroup.Code, InventoryPostingGroup.Description))
             {
             }
             column(Item__Inventory_Posting_Group_; "Inventory Posting Group")
@@ -50,13 +50,13 @@ Report 50138 "ICPInventorytoG/LReconcile"
             {
                 IncludeCaption = true;
             }
-            column(STRSUBSTNO_Text009_FIELDCAPTION__Costing_Method____Costing_Method__; StrSubstNo(Text009, FieldCaption("Costing Method"), "Costing Method"))
+            column(STRSUBSTNO_Text009_FIELDCAPTION__Costing_Method____Costing_Method__; StrSubstNo(Text009Txt, FieldCaption("Costing Method"), "Costing Method"))
             {
             }
             column(Item_Description; Description)
             {
             }
-            column(STRSUBSTNO_Text005_InvPostingGroup_TABLECAPTION_InvPostingGroup_Code_InvPostingGroup_Description_; StrSubstNo(Text005, InvPostingGroup.TableCaption, InvPostingGroup.Code, InvPostingGroup.Description))
+            column(STRSUBSTNO_Text005_InvPostingGroup_TABLECAPTION_InvPostingGroup_Code_InvPostingGroup_Description_; StrSubstNo(Text005Txt, InventoryPostingGroup.TableCaption, InventoryPostingGroup.Code, InventoryPostingGroup.Description))
             {
             }
             column(Inventory_to_G_L_ReconciliationCaption; Inventory_to_G_L_ReconciliationCaptionLbl)
@@ -123,12 +123,12 @@ Report 50138 "ICPInventorytoG/LReconcile"
 
                 trigger OnPostDataItem()
                 begin
-                    UpdateTempBuffer;
+                    UpdateTempBuffer();
                 end;
 
                 trigger OnPreDataItem()
                 begin
-                    SetRange("Posting Date", 0D, AsOfDate);
+                    SetRange("Posting Date", 0D, vAsOfDate);
                 end;
             }
             dataitem(BufferLoop; "Integer")
@@ -137,74 +137,74 @@ Report 50138 "ICPInventorytoG/LReconcile"
                 column(ReportForNavId_1596; 1596)
                 {
                 }
-                column(RowLabel; TempBuffer.Label)
+                column(RowLabel; TempItemLocationVariantBufferGbl.Label)
                 {
                 }
-                column(RowLabelTotal; StrSubstNo(Text010, TempBuffer.Label))
+                column(RowLabelTotal; StrSubstNo(Text010Txt, TempItemLocationVariantBufferGbl.Label))
                 {
                 }
-                column(ItemTotalText; StrSubstNo(Text010, TempBuffer."Item No."))
+                column(ItemTotalText; StrSubstNo(Text010Txt, TempItemLocationVariantBufferGbl."Item No."))
                 {
                 }
-                column(InventoryValue; TempBuffer.Value1)
-                {
-                    AutoFormatExpression = Currency.Code;
-                    AutoFormatType = 1;
-                }
-                column(ReceivedNotInvoiced; TempBuffer.Value2)
+                column(InventoryValue; TempItemLocationVariantBufferGbl.Value1)
                 {
                     AutoFormatExpression = Currency.Code;
                     AutoFormatType = 1;
                 }
-                column(ShippedNotInvoiced; TempBuffer.Value3)
+                column(ReceivedNotInvoiced; TempItemLocationVariantBufferGbl.Value2)
                 {
                     AutoFormatExpression = Currency.Code;
                     AutoFormatType = 1;
                 }
-                column(TotalExpectedCost; TempBuffer.Value4)
+                column(ShippedNotInvoiced; TempItemLocationVariantBufferGbl.Value3)
                 {
                     AutoFormatExpression = Currency.Code;
                     AutoFormatType = 1;
                 }
-                column(ReceivedNotInvoicedPosted; TempBuffer.Value5)
+                column(TotalExpectedCost; TempItemLocationVariantBufferGbl.Value4)
                 {
                     AutoFormatExpression = Currency.Code;
                     AutoFormatType = 1;
                 }
-                column(ShippedNotInvoicedPosted; TempBuffer.Value6)
+                column(ReceivedNotInvoicedPosted; TempItemLocationVariantBufferGbl.Value5)
                 {
                     AutoFormatExpression = Currency.Code;
                     AutoFormatType = 1;
                 }
-                column(NetExpectedCostPosted; TempBuffer.Value7)
+                column(ShippedNotInvoicedPosted; TempItemLocationVariantBufferGbl.Value6)
                 {
                     AutoFormatExpression = Currency.Code;
                     AutoFormatType = 1;
                 }
-                column(NetExpectedCostNotPosted; TempBuffer.Value8)
+                column(NetExpectedCostPosted; TempItemLocationVariantBufferGbl.Value7)
                 {
                     AutoFormatExpression = Currency.Code;
                     AutoFormatType = 1;
                 }
-                column(TotalInvoicedValue; TempBuffer.Value9)
+                column(NetExpectedCostNotPosted; TempItemLocationVariantBufferGbl.Value8)
                 {
                     AutoFormatExpression = Currency.Code;
                     AutoFormatType = 1;
                 }
-                column(InvoicedValuePosted; TempBuffer.Value10)
+                column(TotalInvoicedValue; TempItemLocationVariantBufferGbl.Value9)
                 {
                     AutoFormatExpression = Currency.Code;
                     AutoFormatType = 1;
                 }
-                column(InvoicedValueNotPosted; TempBuffer.Value11)
+                column(InvoicedValuePosted; TempItemLocationVariantBufferGbl.Value10)
                 {
                     AutoFormatExpression = Currency.Code;
                     AutoFormatType = 1;
                 }
-                column(ItemLedgerEntry_VariantCode; TempBuffer."Variant Code")
+                column(InvoicedValueNotPosted; TempItemLocationVariantBufferGbl.Value11)
+                {
+                    AutoFormatExpression = Currency.Code;
+                    AutoFormatType = 1;
+                }
+                column(ItemLedgerEntry_VariantCode; TempItemLocationVariantBufferGbl."Variant Code")
                 {
                 }
-                column(ItemLedgerEntry_LocationCode; TempBuffer."Location Code")
+                column(ItemLedgerEntry_LocationCode; TempItemLocationVariantBufferGbl."Location Code")
                 {
                 }
                 column(AdjustFlagEntry; Format(AdjustFlagEntry))
@@ -214,33 +214,33 @@ Report 50138 "ICPInventorytoG/LReconcile"
                 trigger OnAfterGetRecord()
                 begin
                     if Number = 1 then
-                        TempBuffer.Find('-')
+                        TempItemLocationVariantBufferGbl.Find('-')
                     else
-                        TempBuffer.Next;
+                        TempItemLocationVariantBufferGbl.Next();
                 end;
 
                 trigger OnPostDataItem()
                 begin
-                    TempBuffer.DeleteAll;
+                    TempItemLocationVariantBufferGbl.DeleteAll();
                 end;
 
                 trigger OnPreDataItem()
                 begin
-                    BufferLoop.SetRange(Number, 1, TempBuffer.Count);
+                    BufferLoop.SetRange(Number, 1, TempItemLocationVariantBufferGbl.Count);
                 end;
             }
 
             trigger OnAfterGetRecord()
             begin
-                if not InvPostingGroup.Get("Inventory Posting Group") then
-                    Clear(InvPostingGroup);
-                Progress.Update(1, Format("No."));
+                if not InventoryPostingGroup.Get("Inventory Posting Group") then
+                    Clear(InventoryPostingGroup);
+                ProgressDialog.Update(1, Format("No."));
                 AdjustFlagEntry := false;
             end;
 
             trigger OnPreDataItem()
             begin
-                SetRange("Date Filter", 0D, AsOfDate);
+                SetRange("Date Filter", 0D, vAsOfDate);
             end;
         }
     }
@@ -257,25 +257,29 @@ Report 50138 "ICPInventorytoG/LReconcile"
                 group(Options)
                 {
                     Caption = 'Options';
-                    field(AsOfDate; AsOfDate)
+                    field(AsOfDate; vAsOfDate)
                     {
-                        ApplicationArea = Basic;
+                        ApplicationArea = All;
                         Caption = 'As Of Date';
+                        Tooltip = 'Tooltip';
                     }
                     field(BreakdownByVariants; ShowVariants)
                     {
-                        ApplicationArea = Basic;
+                        ApplicationArea = All;
                         Caption = 'Breakdown by Variants';
+                        Tooltip = 'Tooltip';
                     }
                     field(BreakdownByLocation; ShowLocations)
                     {
-                        ApplicationArea = Basic;
+                        ApplicationArea = All;
                         Caption = 'Breakdown by Location';
+                        Tooltip = 'Tooltip';
                     }
                     field(UseAdditionalReportingCurrency; ShowACY)
                     {
-                        ApplicationArea = Basic;
+                        ApplicationArea = All;
                         Caption = 'Use Additional Reporting Currency';
+                        Tooltip = 'Tooltip';
                     }
                 }
             }
@@ -292,63 +296,61 @@ Report 50138 "ICPInventorytoG/LReconcile"
 
     trigger OnPostReport()
     begin
-        Progress.Close;
+        ProgressDialog.Close();
     end;
 
     trigger OnPreReport()
     begin
         Grouping := (Item.FieldCaption("Inventory Posting Group") = Item.CurrentKey);
 
-        if AsOfDate = 0D then
-            Error(Text000);
+        if vAsOfDate = 0D then
+            Error(Text000Txt);
         if ShowLocations and not ShowVariants then
             if not "Item Ledger Entry".SetCurrentkey("Item No.", "Location Code") then
-                Error(Text001,
+                Error(Text001Txt,
                   "Item Ledger Entry".TableCaption,
                   "Item Ledger Entry".FieldCaption("Item No."),
                   "Item Ledger Entry".FieldCaption("Location Code"));
         if Item.GetFilter("Date Filter") <> '' then
-            Error(Text002, Item.FieldCaption("Date Filter"), Item.TableCaption);
+            Error(Text002Txt, Item.FieldCaption("Date Filter"), Item.TableCaption);
 
-        CompanyInformation.Get;
-        ItemFilter := Item.GetFilters;
-        ShowFootnote := false;
-        GLSetup.Get;
-        if GLSetup."Additional Reporting Currency" = '' then
+        CompanyInformation.Get();
+        ItemFilter := CopyStr(Item.GetFilters, 1, 250);
+        GeneralLedgerSetup.Get();
+        if GeneralLedgerSetup."Additional Reporting Currency" = '' then
             ShowACY := false
         else begin
-            Currency.Get(GLSetup."Additional Reporting Currency");
+            Currency.Get(GeneralLedgerSetup."Additional Reporting Currency");
             Currency.TestField("Amount Rounding Precision");
             Currency.TestField("Unit-Amount Rounding Precision");
         end;
-        Progress.Open(Item.TableCaption + '  #1############');
+        ProgressDialog.Open(Item.TableCaption + '  #1############');
     end;
 
     var
-        GLSetup: Record "General Ledger Setup";
+        GeneralLedgerSetup: Record "General Ledger Setup";
         CompanyInformation: Record "Company Information";
-        InvPostingGroup: Record "Inventory Posting Group";
+        InventoryPostingGroup: Record "Inventory Posting Group";
         Currency: Record Currency;
         Location: Record Location;
         ItemVariant: Record "Item Variant";
-        TempBuffer: Record "Item Location Variant Buffer" temporary;
+        TempItemLocationVariantBufferGbl: Record "Item Location Variant Buffer" temporary;
         ItemFilter: Text[250];
-        ShowFootnote: Boolean;
         ShowVariants: Boolean;
         ShowLocations: Boolean;
         ShowACY: Boolean;
-        AsOfDate: Date;
-        Text000: label 'You must enter an As Of Date.';
-        Text001: label 'If you want to show Locations without also showing Variants, you must add a new key to the %1 table which starts with the %2 and %3 fields.';
-        Text002: label 'Do not set a %1 on the %2.  Use the As Of Date on the Option tab instead.';
-        Text003: label 'Values As Of %1';
-        Text004: label '%1 %2 (%3)';
-        Text005: label '%1 %2 (%3) Total';
-        Text006: label 'All Inventory Values are shown in %1.';
-        Text007: label 'No Variant';
-        Text008: label 'No Location';
-        Text009: label '%1: %2';
-        Text010: label '%1 Total';
+        vAsOfDate: Date;
+        Text000Txt: label 'You must enter an As Of Date.';
+        Text001Txt: label 'If you want to show Locations without also showing Variants, you must add a new key to the %1 table which starts with the %2 and %3 fields.';
+        Text002Txt: label 'Do not set a %1 on the %2.  Use the As Of Date on the Option tab instead.';
+        Text003Txt: label 'Values As Of %1';
+        Text004Txt: label '%1 %2 (%3)';
+        Text005Txt: label '%1 %2 (%3) Total';
+        Text006Txt: label 'All Inventory Values are shown in %1.';
+        Text007Txt: label 'No Variant';
+        Text008Txt: label 'No Location';
+        Text009Txt: label '%1: %2';
+        Text010Txt: label '%1 Total'; // Placeholder %1 is Total
         Grouping: Boolean;
         Inventory_to_G_L_ReconciliationCaptionLbl: label 'Inventory to G/L Reconciliation';
         CurrReport_PAGENOCaptionLbl: label 'Page';
@@ -377,18 +379,16 @@ Report 50138 "ICPInventorytoG/LReconcile"
         InvoicedValueNotPosted: Decimal;
         InvoicedValuePosted: Decimal;
         IsCollecting: Boolean;
-        Progress: Dialog;
+        ProgressDialog: Dialog;
         LastItemNo: Code[20];
         LastLocationCode: Code[10];
         LastVariantCode: Code[10];
-        RowLabel: Text[250];
         NewRow: Boolean;
         VariantLabel: Text[250];
         LocationLabel: Text[250];
-        UniqueCounter: Integer;
         AdjustFlagEntry: Boolean;
 
-    local procedure AdjustItemLedgEntryToAsOfDate(var ItemLedgEntry: Record "Item Ledger Entry")
+    local procedure AdjustItemLedgEntryToAsOfDate(var ItemLedgerEntry: Record "Item Ledger Entry")
     var
         ValueEntry: Record "Value Entry";
         InvoicedValue: Decimal;
@@ -426,10 +426,10 @@ Report 50138 "ICPInventorytoG/LReconcile"
         ExpectedPostedToGLACY := 0;
 
         // calculate adjusted cost of entry
-        ValueEntry.Reset;
+        ValueEntry.Reset();
         ValueEntry.SetCurrentkey("Item Ledger Entry No.");
-        ValueEntry.SetRange("Item Ledger Entry No.", ItemLedgEntry."Entry No.");
-        ValueEntry.SetRange("Posting Date", 0D, AsOfDate);
+        ValueEntry.SetRange("Item Ledger Entry No.", ItemLedgerEntry."Entry No.");
+        ValueEntry.SetRange("Posting Date", 0D, vAsOfDate);
         if ValueEntry.Find('-') then
             repeat
                 ExpectedValue := ExpectedValue + ValueEntry."Cost Amount (Expected)";
@@ -443,7 +443,7 @@ Report 50138 "ICPInventorytoG/LReconcile"
                 InvoicedValueACY := InvoicedValueACY + ValueEntry."Cost Amount (Actual) (ACY)";
                 InvoicedPostedToGL := InvoicedPostedToGL + ValueEntry."Cost Posted to G/L";
                 InvoicedPostedToGLACY := InvoicedPostedToGLACY + ValueEntry."Cost Posted to G/L (ACY)";
-            until ValueEntry.Next = 0;
+            until ValueEntry.Next() = 0;
 
         if ValuedQty = 0 then
             ValuedQty := InvoicedQty
@@ -457,7 +457,7 @@ Report 50138 "ICPInventorytoG/LReconcile"
                     ReceivedNotInvoicedPosted := ExpectedPostedToGL;
                 end;
             end else
-                if ValuedQty < 0 then begin
+                if ValuedQty < 0 then
                     if ShowACY then begin
                         ShippedNotInvoiced := ExpectedValueACY;
                         ShippedNotInvoicedPosted := ExpectedPostedToGLACY;
@@ -465,7 +465,7 @@ Report 50138 "ICPInventorytoG/LReconcile"
                         ShippedNotInvoiced := ExpectedValue;
                         ShippedNotInvoicedPosted := ExpectedPostedToGL;
                     end;
-                end;
+
         TotalExpectedCost := ReceivedNotInvoiced + ShippedNotInvoiced;
         NetExpectedCostPosted := ReceivedNotInvoicedPosted + ShippedNotInvoicedPosted;
         NetExpectedCostNotPosted := TotalExpectedCost - NetExpectedCostPosted;
@@ -481,35 +481,35 @@ Report 50138 "ICPInventorytoG/LReconcile"
 
     end;
 
-    local procedure UpdateBuffer(ItemLedgEntry: Record "Item Ledger Entry")
+    local procedure UpdateBuffer(ItemLedgerEntry: Record "Item Ledger Entry")
     begin
-        if ItemLedgEntry."Item No." <> LastItemNo then begin
-            ClearLastEntry;
-            LastItemNo := ItemLedgEntry."Item No.";
+        if ItemLedgerEntry."Item No." <> LastItemNo then begin
+            ClearLastEntry();
+            LastItemNo := ItemLedgerEntry."Item No.";
             NewRow := true
         end;
 
         if ShowVariants or ShowLocations then begin
-            if (ItemLedgEntry."Variant Code" <> LastVariantCode) then begin
+            if (ItemLedgerEntry."Variant Code" <> LastVariantCode) then begin
                 NewRow := true;
-                LastVariantCode := ItemLedgEntry."Variant Code";
+                LastVariantCode := ItemLedgerEntry."Variant Code";
                 if ShowVariants then begin
-                    if (ItemLedgEntry."Variant Code" = '') or not (ItemVariant.Get(ItemLedgEntry."Item No.", ItemLedgEntry."Variant Code")) then
-                        VariantLabel := Text007
+                    if (ItemLedgerEntry."Variant Code" = '') or not (ItemVariant.Get(ItemLedgerEntry."Item No.", ItemLedgerEntry."Variant Code")) then
+                        VariantLabel := Text007Txt
                     else
-                        VariantLabel := ItemVariant.TableCaption + ' ' + ItemLedgEntry."Variant Code" + '(' + ItemVariant.Description + ')';
+                        VariantLabel := ItemVariant.TableCaption + ' ' + ItemLedgerEntry."Variant Code" + '(' + ItemVariant.Description + ')';
                 end
                 else
                     VariantLabel := ''
             end;
-            if (ItemLedgEntry."Location Code" <> LastLocationCode) then begin
+            if (ItemLedgerEntry."Location Code" <> LastLocationCode) then begin
                 NewRow := true;
-                LastLocationCode := ItemLedgEntry."Location Code";
+                LastLocationCode := ItemLedgerEntry."Location Code";
                 if ShowLocations then begin
-                    if (ItemLedgEntry."Location Code" = '') or not Location.Get(ItemLedgEntry."Location Code") then
-                        LocationLabel := Text008
+                    if (ItemLedgerEntry."Location Code" = '') or not Location.Get(ItemLedgerEntry."Location Code") then
+                        LocationLabel := Text008Txt
                     else
-                        LocationLabel := Location.TableCaption + ' ' + ItemLedgEntry."Location Code" + '(' + Location.Name + ')';
+                        LocationLabel := Location.TableCaption + ' ' + ItemLedgerEntry."Location Code" + '(' + Location.Name + ')';
                 end
                 else
                     LocationLabel := '';
@@ -520,37 +520,37 @@ Report 50138 "ICPInventorytoG/LReconcile"
             UpdateTempBuffer();
 
         if ShowACY then begin
-            TempBuffer.Value1 += ROUND(InventoryValue, Currency."Amount Rounding Precision");
-            TempBuffer.Value2 += ROUND(ReceivedNotInvoiced, Currency."Amount Rounding Precision");
-            TempBuffer.Value3 += ROUND(ShippedNotInvoiced, Currency."Amount Rounding Precision");
-            TempBuffer.Value4 += ROUND(TotalExpectedCost, Currency."Amount Rounding Precision");
-            TempBuffer.Value5 += ROUND(ReceivedNotInvoicedPosted, Currency."Amount Rounding Precision");
-            TempBuffer.Value6 += ROUND(ShippedNotInvoicedPosted, Currency."Amount Rounding Precision");
-            TempBuffer.Value7 += ROUND(NetExpectedCostPosted, Currency."Amount Rounding Precision");
-            TempBuffer.Value8 += ROUND(NetExpectedCostNotPosted, Currency."Amount Rounding Precision");
-            TempBuffer.Value9 += ROUND(TotalInvoicedValue, Currency."Amount Rounding Precision");
-            TempBuffer.Value10 += ROUND(InvoicedValuePosted, Currency."Amount Rounding Precision");
-            TempBuffer.Value11 += ROUND(InvoicedValueNotPosted, Currency."Amount Rounding Precision");
+            TempItemLocationVariantBufferGbl.Value1 += ROUND(InventoryValue, Currency."Amount Rounding Precision");
+            TempItemLocationVariantBufferGbl.Value2 += ROUND(ReceivedNotInvoiced, Currency."Amount Rounding Precision");
+            TempItemLocationVariantBufferGbl.Value3 += ROUND(ShippedNotInvoiced, Currency."Amount Rounding Precision");
+            TempItemLocationVariantBufferGbl.Value4 += ROUND(TotalExpectedCost, Currency."Amount Rounding Precision");
+            TempItemLocationVariantBufferGbl.Value5 += ROUND(ReceivedNotInvoicedPosted, Currency."Amount Rounding Precision");
+            TempItemLocationVariantBufferGbl.Value6 += ROUND(ShippedNotInvoicedPosted, Currency."Amount Rounding Precision");
+            TempItemLocationVariantBufferGbl.Value7 += ROUND(NetExpectedCostPosted, Currency."Amount Rounding Precision");
+            TempItemLocationVariantBufferGbl.Value8 += ROUND(NetExpectedCostNotPosted, Currency."Amount Rounding Precision");
+            TempItemLocationVariantBufferGbl.Value9 += ROUND(TotalInvoicedValue, Currency."Amount Rounding Precision");
+            TempItemLocationVariantBufferGbl.Value10 += ROUND(InvoicedValuePosted, Currency."Amount Rounding Precision");
+            TempItemLocationVariantBufferGbl.Value11 += ROUND(InvoicedValueNotPosted, Currency."Amount Rounding Precision");
         end else begin
-            TempBuffer.Value1 += ROUND(InventoryValue);
-            TempBuffer.Value2 += ROUND(ReceivedNotInvoiced);
-            TempBuffer.Value3 += ROUND(ShippedNotInvoiced);
-            TempBuffer.Value4 += ROUND(TotalExpectedCost);
-            TempBuffer.Value5 += ROUND(ReceivedNotInvoicedPosted);
-            TempBuffer.Value6 += ROUND(ShippedNotInvoicedPosted);
-            TempBuffer.Value7 += ROUND(NetExpectedCostPosted);
-            TempBuffer.Value8 += ROUND(NetExpectedCostNotPosted);
-            TempBuffer.Value9 += ROUND(TotalInvoicedValue);
-            TempBuffer.Value10 += ROUND(InvoicedValuePosted);
-            TempBuffer.Value11 += ROUND(InvoicedValueNotPosted);
+            TempItemLocationVariantBufferGbl.Value1 += ROUND(InventoryValue);
+            TempItemLocationVariantBufferGbl.Value2 += ROUND(ReceivedNotInvoiced);
+            TempItemLocationVariantBufferGbl.Value3 += ROUND(ShippedNotInvoiced);
+            TempItemLocationVariantBufferGbl.Value4 += ROUND(TotalExpectedCost);
+            TempItemLocationVariantBufferGbl.Value5 += ROUND(ReceivedNotInvoicedPosted);
+            TempItemLocationVariantBufferGbl.Value6 += ROUND(ShippedNotInvoicedPosted);
+            TempItemLocationVariantBufferGbl.Value7 += ROUND(NetExpectedCostPosted);
+            TempItemLocationVariantBufferGbl.Value8 += ROUND(NetExpectedCostNotPosted);
+            TempItemLocationVariantBufferGbl.Value9 += ROUND(TotalInvoicedValue);
+            TempItemLocationVariantBufferGbl.Value10 += ROUND(InvoicedValuePosted);
+            TempItemLocationVariantBufferGbl.Value11 += ROUND(InvoicedValueNotPosted);
         end;
 
-        TempBuffer."Item No." := ItemLedgEntry."Item No.";
+        TempItemLocationVariantBufferGbl."Item No." := ItemLedgerEntry."Item No.";
         if ShowVariants then
-            TempBuffer."Variant Code" := LastVariantCode;
+            TempItemLocationVariantBufferGbl."Variant Code" := LastVariantCode;
         if ShowLocations then
-            TempBuffer."Location Code" := LastLocationCode;
-        TempBuffer.Label := VariantLabel + ' ' + LocationLabel;
+            TempItemLocationVariantBufferGbl."Location Code" := LastLocationCode;
+        TempItemLocationVariantBufferGbl.Label := CopyStr(VariantLabel + ' ' + LocationLabel, 1, 250);
 
         IsCollecting := true;
     end;
@@ -564,29 +564,28 @@ Report 50138 "ICPInventorytoG/LReconcile"
 
     local procedure UpdateTempBuffer()
     var
-        AlreadyInsertedTempBuffer: Record "Item Location Variant Buffer" temporary;
+        TempItemLocationVariantBuffer: Record "Item Location Variant Buffer" temporary;
     begin
-        if IsCollecting then begin
-            if not TempBuffer.Insert then begin
-                AlreadyInsertedTempBuffer.Copy(TempBuffer, true);
-                AlreadyInsertedTempBuffer.Get(TempBuffer."Item No.", TempBuffer."Variant Code", TempBuffer."Location Code");
-                AlreadyInsertedTempBuffer.Value1 += TempBuffer.Value1;
-                AlreadyInsertedTempBuffer.Value2 += TempBuffer.Value2;
-                AlreadyInsertedTempBuffer.Value3 += TempBuffer.Value3;
-                AlreadyInsertedTempBuffer.Value4 += TempBuffer.Value4;
-                AlreadyInsertedTempBuffer.Value5 += TempBuffer.Value5;
-                AlreadyInsertedTempBuffer.Value6 += TempBuffer.Value6;
-                AlreadyInsertedTempBuffer.Value7 += TempBuffer.Value7;
-                AlreadyInsertedTempBuffer.Value8 += TempBuffer.Value8;
-                AlreadyInsertedTempBuffer.Value9 += TempBuffer.Value9;
-                AlreadyInsertedTempBuffer.Value10 += TempBuffer.Value10;
-                AlreadyInsertedTempBuffer.Value11 += TempBuffer.Value11;
-                AlreadyInsertedTempBuffer.Modify();
+        if IsCollecting then
+            if not TempItemLocationVariantBuffer.Insert() then begin
+                TempItemLocationVariantBuffer.Copy(TempItemLocationVariantBuffer, true);
+                TempItemLocationVariantBuffer.Get(TempItemLocationVariantBuffer."Item No.", TempItemLocationVariantBuffer."Variant Code", TempItemLocationVariantBuffer."Location Code");
+                TempItemLocationVariantBuffer.Value1 += TempItemLocationVariantBuffer.Value1;
+                TempItemLocationVariantBuffer.Value2 += TempItemLocationVariantBuffer.Value2;
+                TempItemLocationVariantBuffer.Value3 += TempItemLocationVariantBuffer.Value3;
+                TempItemLocationVariantBuffer.Value4 += TempItemLocationVariantBuffer.Value4;
+                TempItemLocationVariantBuffer.Value5 += TempItemLocationVariantBuffer.Value5;
+                TempItemLocationVariantBuffer.Value6 += TempItemLocationVariantBuffer.Value6;
+                TempItemLocationVariantBuffer.Value7 += TempItemLocationVariantBuffer.Value7;
+                TempItemLocationVariantBuffer.Value8 += TempItemLocationVariantBuffer.Value8;
+                TempItemLocationVariantBuffer.Value9 += TempItemLocationVariantBuffer.Value9;
+                TempItemLocationVariantBuffer.Value10 += TempItemLocationVariantBuffer.Value10;
+                TempItemLocationVariantBuffer.Value11 += TempItemLocationVariantBuffer.Value11;
+                TempItemLocationVariantBuffer.Modify();
             end;
-        end;
 
         IsCollecting := false;
-        Clear(TempBuffer);
+        Clear(TempItemLocationVariantBuffer);
     end;
 }
 

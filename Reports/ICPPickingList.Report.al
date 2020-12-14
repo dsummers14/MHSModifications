@@ -49,7 +49,7 @@ Report 50148 "ICPPickingList"
                 column(ShowLotSN; ShowLotSN)
                 {
                 }
-                column(SumUpLines; SumUpLines)
+                column(SumUpLines; vSumUpLines)
                 {
                 }
                 column(No_WhseActivHeaderCaption; "Warehouse Activity Header".FieldCaption("No."))
@@ -144,44 +144,44 @@ Report 50148 "ICPPickingList"
 
                     trigger OnAfterGetRecord()
                     begin
-                        if SumUpLines and
+                        if vSumUpLines and
                            ("Warehouse Activity Header"."Sorting Method" <>
                             "Warehouse Activity Header"."sorting method"::Document)
                         then begin
-                            if TmpWhseActLine."No." = '' then begin
-                                TmpWhseActLine := "Warehouse Activity Line";
-                                TmpWhseActLine.Insert;
+                            if TempWarehouseActivityLine."No." = '' then begin
+                                TempWarehouseActivityLine := "Warehouse Activity Line";
+                                TempWarehouseActivityLine.Insert();
                                 Mark(true);
                             end else begin
-                                TmpWhseActLine.SetCurrentkey("Activity Type", "No.", "Bin Code", "Breakbulk No.", "Action Type");
-                                TmpWhseActLine.SetRange("Activity Type", "Activity Type");
-                                TmpWhseActLine.SetRange("No.", "No.");
-                                TmpWhseActLine.SetRange("Bin Code", "Bin Code");
-                                TmpWhseActLine.SetRange("Item No.", "Item No.");
-                                TmpWhseActLine.SetRange("Action Type", "Action Type");
-                                TmpWhseActLine.SetRange("Variant Code", "Variant Code");
-                                TmpWhseActLine.SetRange("Unit of Measure Code", "Unit of Measure Code");
-                                TmpWhseActLine.SetRange("Due Date", "Due Date");
+                                TempWarehouseActivityLine.SetCurrentkey("Activity Type", "No.", "Bin Code", "Breakbulk No.", "Action Type");
+                                TempWarehouseActivityLine.SetRange("Activity Type", "Activity Type");
+                                TempWarehouseActivityLine.SetRange("No.", "No.");
+                                TempWarehouseActivityLine.SetRange("Bin Code", "Bin Code");
+                                TempWarehouseActivityLine.SetRange("Item No.", "Item No.");
+                                TempWarehouseActivityLine.SetRange("Action Type", "Action Type");
+                                TempWarehouseActivityLine.SetRange("Variant Code", "Variant Code");
+                                TempWarehouseActivityLine.SetRange("Unit of Measure Code", "Unit of Measure Code");
+                                TempWarehouseActivityLine.SetRange("Due Date", "Due Date");
                                 if "Warehouse Activity Header"."Sorting Method" =
                                    "Warehouse Activity Header"."sorting method"::"Ship-To"
                                 then begin
-                                    TmpWhseActLine.SetRange("Destination Type", "Destination Type");
-                                    TmpWhseActLine.SetRange("Destination No.", "Destination No.")
+                                    TempWarehouseActivityLine.SetRange("Destination Type", "Destination Type");
+                                    TempWarehouseActivityLine.SetRange("Destination No.", "Destination No.")
                                 end;
-                                if TmpWhseActLine.FindFirst then begin
-                                    TmpWhseActLine."Qty. (Base)" := TmpWhseActLine."Qty. (Base)" + "Qty. (Base)";
-                                    TmpWhseActLine."Qty. to Handle" := TmpWhseActLine."Qty. to Handle" + "Qty. to Handle";
-                                    TmpWhseActLine."Source No." := '';
+                                if TempWarehouseActivityLine.FindFirst() then begin
+                                    TempWarehouseActivityLine."Qty. (Base)" := TempWarehouseActivityLine."Qty. (Base)" + "Qty. (Base)";
+                                    TempWarehouseActivityLine."Qty. to Handle" := TempWarehouseActivityLine."Qty. to Handle" + "Qty. to Handle";
+                                    TempWarehouseActivityLine."Source No." := '';
                                     if "Warehouse Activity Header"."Sorting Method" <>
                                        "Warehouse Activity Header"."sorting method"::"Ship-To"
                                     then begin
-                                        TmpWhseActLine."Destination Type" := TmpWhseActLine."destination type"::" ";
-                                        TmpWhseActLine."Destination No." := '';
+                                        TempWarehouseActivityLine."Destination Type" := TempWarehouseActivityLine."destination type"::" ";
+                                        TempWarehouseActivityLine."Destination No." := '';
                                     end;
-                                    TmpWhseActLine.Modify;
+                                    TempWarehouseActivityLine.Modify();
                                 end else begin
-                                    TmpWhseActLine := "Warehouse Activity Line";
-                                    TmpWhseActLine.Insert;
+                                    TempWarehouseActivityLine := "Warehouse Activity Line";
+                                    TempWarehouseActivityLine.Insert();
                                     Mark(true);
                                 end;
                             end;
@@ -196,12 +196,12 @@ Report 50148 "ICPPickingList"
 
                     trigger OnPreDataItem()
                     begin
-                        TmpWhseActLine.SetRange("Activity Type", "Warehouse Activity Header".Type);
-                        TmpWhseActLine.SetRange("No.", "Warehouse Activity Header"."No.");
-                        TmpWhseActLine.DeleteAll;
+                        TempWarehouseActivityLine.SetRange("Activity Type", "Warehouse Activity Header".Type);
+                        TempWarehouseActivityLine.SetRange("No.", "Warehouse Activity Header"."No.");
+                        TempWarehouseActivityLine.DeleteAll();
                         if BreakbulkFilter then
-                            TmpWhseActLine.SetRange("Original Breakbulk", false);
-                        Clear(TmpWhseActLine);
+                            TempWarehouseActivityLine.SetRange("Original Breakbulk", false);
+                        Clear(TempWarehouseActivityLine);
                     end;
                 }
                 dataitem(WhseActLine; "Warehouse Activity Line")
@@ -305,10 +305,10 @@ Report 50148 "ICPPickingList"
 
                     trigger OnAfterGetRecord()
                     begin
-                        if SumUpLines then begin
-                            TmpWhseActLine.Get("Activity Type", "No.", "Line No.");
-                            "Qty. (Base)" := TmpWhseActLine."Qty. (Base)";
-                            "Qty. to Handle" := TmpWhseActLine."Qty. to Handle";
+                        if vSumUpLines then begin
+                            TempWarehouseActivityLine.Get("Activity Type", "No.", "Line No.");
+                            "Qty. (Base)" := TempWarehouseActivityLine."Qty. (Base)";
+                            "Qty. to Handle" := TempWarehouseActivityLine."Qty. to Handle";
                         end;
                     end;
 
@@ -317,7 +317,7 @@ Report 50148 "ICPPickingList"
                         Copy("Warehouse Activity Line");
                         Counter := Count;
                         if Counter = 0 then
-                            CurrReport.Break;
+                            CurrReport.Break();
 
                         if BreakbulkFilter then
                             SetRange("Original Breakbulk", false);
@@ -349,20 +349,23 @@ Report 50148 "ICPPickingList"
                     Caption = 'Options';
                     field(Breakbulk; BreakbulkFilter)
                     {
-                        ApplicationArea = Basic;
+                        ApplicationArea = All;
                         Caption = 'Set Breakbulk Filter';
                         Editable = BreakbulkEditable;
+                        ToolTip = 'Tooltip';
                     }
-                    field(SumUpLines; SumUpLines)
+                    field(SumUpLines; vSumUpLines)
                     {
-                        ApplicationArea = Basic;
+                        ApplicationArea = All;
                         Caption = 'Sum up Lines';
                         Editable = SumUpLinesEditable;
+                        ToolTip = 'Tooltip';
                     }
                     field(LotSerialNo; ShowLotSN)
                     {
-                        ApplicationArea = Basic;
+                        ApplicationArea = All;
                         Caption = 'Show Serial/Lot Number';
+                        ToolTip = 'Tooltip';
                     }
                 }
             }
@@ -393,16 +396,16 @@ Report 50148 "ICPPickingList"
 
     trigger OnPreReport()
     begin
-        PickFilter := "Warehouse Activity Header".GetFilters;
+        PickFilter := CopyStr("Warehouse Activity Header".GetFilters(), 1, 250);
     end;
 
     var
         Location: Record Location;
-        TmpWhseActLine: Record "Warehouse Activity Line" temporary;
+        TempWarehouseActivityLine: Record "Warehouse Activity Line" temporary;
         WhseCountPrinted: Codeunit "Whse.-Printed";
         PickFilter: Text[250];
         BreakbulkFilter: Boolean;
-        SumUpLines: Boolean;
+        vSumUpLines: Boolean;
         HideOptions: Boolean;
         InvtPick: Boolean;
         ShowLotSN: Boolean;
@@ -420,7 +423,7 @@ Report 50148 "ICPPickingList"
     local procedure GetLocation(LocationCode: Code[10])
     begin
         if LocationCode = '' then
-            Location.Init
+            Location.Init()
         else
             if Location.Code <> LocationCode then
                 Location.Get(LocationCode);

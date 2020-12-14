@@ -1,4 +1,4 @@
-TableExtension 50111 tableextension50111 extends "Sales Invoice Line" 
+TableExtension 50111 ICPSalesInvoiceLine extends "Sales Invoice Line" 
 {
     keys
     {

@@ -26,49 +26,49 @@ Report 50095 "Cust Sales Item Color Detail"
 
             trigger OnAfterGetRecord()
             begin
-                if not ItemRec.Get("Item No.") then
-                    Clear(ItemRec);
-                if (SkipNonFood) and (ItemRec.DisplayColor = 0) then
-                    CurrReport.Skip;
+                if not Item.Get("Item No.") then
+                    Clear(Item);
+                if (SkipNonFood) and (Item.DisplayColor = 0) then
+                    CurrReport.Skip();
                 CalcFields("Sales Amount (Actual)", Supervisor, Division, Gender);
                 if ColorSummary then
                     "Item No." := '';
 
-                if not CustSaleBuffer.Get(Supervisor, Division, Gender, "Source No.", ItemRec.DisplayColor, "Item No.") then begin
-                    CustSaleBuffer.Init;
-                    CustSaleBuffer."Cust No" := "Source No.";
-                    CustSaleBuffer.DisplayColor := ItemRec.DisplayColor;
-                    CustSaleBuffer."Item No." := "Item No.";
-                    CustSaleBuffer."Sales Amount" := "Sales Amount (Actual)";
-                    CustSaleBuffer."Sales Amount Sort" := Format(9999999999.0 - ROUND("Sales Amount (Actual)", 0.01));
-                    CustSaleBuffer.RanBy := CurrUser;
+                if not CustomerSaleColorBuffer.Get(Supervisor, Division, Gender, "Source No.", Item.DisplayColor, "Item No.") then begin
+                    CustomerSaleColorBuffer.Init();
+                    CustomerSaleColorBuffer."Cust No" := "Source No.";
+                    CustomerSaleColorBuffer.DisplayColor := Item.DisplayColor;
+                    CustomerSaleColorBuffer."Item No." := "Item No.";
+                    CustomerSaleColorBuffer."Sales Amount" := "Sales Amount (Actual)";
+                    CustomerSaleColorBuffer."Sales Amount Sort" := Format(9999999999.0 - ROUND("Sales Amount (Actual)", 0.01));
+                    CustomerSaleColorBuffer.RanBy := CurrUser;
 
                     // iCepts BRB 05.21.12 - RFM7490 Populate New fields :START
-                    CustSaleBuffer.Division := Division;
-                    CustSaleBuffer.Gender := Gender;
+                    CustomerSaleColorBuffer.Division := Division;
+                    CustomerSaleColorBuffer.Gender := Gender;
                     // iCepts BRB 05.21.12 - RFM7490 Populate New fields :END
 
                     // iCepts BRB 07.02.12 - RFM7557 Add Supervisor :START
-                    CustSaleBuffer.Supervisor := Supervisor;
+                    CustomerSaleColorBuffer.Supervisor := Supervisor;
                     //MESSAGE('Supervisor %1',Supervisor); //10.21.13
                     // iCepts BRB 07.02.12 - RFM7557 Add Supervisor :START
 
-                    CustSaleBuffer.Insert;
+                    CustomerSaleColorBuffer.Insert();
                 end else begin
-                    CustSaleBuffer."Sales Amount" := CustSaleBuffer."Sales Amount" + "Sales Amount (Actual)";
-                    CustSaleBuffer."Sales Amount Sort" := Format(9999999999.0 - ROUND(CustSaleBuffer."Sales Amount", 0.01));
-                    CustSaleBuffer.RanBy := CurrUser;
-                    CustSaleBuffer.Modify;
+                    CustomerSaleColorBuffer."Sales Amount" := CustomerSaleColorBuffer."Sales Amount" + "Sales Amount (Actual)";
+                    CustomerSaleColorBuffer."Sales Amount Sort" := Format(9999999999.0 - ROUND(CustomerSaleColorBuffer."Sales Amount", 0.01));
+                    CustomerSaleColorBuffer.RanBy := CurrUser;
+                    CustomerSaleColorBuffer.Modify();
                 end;
 
-                if not CustSaleTotalTemp.Get("Source No.") then begin
-                    CustSaleTotalTemp.Init;
-                    CustSaleTotalTemp."No." := "Source No.";
-                    CustSaleTotalTemp.Amount := "Sales Amount (Actual)";
-                    CustSaleTotalTemp.Insert;
+                if not TempCustomer.Get("Source No.") then begin
+                    TempCustomer.Init();
+                    TempCustomer."No." := "Source No.";
+                    TempCustomer.Amount := "Sales Amount (Actual)";
+                    TempCustomer.Insert();
                 end else begin
-                    CustSaleTotalTemp.Amount := CustSaleTotalTemp.Amount + "Sales Amount (Actual)";
-                    CustSaleTotalTemp.Modify;
+                    TempCustomer.Amount := TempCustomer.Amount + "Sales Amount (Actual)";
+                    TempCustomer.Modify();
                 end;
             end;
         }
@@ -124,7 +124,7 @@ Report 50095 "Cust Sales Item Color Detail"
             column(PrintCustSaleColorBuffer__Sales_Amount_; "Sales Amount")
             {
             }
-            column(ItemRec_Description; ItemRec.Description)
+            column(ItemRec_Description; Item.Description)
             {
             }
             column(PrintCustSaleColorBuffer_DisplayColor_Control1000000008; DisplayColor)
@@ -215,20 +215,19 @@ Report 50095 "Cust Sales Item Color Detail"
                 Percent := 0;
                 if not CustRec.Get("Cust No") then
                     Clear(CustRec);
-                if not ItemRec.Get("Item No.") then
-                    Clear(ItemRec);
+                if not Item.Get("Item No.") then
+                    Clear(Item);
 
-                if CustSaleTotalTemp.Get("Cust No") then begin
-                    if CustSaleTotalTemp.Amount <> 0 then
-                        Percent := ("Sales Amount" / CustSaleTotalTemp.Amount) * 100;
-                end;
+                if TempCustomer.Get("Cust No") then
+                    if TempCustomer.Amount <> 0 then
+                        Percent := ("Sales Amount" / TempCustomer.Amount) * 100;
             end;
 
             trigger OnPreDataItem()
             begin
-                Win.Close;
-                Commit;
-                Reset;
+                Win.Close();
+                Commit();
+                Reset();
                 if not ColorSummary then
                     SetCurrentkey(RanBy, Supervisor, Division, Gender, "Cust No", DisplayColor, "Sales Amount Sort", "Item No.")
                 else
@@ -251,11 +250,15 @@ Report 50095 "Cust Sales Item Color Detail"
                 {
                     field("Display Color Summary"; ColorSummary)
                     {
-                        ApplicationArea = Basic;
+                        ApplicationArea = All;
+                        ToolTip = 'Tooltip';
+                        Caption = 'Display Color Summary';
                     }
                     field("Skip Non-Food"; SkipNonFood)
                     {
-                        ApplicationArea = Basic;
+                        ApplicationArea = All;
+                        ToolTip = 'Tooltip';
+                        Caption = 'Skip Non-Food';
                     }
                 }
             }
@@ -272,32 +275,32 @@ Report 50095 "Cust Sales Item Color Detail"
 
     trigger OnPostReport()
     begin
-        CustSaleBuffer.Reset;
-        CustSaleBuffer.SetCurrentkey(RanBy);
-        CustSaleBuffer.SetRange(RanBy, CurrUser);
-        CustSaleBuffer.DeleteAll;
+        CustomerSaleColorBuffer.Reset();
+        CustomerSaleColorBuffer.SetCurrentkey(RanBy);
+        CustomerSaleColorBuffer.SetRange(RanBy, CurrUser);
+        CustomerSaleColorBuffer.DeleteAll();
     end;
 
     trigger OnPreReport()
     begin
         Win.Open('Building report, please wait...');
-        CurrUser := UserId + Format(CurrentDatetime);
-        FilterStr := "Item Ledger Entry".GetFilters;
+        CurrUser := CopyStr(UserId + Format(CurrentDatetime), 1, 40);
+        FilterStr := CopyStr("Item Ledger Entry".GetFilters, 1, 250);
         //iCepts 11.03.14 DXD
-        CustSaleBuffer.Reset;
-        CustSaleBuffer.DeleteAll;
+        CustomerSaleColorBuffer.Reset();
+        CustomerSaleColorBuffer.DeleteAll();
         //iCepts 11.03.14 DXD
     end;
 
     var
-        CustSaleBuffer: Record "Customer Sale Color Buffer";
-        ItemRec: Record Item;
-        CurrUser: Code[40];
+        CustomerSaleColorBuffer: Record "Customer Sale Color Buffer";
+        Item: Record Item;
         CustRec: Record Customer;
+        TempCustomer: Record Customer temporary;
+        CurrUser: Code[40];
         ColorSummary: Boolean;
         FilterStr: Text[250];
         DispTotal: Text[30];
-        CustSaleTotalTemp: Record Customer temporary;
         Percent: Decimal;
         SkipNonFood: Boolean;
         Win: Dialog;

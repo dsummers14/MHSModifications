@@ -1,4 +1,4 @@
-TableExtension 50112 tableextension50112 extends "Requisition Line" 
+TableExtension 50112 ICPRequisitionLine extends "Requisition Line" 
 {
     fields
     {

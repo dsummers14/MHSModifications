@@ -1,4 +1,4 @@
-TableExtension 50114 tableextension50114 extends "Warehouse Activity Line" 
+TableExtension 50114 ICPWarehouseActivityLine extends "Warehouse Activity Line" 
 {
     keys
     {

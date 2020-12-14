@@ -100,7 +100,7 @@ Report 50146 "ICPPickingListbyItem"
                 column(ReportForNavId_2844; 2844)
                 {
                 }
-                column(STRSUBSTNO_Text000__Variant_Code__; StrSubstNo(Text000, "Variant Code"))
+                column(STRSUBSTNO_Text000__Variant_Code__; StrSubstNo(Text000Txt, "Variant Code"))
                 {
                 }
                 column(ItemVariant_Description; ItemVariant.Description)
@@ -136,7 +136,7 @@ Report 50146 "ICPPickingListbyItem"
                 column(Sales_Line__Unit_of_Measure_; "Unit of Measure")
                 {
                 }
-                column(STRSUBSTNO_Text000__Variant_Code___Control7; StrSubstNo(Text000, "Variant Code"))
+                column(STRSUBSTNO_Text000__Variant_Code___Control7; StrSubstNo(Text000Txt, "Variant Code"))
                 {
                 }
                 column(Sales_Line_Quantity_Control9; Quantity)
@@ -272,9 +272,9 @@ Report 50146 "ICPPickingListbyItem"
 
     trigger OnPreReport()
     begin
-        CompanyInformation.Get;
-        ItemFilter := Item.GetFilters;
-        SalesLineFilter := "Sales Line".GetFilters;
+        CompanyInformation.Get();
+        ItemFilter := CopyStr(Item.GetFilters(),1,250);
+        SalesLineFilter := CopyStr("Sales Line".GetFilters(),1,250);
     end;
 
     var
@@ -283,7 +283,7 @@ Report 50146 "ICPPickingListbyItem"
         ItemVariant: Record "Item Variant";
         ItemFilter: Text[250];
         SalesLineFilter: Text[250];
-        Text000: label 'Variant: %1';
+        Text000Txt: label 'Variant: %1';
         TotalQuantity: Decimal;
         TotalQuantity_Shipped: Decimal;
         TotalQty__to_Ship: Decimal;
