@@ -20,11 +20,11 @@ Page 50096 "Customer Menu"
 
                     trigger OnValidate()
                     begin
-                        if not Cust.Get(CustomerNo) then
-                          Clear(Cust);
+                        if not Customer.Get(CustomerNo) then
+                          Clear(Customer);
                     end;
                 }
-                field(CustName;Cust.Name)
+                field(CustName;Customer.Name)
                 {
                     ApplicationArea = All;
                     ToolTip = 'Tooltip';
@@ -65,9 +65,9 @@ Page 50096 "Customer Menu"
 
                 trigger OnAction()
                 begin
-                    Clear(vPublish);
-                    vPublish.PassParameters(Rec.CustomerNo,Rec.MenuID);
-                    vPublish.Run();
+                    Clear(PagePublishCustomerMenu);
+                    PagePublishCustomerMenu.PassParameters(Rec.CustomerNo,Rec.MenuID);
+                    PagePublishCustomerMenu.Run();
                 end;
             }
         }
@@ -75,12 +75,12 @@ Page 50096 "Customer Menu"
 
     trigger OnAfterGetRecord()
     begin
-        if not Cust.Get(Rec.CustomerNo) then
-          Clear(Cust);
+        if not Customer.Get(Rec.CustomerNo) then
+          Clear(Customer);
     end;
 
     var
-        Cust: Record Customer;
-        vPublish: Page "Publish Customer Menu";
+        Customer: Record Customer;
+        PagePublishCustomerMenu: Page "Publish Customer Menu";
 }
 

@@ -70,6 +70,17 @@ PageExtension 50102 ICPCustomerCard extends "Customer Card"
                     {
                         ApplicationArea = All;
                         ToolTip = 'ToolTip';
+                        DrillDown = true;
+                        DrillDownPageId = 379;
+
+                        trigger OnDrillDown()
+                        var
+                            CustLedgerEntry: Record "Cust. Ledger Entry";
+                            DetailedCustLedgEntry: Record "Detailed Cust. Ledg. Entry";
+
+                        begin
+                            CustLedgerEntry.ICPDrillDownOnEntries(DetailedCustLedgEntry);
+                        end;
                     }
                 }
                 group("Non-Food")
@@ -79,6 +90,8 @@ PageExtension 50102 ICPCustomerCard extends "Customer Card"
                     {
                         ApplicationArea = All;
                         ToolTip = 'ToolTip';
+                        DrillDown = true;
+                        DrillDownPageId = 379;
                     }
                     field("Non-Food Max Forward Amount"; Rec."Non-Food Max Forward Amount")
                     {

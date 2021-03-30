@@ -1,5 +1,6 @@
 TableExtension 50113 ICPDetailedCustomerLedgerEntry extends "Detailed Cust. Ledg. Entry" 
 {
+    DrillDownPageId = "Detailed Cust. Ledg. Entries";
     fields
     {
         field(57000;"Allocated Type";Option)
