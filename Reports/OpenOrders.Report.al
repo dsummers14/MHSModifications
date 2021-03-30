@@ -2,7 +2,7 @@ Report 50099 "Open Orders"
 {
     // // iCepts dxd 10.09.13 -Upgrade2013                             iCepts1.00
     DefaultLayout = RDLC;
-    RDLCLayout = './Layouts/OpenOrders.rdlc';
+    RDLCLayout = './ReportLayouts/OpenOrders.rdlc';
 
 
     dataset

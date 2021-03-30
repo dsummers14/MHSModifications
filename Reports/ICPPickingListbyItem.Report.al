@@ -2,7 +2,7 @@ Report 50146 "ICPPickingListbyItem"
 {
     // // iCepts dxd 09.24.13 - Add Item Category Code filter on Sales Line iCepts1.00
     DefaultLayout = RDLC;
-    RDLCLayout = './Layouts/PickingListbyItem.rdlc';
+    RDLCLayout = './ReportLayouts/PickingListbyItem.rdlc';
 
     Caption = 'Picking List by Item';
     UsageCategory = ReportsandAnalysis;

@@ -10,7 +10,7 @@ Report 50095 "Cust Sales Item Color Detail"
     // // iCepts dxd 09.26.13 -Upgrade2013                             iCepts1.00
     // //iCepts RFM7364 01.12.12 DXD                 iCepts1.00
     DefaultLayout = RDLC;
-    RDLCLayout = './Layouts/CustSalesItemColorDetail.rdlc';
+    RDLCLayout = './ReportLayouts/CustSalesItemColorDetail.rdlc';
 
     UsageCategory = ReportsandAnalysis;
 

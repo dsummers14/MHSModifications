@@ -6,139 +6,37 @@
         <DataProvider>SQL</DataProvider>
         <ConnectString />
       </ConnectionProperties>
-      <rd:DataSourceID>91a41a00-958d-42d0-b569-feafc28da2f8</rd:DataSourceID>
+      <rd:DataSourceID>8c8c8aa4-00bd-4af0-b355-72bc75174a34</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Fields>
-        <Field Name="COMPANYNAME">
-          <DataField>COMPANYNAME</DataField>
-        </Field>
-        <Field Name="FORMAT_TODAY_0_4_">
-          <DataField>FORMAT_TODAY_0_4_</DataField>
-        </Field>
-        <Field Name="USERID">
-          <DataField>USERID</DataField>
-        </Field>
-        <Field Name="CurrReport_PAGENO">
-          <DataField>CurrReport_PAGENO</DataField>
-        </Field>
-        <Field Name="Item_Ledger_Entry__TABLECAPTION______FilterStr">
-          <DataField>Item_Ledger_Entry__TABLECAPTION______FilterStr</DataField>
-        </Field>
-        <Field Name="PrintCustSaleColorBuffer_DisplayColor">
-          <DataField>PrintCustSaleColorBuffer_DisplayColor</DataField>
-        </Field>
-        <Field Name="PrintCustSaleColorBuffer_DisplayColor_Control1000000008">
-          <DataField>PrintCustSaleColorBuffer_DisplayColor_Control1000000008</DataField>
-        </Field>
-        <Field Name="PrintCustSaleColorBuffer__Cust_No_">
-          <DataField>PrintCustSaleColorBuffer__Cust_No_</DataField>
-        </Field>
-        <Field Name="CustRec_Name">
-          <DataField>CustRec_Name</DataField>
-        </Field>
-        <Field Name="PrintCustSaleColorBuffer__Sales_Amount_">
-          <DataField>PrintCustSaleColorBuffer__Sales_Amount_</DataField>
-        </Field>
-        <Field Name="PrintCustSaleColorBuffer__Sales_Amount_Format">
-          <DataField>PrintCustSaleColorBuffer__Sales_Amount_Format</DataField>
-        </Field>
-        <Field Name="PrintCustSaleColorBuffer_Gender">
-          <DataField>PrintCustSaleColorBuffer_Gender</DataField>
-        </Field>
-        <Field Name="PrintCustSaleColorBuffer_Division">
-          <DataField>PrintCustSaleColorBuffer_Division</DataField>
-        </Field>
-        <Field Name="PrintCustSaleColorBuffer_Supervisor">
-          <DataField>PrintCustSaleColorBuffer_Supervisor</DataField>
-        </Field>
-        <Field Name="Group___FORMAT_DisplayColor____Total___">
-          <DataField>Group___FORMAT_DisplayColor____Total___</DataField>
-        </Field>
-        <Field Name="PrintCustSaleColorBuffer__Sales_Amount__Control1000000022">
-          <DataField>PrintCustSaleColorBuffer__Sales_Amount__Control1000000022</DataField>
-        </Field>
-        <Field Name="PrintCustSaleColorBuffer__Sales_Amount__Control1000000022Format">
-          <DataField>PrintCustSaleColorBuffer__Sales_Amount__Control1000000022Format</DataField>
-        </Field>
-        <Field Name="Report_Total__">
-          <DataField>Report_Total__</DataField>
-        </Field>
-        <Field Name="PrintCustSaleColorBuffer__Sales_Amount__Control1000000023">
-          <DataField>PrintCustSaleColorBuffer__Sales_Amount__Control1000000023</DataField>
-        </Field>
-        <Field Name="PrintCustSaleColorBuffer__Sales_Amount__Control1000000023Format">
-          <DataField>PrintCustSaleColorBuffer__Sales_Amount__Control1000000023Format</DataField>
-        </Field>
-        <Field Name="Customer_Sales_by_Color_ClassificationCaption">
-          <DataField>Customer_Sales_by_Color_ClassificationCaption</DataField>
-        </Field>
-        <Field Name="CurrReport_PAGENOCaption">
-          <DataField>CurrReport_PAGENOCaption</DataField>
-        </Field>
-        <Field Name="PrintCustSaleColorBuffer_DisplayColor_Control1000000008Caption">
-          <DataField>PrintCustSaleColorBuffer_DisplayColor_Control1000000008Caption</DataField>
-        </Field>
-        <Field Name="PrintCustSaleColorBuffer__Cust_No_Caption">
-          <DataField>PrintCustSaleColorBuffer__Cust_No_Caption</DataField>
-        </Field>
-        <Field Name="Customer_NameCaption">
-          <DataField>Customer_NameCaption</DataField>
-        </Field>
-        <Field Name="PrintCustSaleColorBuffer__Sales_Amount_Caption">
-          <DataField>PrintCustSaleColorBuffer__Sales_Amount_Caption</DataField>
-        </Field>
-        <Field Name="PrintCustSaleColorBuffer_GenderCaption">
-          <DataField>PrintCustSaleColorBuffer_GenderCaption</DataField>
-        </Field>
-        <Field Name="PrintCustSaleColorBuffer_DivisionCaption">
-          <DataField>PrintCustSaleColorBuffer_DivisionCaption</DataField>
-        </Field>
-        <Field Name="PrintCustSaleColorBuffer_SupervisorCaption">
-          <DataField>PrintCustSaleColorBuffer_SupervisorCaption</DataField>
-        </Field>
-        <Field Name="PrintCustSaleColorBuffer_Item_No_">
-          <DataField>PrintCustSaleColorBuffer_Item_No_</DataField>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <rd:DataSetInfo>
-        <rd:DataSetName>DataSet</rd:DataSetName>
-        <rd:SchemaPath>Report.xsd</rd:SchemaPath>
-        <rd:TableName>Result</rd:TableName>
-      </rd:DataSetInfo>
-    </DataSet>
-  </DataSets>
   <Body>
     <ReportItems>
       <Tablix Name="Table1">
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.80939in</Width>
+              <Width>0.6496in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.66692in</Width>
+              <Width>1.98821in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.58702in</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>0.76772in</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>2.12598in</Width>
+              <Width>0.76771in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>0.70866in</Width>
             </TablixColumn>
             <TablixColumn>
+              <Width>1.5748in</Width>
+            </TablixColumn>
+            <TablixColumn>
               <Width>0.70866in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>0.41339in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>0.17716in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>0.07874in</Width>
@@ -156,14 +54,14 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="PrintCustSaleColorBuffer_DisplayColor_Control1000000008Caption">
+                    <Textbox Name="Cust_NoCaption">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=First(Fields!PrintCustSaleColorBuffer_DisplayColor_Control1000000008Caption.Value)</Value>
+                              <Value>=First(Fields!Cust_NoCaption.Value)</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -177,126 +75,6 @@
                         <VerticalAlign>Bottom</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>0.075cm</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="PrintCustSaleColorBuffer_SupervisorCaption">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=First(Fields!PrintCustSaleColorBuffer_SupervisorCaption.Value)</Value>
-                              <Style>
-                                <FontSize>7pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <VerticalAlign>Bottom</VerticalAlign>
-                        <PaddingLeft>0.075cm</PaddingLeft>
-                        <PaddingRight>0.075cm</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="PrintCustSaleColorBuffer_GenderCaption">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=First(Fields!PrintCustSaleColorBuffer_GenderCaption.Value)</Value>
-                              <Style>
-                                <FontSize>8pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Left</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <VerticalAlign>Bottom</VerticalAlign>
-                        <PaddingLeft>0.075cm</PaddingLeft>
-                        <PaddingRight>0.15cm</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="PrintCustSaleColorBuffer_DivisionCaption">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=First(Fields!PrintCustSaleColorBuffer_DivisionCaption.Value)</Value>
-                              <Style>
-                                <FontSize>8pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Left</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <VerticalAlign>Bottom</VerticalAlign>
-                        <PaddingLeft>0.15cm</PaddingLeft>
-                        <PaddingRight>0.225cm</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="PrintCustSaleColorBuffer__Cust_No_Caption">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=First(Fields!PrintCustSaleColorBuffer__Cust_No_Caption.Value)</Value>
-                              <Style>
-                                <FontSize>8pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <VerticalAlign>Bottom</VerticalAlign>
-                        <PaddingLeft>0.225cm</PaddingLeft>
-                        <PaddingRight>0.15cm</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
@@ -324,7 +102,7 @@
                       </Paragraphs>
                       <Style>
                         <VerticalAlign>Bottom</VerticalAlign>
-                        <PaddingLeft>0.15cm</PaddingLeft>
+                        <PaddingLeft>0.075cm</PaddingLeft>
                         <PaddingRight>0.15cm</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
@@ -334,14 +112,105 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="PrintCustSaleColorBuffer__Sales_Amount_Caption">
+                    <Textbox Name="Display_ColorCaption">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=First(Fields!PrintCustSaleColorBuffer__Sales_Amount_Caption.Value)</Value>
+                              <Value>=First(Fields!Display_ColorCaption.Value)</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <VerticalAlign>Bottom</VerticalAlign>
+                        <PaddingLeft>0.15cm</PaddingLeft>
+                        <PaddingRight>0.225cm</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="TextBox117">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=First(Fields!ItemNoCaption.Value)</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <Border />
+                        <VerticalAlign>Bottom</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="TextBox118">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=First(Fields!DescriptionCaption.Value)</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <Border />
+                        <VerticalAlign>Bottom</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Sales_AmountCaption">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=First(Fields!Sales_AmountCaption.Value)</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -356,6 +225,37 @@
                       <Style>
                         <VerticalAlign>Bottom</VerticalAlign>
                         <PaddingLeft>0.15cm</PaddingLeft>
+                        <PaddingRight>0.075cm</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="PercentCaption">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=First(Fields!PercentCaption.Value)</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <VerticalAlign>Bottom</VerticalAlign>
+                        <PaddingLeft>0.075cm</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
@@ -365,7 +265,33 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="TextBox117">
+                    <Textbox Name="TextBox119">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="TextBox126">
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
@@ -394,25 +320,27 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.16654in</Height>
+              <Height>0.16955in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="PrintCustSaleColorBuffer_DisplayColor_Control1000000008">
+                    <Textbox Name="PrintCustSaleColorBuffer__Cust_No__Control17">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=First(Fields!PrintCustSaleColorBuffer_DisplayColor.Value)</Value>
+                              <Value>=First(Fields!PrintCustSaleColorBuffer__Cust_No_.Value)</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <Style>
@@ -427,7 +355,98 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="TextBox11">
+                    <Textbox Name="CustRec_Name_Control113">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=First(Fields!CustRec_Name.Value)</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>0.075cm</PaddingLeft>
+                        <PaddingRight>0.15cm</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Supervisor____FORMAT_Supervisor_2">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=First(Fields!Supervisor____FORMAT_Supervisor_.Value)</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>0.15cm</PaddingLeft>
+                        <PaddingRight>0.225cm</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Gender____FORMAT_Gender_2">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=First(Fields!Gender____FORMAT_Gender_.Value)</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>0.225cm</PaddingLeft>
+                        <PaddingRight>0.15cm</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox34">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -441,6 +460,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
+                      <rd:DefaultName>Textbox34</rd:DefaultName>
                       <Style>
                         <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
@@ -453,7 +473,38 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="TextBox12">
+                    <Textbox Name="Division____FORMAT_Division_2">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=First(Fields!Division____FORMAT_Division_.Value)</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>0.15cm</PaddingLeft>
+                        <PaddingRight>0.075cm</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox36">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -467,6 +518,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
+                      <rd:DefaultName>Textbox36</rd:DefaultName>
                       <Style>
                         <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
@@ -479,7 +531,7 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="TextBox13">
+                    <Textbox Name="Textbox37">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -493,6 +545,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
+                      <rd:DefaultName>Textbox37</rd:DefaultName>
                       <Style>
                         <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
@@ -505,7 +558,7 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="TextBox14">
+                    <Textbox Name="Textbox38">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -519,6 +572,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
+                      <rd:DefaultName>Textbox38</rd:DefaultName>
                       <Style>
                         <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
@@ -531,7 +585,7 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="TextBox15">
+                    <Textbox Name="Textbox40">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -545,6 +599,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
+                      <rd:DefaultName>Textbox40</rd:DefaultName>
                       <Style>
                         <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
@@ -557,7 +612,7 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="TextBox16">
+                    <Textbox Name="Textbox44">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -571,6 +626,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
+                      <rd:DefaultName>Textbox44</rd:DefaultName>
                       <Style>
                         <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
@@ -581,38 +637,10 @@
                     </Textbox>
                   </CellContents>
                 </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="TextBox119">
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <VerticalAlign>Middle</VerticalAlign>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                    <ColSpan>3</ColSpan>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell />
-                <TablixCell />
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.16693in</Height>
+              <Height>0.15278in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -641,16 +669,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="PrintCustSaleColorBuffer_Supervisor">
+                    <Textbox Name="TextBox11">
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!PrintCustSaleColorBuffer_Supervisor.Value</Value>
-                              <Style>
-                                <FontSize>7pt</FontSize>
-                              </Style>
+                              <Value />
+                              <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -658,8 +684,8 @@
                       </Paragraphs>
                       <Style>
                         <VerticalAlign>Middle</VerticalAlign>
-                        <PaddingLeft>0.075cm</PaddingLeft>
-                        <PaddingRight>0.075cm</PaddingRight>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
@@ -668,42 +694,13 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="PrintCustSaleColorBuffer_Gender">
+                    <Textbox Name="PrintCustSaleColorBuffer_DisplayColor_Control1000000008">
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!PrintCustSaleColorBuffer_Gender.Value</Value>
-                              <Style>
-                                <FontSize>7pt</FontSize>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Left</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <VerticalAlign>Middle</VerticalAlign>
-                        <PaddingLeft>0.075cm</PaddingLeft>
-                        <PaddingRight>0.15cm</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="PrintCustSaleColorBuffer_Division">
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!PrintCustSaleColorBuffer_Division.Value</Value>
+                              <Value>=Fields!PrintCustSaleColorBuffer_DisplayColor.Value</Value>
                               <Style>
                                 <FontSize>7pt</FontSize>
                               </Style>
@@ -724,20 +721,20 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="PrintCustSaleColorBuffer__Cust_No_">
+                    <Textbox Name="PrintCustSaleColorBuffer__Item_No__">
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!PrintCustSaleColorBuffer__Cust_No_.Value</Value>
+                              <Value>=Fields!PrintCustSaleColorBuffer__Item_No__.Value</Value>
                               <Style>
                                 <FontSize>7pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Left</TextAlign>
+                            <TextAlign>Right</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -753,19 +750,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="CustRec_Name">
+                    <Textbox Name="ItemRec_Description">
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!CustRec_Name.Value</Value>
+                              <Value>=Fields!ItemRec_Description.Value</Value>
                               <Style>
                                 <FontSize>7pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <Style>
@@ -799,7 +798,7 @@
                       <Style>
                         <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>0.15cm</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingRight>0.075cm</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
@@ -808,24 +807,19 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="COMPANYNAME">
+                    <Textbox Name="TextBox12">
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!COMPANYNAME.Value</Value>
-                              <Style>
-                                <Color>#ff0000</Color>
-                              </Style>
+                              <Value />
+                              <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <Visibility>
-                        <Hidden>true</Hidden>
-                      </Visibility>
                       <Style>
                         <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
@@ -838,13 +832,67 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Customer_Sales_by_Color_ClassificationCaption">
+                    <Textbox Name="TextBox13">
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Customer_Sales_by_Color_ClassificationCaption.Value</Value>
+                              <Value />
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox2">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style>
+                                <Color>#ff0000</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox2</rd:DefaultName>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Customer_Sales_Item_Color_DetailCaption">
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!Customer_Sales_Item_Color_DetailCaption.Value</Value>
                               <Style>
                                 <Color>#ff0000</Color>
                               </Style>
@@ -899,7 +947,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.16693in</Height>
+              <Height>0.17778in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -945,6 +993,35 @@
                         <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="FORMAT_DisplayColor____DispTotal">
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=First(Fields!FORMAT_DisplayColor____DispTotal.Value)</Value>
+                              <Style>
+                                <FontSize>7pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <Border />
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>0.15cm</PaddingLeft>
+                        <PaddingRight>0.225cm</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
@@ -1003,35 +1080,7 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Group___FORMAT_DisplayColor____Total___">
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=First(Fields!Group___FORMAT_DisplayColor____Total___.Value)</Value>
-                              <Style>
-                                <FontSize>8pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <VerticalAlign>Middle</VerticalAlign>
-                        <PaddingLeft>0.225cm</PaddingLeft>
-                        <PaddingRight>0.15cm</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="PrintCustSaleColorBuffer__Sales_Amount__Control1000000022">
+                    <Textbox Name="PrintCustSaleColorBuffer__Sales_Amount__Control1000000018">
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
@@ -1040,7 +1089,7 @@
                               <Value>=Sum(Fields!PrintCustSaleColorBuffer__Sales_Amount_.Value)</Value>
                               <Style>
                                 <FontSize>7pt</FontSize>
-                                <Format>=First(Fields!PrintCustSaleColorBuffer__Sales_Amount__Control1000000022Format.Value)</Format>
+                                <Format>=First(Fields!PrintCustSaleColorBuffer__Sales_Amount__Control1000000018Format.Value)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1050,7 +1099,7 @@
                       <Style>
                         <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>0.15cm</PaddingLeft>
-                        <PaddingRight>0.15cm</PaddingRight>
+                        <PaddingRight>0.075cm</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
@@ -1059,17 +1108,51 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="TextBox111">
+                    <Textbox Name="Percent">
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
-                              <Style />
+                              <Value>=Sum(Fields!Percent.Value)</Value>
+                              <Style>
+                                <FontSize>7pt</FontSize>
+                                <Format>=First(Fields!PercentFormat.Value)</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>0.075cm</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="EmptyStringCaption">
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=First(Fields!EmptyStringCaption.Value)</Value>
+                              <Style>
+                                <FontSize>7pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <Style>
@@ -1084,7 +1167,7 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="TextBox120">
+                    <Textbox Name="TextBox129">
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
@@ -1113,11 +1196,12 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.16693in</Height>
+              <Height>0.17778in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="TextBox112">
+                    <Textbox Name="Textbox9">
+                      <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
@@ -1130,6 +1214,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
+                      <rd:DefaultName>Textbox9</rd:DefaultName>
                       <Style>
                         <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
@@ -1142,7 +1227,65 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="TextBox113">
+                    <Textbox Name="Cust____Cust_No____Totals___4">
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=First(Fields!Cust____Cust_No____Totals___.Value)</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>0.075cm</PaddingLeft>
+                        <PaddingRight>0.15cm</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox20">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style>
+                                <FontSize>7pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox20</rd:DefaultName>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>0.15cm</PaddingLeft>
+                        <PaddingRight>0.225cm</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox21">
+                      <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
@@ -1155,6 +1298,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
+                      <rd:DefaultName>Textbox21</rd:DefaultName>
                       <Style>
                         <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
@@ -1167,7 +1311,8 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="TextBox114">
+                    <Textbox Name="Textbox22">
+                      <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
@@ -1180,6 +1325,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
+                      <rd:DefaultName>Textbox22</rd:DefaultName>
                       <Style>
                         <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
@@ -1192,7 +1338,184 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="TextBox115">
+                    <Textbox Name="PrintCustSaleColorBuffer__Sales_Amount__Control125">
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Sum(Fields!PrintCustSaleColorBuffer__Sales_Amount_.Value)</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                                <Format>=First(Fields!PrintCustSaleColorBuffer__Sales_Amount__Control1000000022Format.Value)</Format>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>0.15cm</PaddingLeft>
+                        <PaddingRight>0.075cm</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox24">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style>
+                                <FontSize>7pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox24</rd:DefaultName>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>0.075cm</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox25">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style>
+                                <FontSize>7pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox25</rd:DefaultName>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox26">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox26</rd:DefaultName>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox27">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox27</rd:DefaultName>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox28">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox28</rd:DefaultName>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.17778in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="TextBox120">
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
@@ -1235,7 +1558,7 @@
                       </Paragraphs>
                       <Style>
                         <VerticalAlign>Middle</VerticalAlign>
-                        <PaddingLeft>0.225cm</PaddingLeft>
+                        <PaddingLeft>0.075cm</PaddingLeft>
                         <PaddingRight>0.15cm</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
@@ -1245,35 +1568,7 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="PrintCustSaleColorBuffer__Sales_Amount__Control1000000023">
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Sum(Fields!PrintCustSaleColorBuffer__Sales_Amount_.Value)</Value>
-                              <Style>
-                                <FontSize>7pt</FontSize>
-                                <Format>=First(Fields!PrintCustSaleColorBuffer__Sales_Amount__Control1000000023Format.Value)</Format>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <VerticalAlign>Middle</VerticalAlign>
-                        <PaddingLeft>0.15cm</PaddingLeft>
-                        <PaddingRight>0.15cm</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="TextBox116">
+                    <Textbox Name="TextBox121">
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
@@ -1298,7 +1593,136 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="TextBox118">
+                    <Textbox Name="TextBox122">
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="TextBox123">
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="PrintCustSaleColorBuffer__Sales_Amount__Control1000000020">
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Sum(Fields!PrintCustSaleColorBuffer__Sales_Amount_.Value)</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                                <Format>=First(Fields!PrintCustSaleColorBuffer__Sales_Amount__Control1000000020Format.Value)</Format>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>0.15cm</PaddingLeft>
+                        <PaddingRight>0.075cm</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="TextBox124">
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="TextBox125">
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="TextBox127">
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
@@ -1340,60 +1764,95 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
+            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
           <TablixMembers>
+            <TablixMember />
             <TablixMember>
-              <KeepWithGroup>After</KeepWithGroup>
-              <RepeatOnNewPage>true</RepeatOnNewPage>
-              <KeepTogether>true</KeepTogether>
-            </TablixMember>
-            <TablixMember>
-              <Group Name="Table1_Group">
-                <GroupExpressions>
-                  <GroupExpression>=Fields!PrintCustSaleColorBuffer_DisplayColor.Value</GroupExpression>
-                </GroupExpressions>
-                <PageBreak>
-                  <BreakLocation>Between</BreakLocation>
-                </PageBreak>
-              </Group>
               <TablixMembers>
                 <TablixMember>
-                  <KeepWithGroup>After</KeepWithGroup>
-                  <KeepTogether>true</KeepTogether>
-                </TablixMember>
-                <TablixMember>
-                  <Group Name="Table1_Details_Group">
-                    <DataElementName>Detail</DataElementName>
+                  <Group Name="Group1">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!PrintCustSaleColorBuffer__Cust_No_.Value</GroupExpression>
+                    </GroupExpressions>
                   </Group>
+                  <SortExpressions>
+                    <SortExpression>
+                      <Value>=Fields!PrintCustSaleColorBuffer__Cust_No_.Value</Value>
+                    </SortExpression>
+                  </SortExpressions>
                   <TablixMembers>
                     <TablixMember />
+                    <TablixMember>
+                      <TablixMembers>
+                        <TablixMember>
+                          <Group Name="Table1_Group1">
+                            <GroupExpressions>
+                              <GroupExpression>=Fields!PrintCustSaleColorBuffer_DisplayColor.Value</GroupExpression>
+                              <GroupExpression>=Fields!PrintCustSaleColorBuffer__Cust_No_.Value</GroupExpression>
+                            </GroupExpressions>
+                          </Group>
+                          <TablixMembers>
+                            <TablixMember>
+                              <Group Name="Table1_Details_Group">
+                                <DataElementName>Detail</DataElementName>
+                              </Group>
+                              <TablixMembers>
+                                <TablixMember />
+                              </TablixMembers>
+                              <Visibility>
+                                <Hidden>=iif(Fields!Color_Summary.Value,TRUE,FALSE)</Hidden>
+                              </Visibility>
+                              <DataElementName>Detail_Collection</DataElementName>
+                              <DataElementOutput>Output</DataElementOutput>
+                            </TablixMember>
+                            <TablixMember>
+                              <KeepWithGroup>Before</KeepWithGroup>
+                            </TablixMember>
+                          </TablixMembers>
+                        </TablixMember>
+                      </TablixMembers>
+                    </TablixMember>
+                    <TablixMember />
                   </TablixMembers>
-                  <DataElementName>Detail_Collection</DataElementName>
-                  <DataElementOutput>Output</DataElementOutput>
-                  <KeepTogether>true</KeepTogether>
-                </TablixMember>
-                <TablixMember>
-                  <KeepWithGroup>Before</KeepWithGroup>
-                  <KeepTogether>true</KeepTogether>
                 </TablixMember>
               </TablixMembers>
             </TablixMember>
             <TablixMember>
-              <KeepWithGroup>Before</KeepWithGroup>
               <KeepTogether>true</KeepTogether>
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet_Result</DataSetName>
+        <SortExpressions>
+          <SortExpression>
+            <Value>=Fields!PrintCustSaleColorBuffer_Supervisor.Value</Value>
+          </SortExpression>
+          <SortExpression>
+            <Value>=Fields!PrintCustSaleColorBuffer_Division.Value</Value>
+          </SortExpression>
+          <SortExpression>
+            <Value>=Fields!PrintCustSaleColorBuffer_Gender.Value</Value>
+          </SortExpression>
+          <SortExpression>
+            <Value>=Fields!PrintCustSaleColorBuffer__Cust_No_.Value</Value>
+          </SortExpression>
+          <SortExpression>
+            <Value>=Fields!PrintCustSaleColorBuffer_SalesAmount_Sort.Value</Value>
+          </SortExpression>
+          <SortExpression>
+            <Value>=Fields!PrintCustSaleColorBuffer_DisplayColor.Value</Value>
+          </SortExpression>
+        </SortExpressions>
         <Top>0cm</Top>
-        <Height>2.54302cm</Height>
-        <Width>16.79085cm</Width>
+        <Height>3.02141cm</Height>
+        <Width>18.35cm</Width>
         <Style />
       </Tablix>
     </ReportItems>
-    <Height>1.00119in</Height>
+    <Height>1.26187in</Height>
     <Style />
   </Body>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
@@ -1431,10 +1890,10 @@ Public Function BlankNegAndZero(ByVal Value As Decimal)
     Return Value
 End Function
 </Code>
-  <Width>7.14567in</Width>
+  <Width>7.25774in</Width>
   <Page>
     <PageHeader>
-      <Height>0.49961in</Height>
+      <Height>0.85789in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -1444,7 +1903,7 @@ End Function
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>=ReportItems!COMPANYNAME.Value</Value>
+                  <Value>=First(Fields!COMPANYNAME.Value, "DataSet_Result")</Value>
                   <Style>
                     <FontSize>7pt</FontSize>
                   </Style>
@@ -1458,16 +1917,17 @@ End Function
           <Height>0.423cm</Height>
           <Width>7.5cm</Width>
           <Style>
+            <Border />
             <VerticalAlign>Middle</VerticalAlign>
           </Style>
         </Textbox>
-        <Textbox Name="Customer_Sales_by_Color_ClassificationCaption1">
+        <Textbox Name="ReportTitle1">
           <KeepTogether>true</KeepTogether>
           <Paragraphs>
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>=ReportItems!Customer_Sales_by_Color_ClassificationCaption.Value</Value>
+                  <Value>=First(Fields!Customer_Sales_Item_Color_DetailCaption.Value, "DataSet_Result")</Value>
                   <Style>
                     <FontSize>8pt</FontSize>
                     <FontWeight>Bold</FontWeight>
@@ -1483,6 +1943,7 @@ End Function
           <Width>7.5cm</Width>
           <ZIndex>1</ZIndex>
           <Style>
+            <Border />
             <VerticalAlign>Middle</VerticalAlign>
           </Style>
         </Textbox>
@@ -1589,16 +2050,206 @@ End Function
             <VerticalAlign>Middle</VerticalAlign>
           </Style>
         </Textbox>
+        <Textbox Name="Textbox16">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=First(Fields!Item_Ledger_Entry__TABLECAPTION______FilterStr.Value, "DataSet_Result")</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox16</rd:DefaultName>
+          <Top>1.65664cm</Top>
+          <Left>0cm</Left>
+          <Height>0.346cm</Height>
+          <Width>18.35cm</Width>
+          <ZIndex>6</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
       </ReportItems>
       <Style />
     </PageHeader>
-    <LeftMargin>0.1in</LeftMargin>
+    <LeftMargin>0.5in</LeftMargin>
     <TopMargin>0.3in</TopMargin>
     <BottomMargin>0.4in</BottomMargin>
     <Style />
   </Page>
   <Language>=User!Language</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
-  <rd:ReportID>fa4143e4-c8c1-4387-9e6d-1380844ea750</rd:ReportID>
+  <rd:ReportID>8537e7e4-11ae-4930-8e6c-1de78e335696</rd:ReportID>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_7209">
+          <DataField>ReportForNavId_7209</DataField>
+        </Field>
+        <Field Name="ReportForNavId_6803">
+          <DataField>ReportForNavId_6803</DataField>
+        </Field>
+        <Field Name="COMPANYNAME">
+          <DataField>COMPANYNAME</DataField>
+        </Field>
+        <Field Name="FORMAT_TODAY_0_4_">
+          <DataField>FORMAT_TODAY_0_4_</DataField>
+        </Field>
+        <Field Name="UserId">
+          <DataField>UserId</DataField>
+        </Field>
+        <Field Name="Color_Summary">
+          <DataField>Color_Summary</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry__TABLECAPTION______FilterStr">
+          <DataField>Item_Ledger_Entry__TABLECAPTION______FilterStr</DataField>
+        </Field>
+        <Field Name="PrintCustSaleColorBuffer_DisplayColor">
+          <DataField>PrintCustSaleColorBuffer_DisplayColor</DataField>
+        </Field>
+        <Field Name="PrintCustSaleColorBuffer__Cust_No_">
+          <DataField>PrintCustSaleColorBuffer__Cust_No_</DataField>
+        </Field>
+        <Field Name="CustRec_Name">
+          <DataField>CustRec_Name</DataField>
+        </Field>
+        <Field Name="PrintCustSaleColorBuffer__Cust_No__Control1000000006">
+          <DataField>PrintCustSaleColorBuffer__Cust_No__Control1000000006</DataField>
+        </Field>
+        <Field Name="CustRec_Name_Control1000000012">
+          <DataField>CustRec_Name_Control1000000012</DataField>
+        </Field>
+        <Field Name="Gender____FORMAT_Gender_">
+          <DataField>Gender____FORMAT_Gender_</DataField>
+        </Field>
+        <Field Name="Division____FORMAT_Division_">
+          <DataField>Division____FORMAT_Division_</DataField>
+        </Field>
+        <Field Name="Supervisor____FORMAT_Supervisor_">
+          <DataField>Supervisor____FORMAT_Supervisor_</DataField>
+        </Field>
+        <Field Name="PrintCustSaleColorBuffer__Item_No__">
+          <DataField>PrintCustSaleColorBuffer__Item_No__</DataField>
+        </Field>
+        <Field Name="PrintCustSaleColorBuffer__Sales_Amount_">
+          <DataField>PrintCustSaleColorBuffer__Sales_Amount_</DataField>
+        </Field>
+        <Field Name="PrintCustSaleColorBuffer__Sales_Amount_Format">
+          <DataField>PrintCustSaleColorBuffer__Sales_Amount_Format</DataField>
+        </Field>
+        <Field Name="ItemRec_Description">
+          <DataField>ItemRec_Description</DataField>
+        </Field>
+        <Field Name="PrintCustSaleColorBuffer_DisplayColor_Control1000000008">
+          <DataField>PrintCustSaleColorBuffer_DisplayColor_Control1000000008</DataField>
+        </Field>
+        <Field Name="FORMAT_DisplayColor____DispTotal">
+          <DataField>FORMAT_DisplayColor____DispTotal</DataField>
+        </Field>
+        <Field Name="PrintCustSaleColorBuffer__Sales_Amount__Control1000000018">
+          <DataField>PrintCustSaleColorBuffer__Sales_Amount__Control1000000018</DataField>
+        </Field>
+        <Field Name="PrintCustSaleColorBuffer__Sales_Amount__Control1000000018Format">
+          <DataField>PrintCustSaleColorBuffer__Sales_Amount__Control1000000018Format</DataField>
+        </Field>
+        <Field Name="Percent">
+          <DataField>Percent</DataField>
+        </Field>
+        <Field Name="PercentFormat">
+          <DataField>PercentFormat</DataField>
+        </Field>
+        <Field Name="Cust____Cust_No____Totals___">
+          <DataField>Cust____Cust_No____Totals___</DataField>
+        </Field>
+        <Field Name="PrintCustSaleColorBuffer__Sales_Amount__Control1000000022">
+          <DataField>PrintCustSaleColorBuffer__Sales_Amount__Control1000000022</DataField>
+        </Field>
+        <Field Name="PrintCustSaleColorBuffer__Sales_Amount__Control1000000022Format">
+          <DataField>PrintCustSaleColorBuffer__Sales_Amount__Control1000000022Format</DataField>
+        </Field>
+        <Field Name="Report_Total__">
+          <DataField>Report_Total__</DataField>
+        </Field>
+        <Field Name="PrintCustSaleColorBuffer__Sales_Amount__Control1000000020">
+          <DataField>PrintCustSaleColorBuffer__Sales_Amount__Control1000000020</DataField>
+        </Field>
+        <Field Name="PrintCustSaleColorBuffer__Sales_Amount__Control1000000020Format">
+          <DataField>PrintCustSaleColorBuffer__Sales_Amount__Control1000000020Format</DataField>
+        </Field>
+        <Field Name="Customer_Sales_Item_Color_DetailCaption">
+          <DataField>Customer_Sales_Item_Color_DetailCaption</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENOCaption">
+          <DataField>CurrReport_PAGENOCaption</DataField>
+        </Field>
+        <Field Name="Cust_NoCaption">
+          <DataField>Cust_NoCaption</DataField>
+        </Field>
+        <Field Name="Customer_NameCaption">
+          <DataField>Customer_NameCaption</DataField>
+        </Field>
+        <Field Name="Display_ColorCaption">
+          <DataField>Display_ColorCaption</DataField>
+        </Field>
+        <Field Name="Sales_AmountCaption">
+          <DataField>Sales_AmountCaption</DataField>
+        </Field>
+        <Field Name="PercentCaption">
+          <DataField>PercentCaption</DataField>
+        </Field>
+        <Field Name="PrintCustSaleColorBuffer__Item_No__Caption">
+          <DataField>PrintCustSaleColorBuffer__Item_No__Caption</DataField>
+        </Field>
+        <Field Name="PrintCustSaleColorBuffer_DisplayColor_Control1000000008Caption">
+          <DataField>PrintCustSaleColorBuffer_DisplayColor_Control1000000008Caption</DataField>
+        </Field>
+        <Field Name="PrintCustSaleColorBuffer__Cust_No__Control1000000006Caption">
+          <DataField>PrintCustSaleColorBuffer__Cust_No__Control1000000006Caption</DataField>
+        </Field>
+        <Field Name="Customer_NameCaption_Control1000000013">
+          <DataField>Customer_NameCaption_Control1000000013</DataField>
+        </Field>
+        <Field Name="PrintCustSaleColorBuffer__Sales_Amount_Caption">
+          <DataField>PrintCustSaleColorBuffer__Sales_Amount_Caption</DataField>
+        </Field>
+        <Field Name="DescriptionCaption">
+          <DataField>DescriptionCaption</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption">
+          <DataField>EmptyStringCaption</DataField>
+        </Field>
+        <Field Name="ItemNoCaption">
+          <DataField>ItemNoCaption</DataField>
+        </Field>
+        <Field Name="PrintCustSaleColorBuffer_Supervisor">
+          <DataField>PrintCustSaleColorBuffer_Supervisor</DataField>
+        </Field>
+        <Field Name="PrintCustSaleColorBuffer_Division">
+          <DataField>PrintCustSaleColorBuffer_Division</DataField>
+        </Field>
+        <Field Name="PrintCustSaleColorBuffer_Gender">
+          <DataField>PrintCustSaleColorBuffer_Gender</DataField>
+        </Field>
+        <Field Name="PrintCustSaleColorBuffer_SalesAmount_Sort">
+          <DataField>PrintCustSaleColorBuffer_SalesAmount_Sort</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>

@@ -9,66 +9,6 @@
       <rd:DataSourceID>73d299f4-e8e1-4f7b-be0f-5346aa3bc6a7</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Fields>
-        <Field Name="ShipmentDate">
-          <DataField>ShipmentDate</DataField>
-        </Field>
-        <Field Name="RouteNo">
-          <DataField>RouteNo</DataField>
-        </Field>
-        <Field Name="DeliveryStop">
-          <DataField>DeliveryStop</DataField>
-        </Field>
-        <Field Name="StudentHomeInitials">
-          <DataField>StudentHomeInitials</DataField>
-        </Field>
-        <Field Name="StudnetAllergies">
-          <DataField>StudnetAllergies</DataField>
-        </Field>
-        <Field Name="SellToCustomer">
-          <DataField>SellToCustomer</DataField>
-        </Field>
-        <Field Name="UnitofMeasure">
-          <DataField>UnitofMeasure</DataField>
-        </Field>
-        <Field Name="Quantity">
-          <DataField>Quantity</DataField>
-        </Field>
-        <Field Name="QuantityFormat">
-          <DataField>QuantityFormat</DataField>
-        </Field>
-        <Field Name="CustomerName">
-          <DataField>CustomerName</DataField>
-        </Field>
-        <Field Name="ItemNo">
-          <DataField>ItemNo</DataField>
-        </Field>
-        <Field Name="ItemDescription">
-          <DataField>ItemDescription</DataField>
-        </Field>
-        <Field Name="Full">
-          <DataField>Full</DataField>
-        </Field>
-        <Field Name="Half">
-          <DataField>Half</DataField>
-        </Field>
-        <Field Name="DocumentNumber">
-          <DataField>DocumentNumber</DataField>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <rd:DataSetInfo>
-        <rd:DataSetName>DataSet</rd:DataSetName>
-        <rd:SchemaPath>Report.xsd</rd:SchemaPath>
-        <rd:TableName>Result</rd:TableName>
-      </rd:DataSetInfo>
-    </DataSet>
-  </DataSets>
   <Body>
     <ReportItems>
       <Tablix Name="Tablix1">
@@ -1715,4 +1655,62 @@ End Function
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_1000000000">
+          <DataField>ReportForNavId_1000000000</DataField>
+        </Field>
+        <Field Name="ShipmentDate">
+          <DataField>ShipmentDate</DataField>
+        </Field>
+        <Field Name="RouteNo">
+          <DataField>RouteNo</DataField>
+        </Field>
+        <Field Name="DeliveryStop">
+          <DataField>DeliveryStop</DataField>
+        </Field>
+        <Field Name="StudentHomeInitials">
+          <DataField>StudentHomeInitials</DataField>
+        </Field>
+        <Field Name="StudnetAllergies">
+          <DataField>StudnetAllergies</DataField>
+        </Field>
+        <Field Name="SellToCustomer">
+          <DataField>SellToCustomer</DataField>
+        </Field>
+        <Field Name="UnitofMeasure">
+          <DataField>UnitofMeasure</DataField>
+        </Field>
+        <Field Name="Quantity">
+          <DataField>Quantity</DataField>
+        </Field>
+        <Field Name="QuantityFormat">
+          <DataField>QuantityFormat</DataField>
+        </Field>
+        <Field Name="CustomerName">
+          <DataField>CustomerName</DataField>
+        </Field>
+        <Field Name="ItemNo">
+          <DataField>ItemNo</DataField>
+        </Field>
+        <Field Name="ItemDescription">
+          <DataField>ItemDescription</DataField>
+        </Field>
+        <Field Name="Full">
+          <DataField>Full</DataField>
+        </Field>
+        <Field Name="Half">
+          <DataField>Half</DataField>
+        </Field>
+        <Field Name="DocumentNumber">
+          <DataField>DocumentNumber</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>

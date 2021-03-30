@@ -2,7 +2,7 @@ Report 50148 "ICPPickingList"
 {
     // // iCepts dxd 09.24.13 - RFM5488 Sort by Location Bin MHS1.00               iCepts1.00
     DefaultLayout = RDLC;
-    RDLCLayout = './Layouts/PickingList.rdlc';
+    RDLCLayout = './ReportLayouts/PickingList.rdlc';
 
     Caption = 'Picking List';
     UsageCategory = Documents;

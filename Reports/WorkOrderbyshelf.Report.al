@@ -2,7 +2,7 @@ Report 50073 "Work Order by shelf"
 {
     // // iCepts BRB 09.24.13dxd - Add Required Filters Allocated Type, Order Date, and item Category Code  iCepts1.00
     DefaultLayout = RDLC;
-    RDLCLayout = './Layouts/WorkOrderbyshelf.rdlc';
+    RDLCLayout = './ReportLayouts/WorkOrderbyshelf.rdlc';
 
     Caption = 'Work Order';
 

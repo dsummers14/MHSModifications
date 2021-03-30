@@ -1,7 +1,7 @@
 Report 50139 "ICPInventoryValuation"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './Layouts/InventoryValuation.rdlc';
+    RDLCLayout = './ReportLayouts/InventoryValuation.rdlc';
     Caption = 'Inventory Valuation';
     UsageCategory = ReportsandAnalysis;
 

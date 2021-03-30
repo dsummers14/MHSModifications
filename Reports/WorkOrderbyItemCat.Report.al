@@ -2,7 +2,7 @@ Report 50072 "Work Order by Item Cat"
 {
     // // iCepts BRB 09.24.13dxd - Add Required Filters Allocated Type, Order Date, and item Category Code  iCepts1.00
     DefaultLayout = RDLC;
-    RDLCLayout = './Layouts/WorkOrderbyItemCat.rdlc';
+    RDLCLayout = './ReportLayouts/WorkOrderbyItemCat.rdlc';
 
     Caption = 'Work Order';
 

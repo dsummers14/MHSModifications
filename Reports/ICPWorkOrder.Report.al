@@ -3,7 +3,7 @@ Report 50147 "ICPWorkOrder"
     // // iCepts BRB 09.24.13dxd - Add Required Filters Allocated Type, Order Date, and item Category Code  iCepts1.00
     // // iCepts DXD 01.16.20DXD - RFM9695 Print in Shelf No. insteadd of Item Category Code
     DefaultLayout = RDLC;
-    RDLCLayout = './Layouts/WorkOrder.rdlc';
+    RDLCLayout = './ReportLayouts/WorkOrder.rdlc';
 
     Caption = 'Work Order';
     UsageCategory = ReportsandAnalysis;

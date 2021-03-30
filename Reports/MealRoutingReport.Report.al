@@ -1,7 +1,7 @@
 Report 50093 "Meal Routing Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './Layouts/MealRoutingReport.rdlc';
+    RDLCLayout = './ReportLayouts/MealRoutingReport.rdlc';
     UsageCategory = ReportsandAnalysis;
 
     dataset

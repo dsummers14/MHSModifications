@@ -5,7 +5,7 @@ Report 50096 "Customer Sales By Color Class"
     // // iCepts BRB 07.02.12 - RFM7557 Be able to Select and sort by Supervisor iCepts1.02
     // // iCepts BRB 04.26.14 - Add CURRENTDATETIME to CurrUser iCepts1.03
     DefaultLayout = RDLC;
-    RDLCLayout = './Layouts/CustomerSalesByColorClass.rdlc';
+    RDLCLayout = './ReportLayouts/CustomerSalesByColorClass.rdlc';
 
     UsageCategory = ReportsandAnalysis;
 

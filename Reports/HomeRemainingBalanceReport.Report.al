@@ -4,7 +4,7 @@ Report 50094 "Home Remaining Balance Report"
     // // iCepts BRB 05.25.12 - RFM7490 New Report for balances iCepts1.00
     // // iCepts BRB 07.02.12 - RFM7557 Change Sort and ReqFilterFields, add Supervisor iCepts1.01
     DefaultLayout = RDLC;
-    RDLCLayout = './Layouts/HomeRemainingBalanceReport.rdlc';
+    RDLCLayout = './ReportLayouts/HomeRemainingBalanceReport.rdlc';
 
     UsageCategory = ReportsandAnalysis;
 
