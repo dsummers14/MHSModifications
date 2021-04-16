@@ -16,11 +16,12 @@
   "application": "17.0.0.0",
   "idRanges": [
     {
+      
       "from": 50000,
       "to": 50999
     }
   ],
-  "contextSensitiveHelpUrl": "https://LescoModifications.com/help/",
+  "contextSensitiveHelpUrl": "https://MHSModifications.com/help/",
   "showMyCode": true,
   "runtime": "6.0"
 }
