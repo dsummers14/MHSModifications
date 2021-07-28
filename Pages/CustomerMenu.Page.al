@@ -12,7 +12,7 @@ Page 50096 "Customer Menu"
         {
             group(General)
             {
-                field(CustomerNo;Rec.CustomerNo)
+                field(CustomerNo; Rec.CustomerNo)
                 {
                     ApplicationArea = All;
                     ToolTip = 'Tooltip';
@@ -21,33 +21,33 @@ Page 50096 "Customer Menu"
                     trigger OnValidate()
                     begin
                         if not Customer.Get(CustomerNo) then
-                          Clear(Customer);
+                            Clear(Customer);
                     end;
                 }
-                field(CustName;Customer.Name)
+                field(CustName; Customer.Name)
                 {
                     ApplicationArea = All;
                     ToolTip = 'Tooltip';
                     Caption = 'Cust Name';
                     Editable = false;
                 }
-                field(MenuID;Rec.MenuID)
+                field(MenuID; Rec.MenuID)
                 {
                     ApplicationArea = All;
                     ToolTip = 'Tooltip';
                     Editable = false;
                 }
-                field(Description;Rec.Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = All;
                     ToolTip = 'Tooltip';
                     Editable = false;
                 }
             }
-            part(CustomerMenus;"Customer Menu Details")
+            part(CustomerMenus; "Customer Menu Details")
             {
-                SubPageLink = CustomerNo=field(CustomerNo),
-                              MenuID=field(MenuID);
+                SubPageLink = CustomerNo = field(CustomerNo),
+                              MenuID = field(MenuID);
             }
         }
     }
@@ -66,8 +66,8 @@ Page 50096 "Customer Menu"
                 trigger OnAction()
                 begin
                     Clear(PagePublishCustomerMenu);
-                    PagePublishCustomerMenu.PassParameters(Rec.CustomerNo,Rec.MenuID);
-                    PagePublishCustomerMenu.Run();
+                    PagePublishCustomerMenu.PassParameters(Rec.CustomerNo, Rec.MenuID);
+                    PagePublishCustomerMenu.RunModal();
                 end;
             }
         }
@@ -76,7 +76,7 @@ Page 50096 "Customer Menu"
     trigger OnAfterGetRecord()
     begin
         if not Customer.Get(Rec.CustomerNo) then
-          Clear(Customer);
+            Clear(Customer);
     end;
 
     var

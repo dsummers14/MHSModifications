@@ -1,20 +1,25 @@
-TableExtension 50107 ICPSalesLine extends "Sales Line" 
+TableExtension 50107 ICPSalesLine extends "Sales Line"
 {
     fields
     {
-        field(57011;"Student Home Initials";Text[10])
+        field(57011; "Student Home Initials"; Text[10])
         {
         }
-        field(57012;"Route No.";Code[20])
+        field(57012; "Route No."; Code[20])
         {
             TableRelation = "Meal Routes"."Route No.";
         }
-        field(57013;"Delivery Stop";Integer)
+        field(57013; "Delivery Stop"; Integer)
         {
         }
-        field(57014;"Student Allergies";Boolean)
+        field(57014; "Student Allergies"; Boolean)
         {
         }
+        field(57015; MenuID; Code[20])
+        {
+            TableRelation = "Customer Menu Details".MenuID where(CustomerNo = field("Sell-to Customer No."));
+        }
+
     }
     keys
     {

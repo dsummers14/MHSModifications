@@ -1,17 +1,15 @@
 Page 50098 "Publish Customer Menu"
 {
-    //DRS 07/17.20 - Rem'd out code that accesses Insight Tables
-
-    //iCepts 09.23.13 DXD Upgrade2013                     iCepts1.00
-
-    PageType = NavigatePage;
+   // PageType = NavigatePage;
 
     layout
     {
         area(content)
         {
-            group(Control1000000005)
+            group(MenuPublishing)
             {
+                Caption = 'Menu Publishing';
+
                 field("Customer Number"; vCustomerNo)
                 {
                     ApplicationArea = All;
@@ -55,7 +53,7 @@ Page 50098 "Publish Customer Menu"
                         if GuiAllowed then
                             Message('The Starting Date must be a Monday!')
                     end else
-                        gPublish();
+                        PublishMenu();
                 end;
             }
         }
@@ -72,10 +70,10 @@ Page 50098 "Publish Customer Menu"
         vMenuID := pMenuID;
     end;
 
-    procedure gPublish()
+    procedure PublishMenu()
     var
-        /*   iTemplateHeader: Record InsightTemplateHeader;
-          iTemplateDetail: Record InsightTemplateDetails; */
+        iPublishedMenuHeader: Record PublishedMenuHeader;
+        iPublishedMenuDetail: Record PublishedMenuDetails;
         iCustomerMenuHeader: Record "Customer Menu Header";
         iCustomerMenuDetails: Record "Customer Menu Details";
         iListName: Text[50];
@@ -104,34 +102,34 @@ Page 50098 "Publish Customer Menu"
                         iDescription := Format(iCustomerMenuDetails.Meal) + ' for ' +
                                         Format(iDate, 0, '<Weekday Text> <Month Text> <Day>') + ' - ' +
                                         iCustomerMenuHeader.Description;
-                        /* 
-                                      iTemplateHeader.Reset;
-                                      iTemplateHeader.SetRange(CustomerNo,vCustomerNo);
-                                      iTemplateHeader.SetRange(ListName,iListName);
-                                      iTemplateHeader.DeleteAll;
 
-                                      iTemplateDetail.Reset;
-                                      iTemplateDetail.SetRange(CustomerNo,vCustomerNo);
-                                      iTemplateDetail.SetRange(ListName,iListName);
-                                      iTemplateDetail.DeleteAll;
+                        iPublishedMenuHeader.Reset();
+                        iPublishedMenuHeader.SetRange(CustomerNo, vCustomerNo);
+                        iPublishedMenuHeader.SetRange(ListName, iListName);
+                        iPublishedMenuHeader.DeleteAll();
 
-                                      iTemplateHeader.Init;
-                                      iTemplateHeader.CustomerNo := vCustomerNo;
-                                      iTemplateHeader.ListName := iListName;
-                                      iTemplateHeader.Description := iDescription;
-                                      iTemplateHeader.Insert; */
+                        iPublishedMenuDetail.Reset();
+                        iPublishedMenuDetail.SetRange(CustomerNo, vCustomerNo);
+                        iPublishedMenuDetail.SetRange(ListName, iListName);
+                        iPublishedMenuDetail.DeleteAll();
+
+                        iPublishedMenuHeader.Init();
+                        iPublishedMenuHeader.CustomerNo := vCustomerNo;
+                        iPublishedMenuHeader.ListName := iListName;
+                        iPublishedMenuHeader.Description := iDescription;
+                        iPublishedMenuHeader.Insert();
                     end;
 
 
-                /*  iTemplateDetail.Init;
-                 iTemplateDetail.CustomerNo := vCustomerNo;
-                 iTemplateDetail.ListName := iListName;
-                 iTemplateDetail.SeqNo := iCustDetail.SeqNo;
-                 iTemplateDetail.ItemNo := iCustDetail.ItemNo;
-                 iTemplateDetail.OrderQty := iCustDetail.Quantity;
-                 iTemplateDetail.RequestDate := iDate;
-                 iTemplateDetail.UOM := iCustDetail.Uom;
-                 iTemplateDetail.Insert; */
+                    iPublishedMenuDetail.Init();
+                    iPublishedMenuDetail.CustomerNo := vCustomerNo;
+                    iPublishedMenuDetail.ListName := iListName;
+                    iPublishedMenuDetail.SeqNo := iCustomerMenuDetails.SeqNo;
+                    iPublishedMenuDetail.ItemNo := iCustomerMenuDetails.ItemNo;
+                    iPublishedMenuDetail.OrderQty := iCustomerMenuDetails.Quantity;
+                    iPublishedMenuDetail.RequestDate := iDate;
+                    iPublishedMenuDetail.UOM := iCustomerMenuDetails.Uom;
+                    iPublishedMenuDetail.Insert();
                 until iCustomerMenuDetails.Next() = 0;
             Message('Menu Published');
         end;
