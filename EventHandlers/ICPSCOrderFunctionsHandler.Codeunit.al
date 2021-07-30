@@ -1,7 +1,8 @@
 codeunit 50118 ICPSCOrderFunctionsHandler
 {
+    // EventSubscriberInstance = Manual;
 
-    [EventSubscriber(ObjectType::Table, 11123310, 'OnInitLineFieldValues', '', false, false)]
+    [EventSubscriber(ObjectType::Table, Database::"SC - Parameters Collection", 'OnInitLineFieldValues', '', false, false)]
     local procedure OnInitLineFieldValues(var LineNodeBuff: Record "SC - XML Buffer (dotNET)"; var Params: Record "SC - Parameters Collection")
     var
         TextValue: Text[250];
@@ -15,9 +16,13 @@ codeunit 50118 ICPSCOrderFunctionsHandler
     var
 
     begin
-        SalesLine.Validate(MenuID, Params.ICPMenuId);
-        SalesLine.Modify(true);
+        if not SalesLine.IsEmpty then begin
+            SalesLine.MenuID := Params.ICPMenuId;
+            SalesLine.Modify(true);
+        end;
     end;
+
+
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"SC - Orders Functions", 'OnGetSalesLine', '', false, false)]
     local procedure OnGetSalesLine(var Params: Record "SC - Parameters Collection"; var SalesLine: Record "Sales Line"; var XMLNodeBuff: Record "SC - XML Buffer (dotNET)")

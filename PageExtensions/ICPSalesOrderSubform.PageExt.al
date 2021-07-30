@@ -11,6 +11,11 @@ pageextension 50118 ICPSalesOrderSubform extends "Sales Order Subform"
                 ApplicationArea = All;
             }
         }
+
+        modify("Requested Delivery Date")
+        {
+            Visible = true;
+        }
     }
 
     actions

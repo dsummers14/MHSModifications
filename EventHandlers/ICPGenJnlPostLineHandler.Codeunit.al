@@ -9,8 +9,19 @@ codeunit 50000 ICPGenJnlPostLineHandler
         DtldCVLedgEntryBuffer: Record "Detailed CV Ledg. Entry Buffer"
     )
     begin
-        // iCepts BRB 05.30.07 - Update Allocated Type
         DtldCustLedgEntry."Allocated Type" := GenJournalLine."Allocated Type";
+    end;
+
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Gen. Jnl.-Post Line", 'OnBeforeCustLedgEntryInsert', '', true, true)]
+    local procedure "Gen. Jnl.-Post Line_OnBeforeCustLedgEntryInsert"
+    (
+        var CustLedgerEntry: Record "Cust. Ledger Entry";
+        GenJournalLine: Record "Gen. Journal Line";
+        GLRegister: Record "G/L Register"
+    )
+    begin
+        CustLedgerEntry."Allocated Type" := GenJournalLine."Allocated Type";
     end;
 
 
