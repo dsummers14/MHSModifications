@@ -1,1 +1,1 @@
-﻿{"Added":[],"Modified":[],"Removed":[]}
+﻿{"Added":[],"Modified":[{"Id":50107,"Kind":17,"Name":"ICPSalesLine","PackagePath":"/src/TableExtensions/ICPSalesLine.TableExt.al"},{"Id":50119,"Kind":11,"Name":"ICPSCCustomOperations","PackagePath":"/src/Codeunits/ICPSCCustomOperations.Codeunit.al"},{"Id":50118,"Kind":11,"Name":"ICPSCOrderFunctionsHandler","PackagePath":"/src/EventHandlers/ICPSCOrderFunctionsHandler.Codeunit.al"}],"Removed":[]}

@@ -17,8 +17,17 @@ TableExtension 50107 ICPSalesLine extends "Sales Line"
         }
         field(57015; MenuID; Code[20])
         {
-              TableRelation = "Customer Menu Details".MenuID where(CustomerNo = field("Sell-to Customer No."));
+            TableRelation = "Customer Menu Details".MenuID where(CustomerNo = field("Sell-to Customer No."));
         }
+
+        field(5016; FoodItem; Boolean)
+        {
+            CalcFormula = lookup(Item.FoodItem where("No." = field("No.")));
+            Caption = 'Food Item';
+            Description = 'RFM5484';
+            FieldClass = FlowField;
+        }
+
 
     }
     keys

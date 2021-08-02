@@ -61,9 +61,9 @@ codeunit 50119 ICPSCCustomOperations
     var
         Params: Record "SC - Parameters Collection" temporary;
         CurrentPeriodFoodBudget: Decimal;
-        CurrentPeriodNonFoodBudget: Decimal;
+        CurrentQuarterNonFoodBudget: Decimal;
         NextPeriodFoodBudget: Decimal;
-        NextPeriodNonFoodBudget: Decimal;
+        NextQuarterNonFoodBudget: Decimal;
         CurrentPeriodStartDate: Date;
         CurrentPeriodEndDate: Date;
         NextPeriodStartDate: Date;
@@ -73,6 +73,9 @@ codeunit 50119 ICPSCCustomOperations
         NextQuarterStartDate: Date;
         NextQuarterEndDate: Date;
         CurrentPeriodOpenFoodOrderTotal: Decimal;
+        CurrentQuarterOpenNonFoodOrderTotal: Decimal;
+        NextPeriodOpenFoodOrderTotal: Decimal;
+        NextQuarterOpenNonFoodOrderTotal: Decimal;
 
     begin
         // Initialize parameters
@@ -82,16 +85,19 @@ codeunit 50119 ICPSCCustomOperations
         GetQuarterDates(CurrentPeriodStartDate, CurrentQuarterStartDate, CurrentQuarterEndDate, NextQuarterStartDate, NextQuarterEndDate);
 
         CurrentPeriodOpenFoodOrderTotal := GetOpenOrderTotal(Params.ICPCustomerId, true, CurrentPeriodStartDate, CurrentPeriodEndDate);
+        CurrentQuarterOpenNonFoodOrderTotal := GetOpenOrderTotal(Params.ICPCustomerId, false, CurrentQuarterStartDate, CurrentQuarterEndDate);
+        NextPeriodOpenFoodOrderTotal := GetOpenOrderTotal(Params.ICPCustomerId, true, NextPeriodStartDate, NextPeriodEndDate);
+        NextQuarterOpenNonFoodOrderTotal := GetOpenOrderTotal(Params.ICPCustomerId, false, NextQuarterStartDate, NextQuarterEndDate);
 
         CurrentPeriodFoodBudget := GetBalance(Params.ICPCustomerId, true, CurrentPeriodStartDate, CurrentPeriodEndDate);
         NextPeriodFoodBudget := GetBalance(Params.ICPCustomerId, true, NextPeriodStartDate, NextPeriodEndDate);
-        CurrentPeriodNonFoodBudget := GetBalance(Params.ICPCustomerId, false, CurrentQuarterStartDate, CurrentQuarterEndDate);
-        NextPeriodNonFoodBudget := GetBalance(Params.ICPCustomerId, false, NextQuarterStartDate, NextQuarterEndDate);
+        CurrentQuarterNonFoodBudget := GetBalance(Params.ICPCustomerId, false, CurrentQuarterStartDate, CurrentQuarterEndDate);
+        NextQuarterNonFoodBudget := GetBalance(Params.ICPCustomerId, false, NextQuarterStartDate, NextQuarterEndDate);
 
-        ResponseBuff.AddFieldElement('CurrentPeriodFoodBudget', format(CurrentPeriodFoodBudget));
-        ResponseBuff.AddFieldElement('NextPeriodFoodBudget', format(NextPeriodFoodBudget));
-        ResponseBuff.AddFieldElement('CurrentPeriodNonFoodBudget', format(CurrentPeriodNonFoodBudget));
-        ResponseBuff.AddFieldElement('NextPeriodNonFoodBudget', format(NextPeriodNonFoodBudget));
+        ResponseBuff.AddFieldElement('CurrentPeriodFoodBudget', format(CurrentPeriodFoodBudget + CurrentPeriodOpenFoodOrderTotal));
+        ResponseBuff.AddFieldElement('NextPeriodFoodBudget', format(NextPeriodFoodBudget + NextPeriodOpenFoodOrderTotal));
+        ResponseBuff.AddFieldElement('CurrentPeriodNonFoodBudget', format(CurrentQuarterNonFoodBudget + CurrentQuarterOpenNonFoodOrderTotal));
+        ResponseBuff.AddFieldElement('NextPeriodNonFoodBudget', format(NextQuarterNonFoodBudget + NextQuarterOpenNonFoodOrderTotal));
     end;
 
     procedure GetBalance(CustomerNo: code[20]; Food: Boolean; StartDate: Date; EndDate: Date): Decimal
