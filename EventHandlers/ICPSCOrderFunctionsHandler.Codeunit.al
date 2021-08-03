@@ -166,10 +166,10 @@ codeunit 50118 ICPSCOrderFunctionsHandler
             end;
 
         If SalesLine.Quantity < MinimumQty then
-            Message := StrSubstNo('The minimum order quatity for %1 is %2', MinimumQty, SalesLine."No.")
+            Message := StrSubstNo('The minimum order quatity for %1 is %2', SalesLine."No.", MinimumQty)
         else
             if (SalesLine.Quantity > MaximumQty) and (MaximumQty > 0) then
-                Message := StrSubstNo('The maximum order quatity for %1 is %2', MaximumQty, SalesLine."No.");
+                Message := StrSubstNo('The maximum order quatity for %1 is %2', SalesLine."No.", MaximumQty);
 
         exit(message);
     end;

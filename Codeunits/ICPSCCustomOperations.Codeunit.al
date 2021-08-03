@@ -47,10 +47,12 @@ codeunit 50119 ICPSCCustomOperations
                 PublishedMenuDetail.SetRange(ListName, PublishedMenuHeader.ListName);
                 if PublishedMenuDetail.FindSet() then
                     repeat
+                        PublishedMenuDetail.CalcFields("Food Allergen");
                         ProductsBuffer.AddElement(ProductBuffer, 'Product', '');
                         ProductBuffer.AddFieldElement('id', PublishedMenuDetail.ItemNo);
                         ProductBuffer.AddFieldElement('uom', PublishedMenuDetail.UOM);
-
+                        ProductBuffer.AddFieldElement('Allergen', format(PublishedMenuDetail."Food Allergen"));
+                        ProductBuffer.AddFieldElement('DeliveryDate', Format(PublishedMenuDetail.RequestDate));
                     until (PublishedMenuDetail.Next() = 0);
 
             until (PublishedMenuHeader.Next() = 0);
