@@ -11,6 +11,12 @@ tableextension 50116 ICPSCParametersCollection extends "SC - Parameters Collecti
         {
             Caption = 'Customer Id';
         }
+
+        field(50112; ICPAllocatedType; Option)
+        {
+            Caption = 'Allocated Type';
+            OptionMembers = " ",Food,"Non-Food";
+        }
     }
     procedure InitCustomParameters(var InXMLBuff: Record "SC - XML Buffer (dotNET)");
     var

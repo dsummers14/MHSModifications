@@ -180,7 +180,7 @@ Report 50094 "Home Remaining Balance Report"
                 //SalesHeader.SETRANGE("Order Date",FoodStartDate,FoodEndDate);
                 SalesHeader.SetRange("Sell-to Customer No.", "No.");
                 SalesHeader.SetRange("Document Type", SalesHeader."document type"::Order);
-                SalesHeader.SetRange("Allocated Type", SalesHeader."allocated type"::Food);
+                SalesHeader.SetRange("Allocated Type", SalesHeader."Allocated Type"::Food);
                 if SalesHeader.FindSet() then
                     repeat
                         // iCepts BRB 11.27.12 - SalesHeader.CALCFIELDS(Amount);
@@ -201,7 +201,7 @@ Report 50094 "Home Remaining Balance Report"
                 // iCepts BRB 11.27.12 - SalesHeader.SETRANGE("Order Date",NonFoodStartDate,NonFoodEndDate);
                 SalesHeader.SetRange("Sell-to Customer No.", "No.");
                 SalesHeader.SetRange("Document Type", SalesHeader."document type"::Order);
-                SalesHeader.SetRange("Allocated Type", SalesHeader."allocated type"::"Non-Food");
+                SalesHeader.SetRange("Allocated Type", SalesHeader."Allocated Type"::"Non-Food");
                 if SalesHeader.FindSet() then
                     repeat
                         // iCepts BRB 11.27.12 - SalesHeader.CALCFIELDS(Amount);

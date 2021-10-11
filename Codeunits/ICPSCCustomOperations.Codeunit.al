@@ -7,6 +7,7 @@ codeunit 50119 ICPSCCustomOperations
         RequestBuff: Record "SC - XML Buffer (dotNET)" temporary;
         ResponseBuff: Record "SC - XML Buffer (dotNET)" temporary;
         Context: Codeunit "SC - Execution Context";
+
     begin
         Context.GetRequestBuff(RequestBuff);
         Context.GetResponseBuff(ResponseBuff);
@@ -20,6 +21,73 @@ codeunit 50119 ICPSCCustomOperations
     end;
 
     local procedure GetDailyMenuList(var RequestBuff: Record "SC - XML Buffer (dotNET)"; var ResponseBuff: Record "SC - XML Buffer (dotNET)")
+    var
+        Params: Record "SC - Parameters Collection" temporary;
+        PublishedMenuHeader: Record PublishedMenuHeader;
+        PublishedMenuDetail: Record PublishedMenuDetails;
+        DailyMenuBuffer: Record "SC - XML Buffer (dotNET)";
+        ProductsBuffer: Record "SC - XML Buffer (dotNET)";
+        ProductBuffer: Record "SC - XML Buffer (dotNET)";
+        Validation: Codeunit "SC - Validation";
+        Counter: Integer;
+        CountOfRecords: Integer;
+        CanRead: Boolean;
+        Position: Integer;
+
+    begin
+        // Initialize parameters
+        Params.InitParams(RequestBuff, DATABASE::PublishedMenuHeader);
+        Validation.ValidatePageParameters(Params.PageIndex, Params.PageSize);
+        Params.InitCustomParameters(RequestBuff);
+
+        PublishedMenuHeader.SetFilter(CustomerNo, Params.ICPCustomerId);
+
+        /* if (Params.PageIndex <> 0) and (Params.PageSize <> 0) then
+            Position := Params.PageIndex * Params.PageSize;
+
+        if Position > 0 then
+            if PublishedMenuHeader.Next(Position) = 0 then
+                exit;
+ */
+        if PublishedMenuHeader.FindSet() then begin
+            CountOfRecords := PublishedMenuHeader.COUNT;
+            ResponseBuff.AddElement(DailyMenuBuffer, 'TotalCount', FORMAT(CountOfRecords));
+
+            if (Params.PageIndex * Params.PageSize) >= CountOfRecords then
+                exit;
+
+            if (Params.PageSize > 0) and (Params.PageIndex > 0) then
+                CanRead := PublishedMenuHeader.NEXT(Params.PageIndex * Params.PageSize) <> 0
+            else
+                CanRead := true;
+
+            while CanRead and ((Params.PageSize = 0) or (Counter < Params.PageSize)) do begin
+                Counter += 1;
+                ResponseBuff.AddElement(DailyMenuBuffer, 'DailyMenu', '');
+                DailyMenuBuffer.AddFieldElement('Id', PublishedMenuHeader.ListName);
+                DailyMenuBuffer.AddFieldElement('Description', PublishedMenuHeader.Description);
+
+                DailyMenuBuffer.AddElement(ProductsBuffer, 'Products', '');
+
+                PublishedMenuDetail.Reset();
+                PublishedMenuDetail.SetRange(CustomerNo, PublishedMenuHeader.CustomerNo);
+                PublishedMenuDetail.SetRange(ListName, PublishedMenuHeader.ListName);
+                if PublishedMenuDetail.FindSet() then
+                    repeat
+                        PublishedMenuDetail.CalcFields("Food Allergen");
+                        ProductsBuffer.AddElement(ProductBuffer, 'Product', '');
+                        ProductBuffer.AddFieldElement('id', PublishedMenuDetail.ItemNo);
+                        ProductBuffer.AddFieldElement('uom', PublishedMenuDetail.UOM);
+                        ProductBuffer.AddFieldElement('Allergen', format(PublishedMenuDetail."Food Allergen"));
+                        ProductBuffer.AddFieldElement('DeliveryDate', Format(PublishedMenuDetail.RequestDate));
+                    until (PublishedMenuDetail.Next() = 0);
+
+                CanRead := PublishedMenuHeader.NEXT() <> 0;
+            end;
+        end;
+    end;
+
+    local procedure GetDailyMenuListUnPaged(var RequestBuff: Record "SC - XML Buffer (dotNET)"; var ResponseBuff: Record "SC - XML Buffer (dotNET)")
     var
         Params: Record "SC - Parameters Collection" temporary;
         PublishedMenuHeader: Record PublishedMenuHeader;

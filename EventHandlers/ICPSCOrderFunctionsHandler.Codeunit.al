@@ -11,15 +11,14 @@ codeunit 50118 ICPSCOrderFunctionsHandler
         Params.ICPMenuId := CopyStr(TextValue, 1, 20);
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"SC - Order/Basket Functions", 'OnAfterAddDocumentLine', '', false, false)]
-    local procedure OnAfterAddDocumentLine(var SalesLine: Record "Sales Line"; var Params: Record "SC - Parameters Collection")
-    var
-
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"SC - Order/Basket Functions", 'OnBeforeInsertSalesLine', '', true, true)]
+    local procedure "SC - Order/Basket Functions_OnBeforeInsertSalesLine"
+    (
+        var SalesLine: Record "Sales Line";
+        var Params: Record "SC - Parameters Collection"
+    )
     begin
-        if not SalesLine.IsEmpty then begin
-            SalesLine.MenuID := Params.ICPMenuId;
-            SalesLine.Modify(true);
-        end;
+        SalesLine.MenuID := Params.ICPMenuId;
     end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"SC - Order/Basket Functions", 'OnAfterCreateDocResponse', '', true, true)]
@@ -49,9 +48,11 @@ codeunit 50118 ICPSCOrderFunctionsHandler
         NextQuarterStartDate: Date;
         NextQuarterEndDate: Date;
         Message: Text[250];
+        MessageCreated: Boolean;
 
     begin
         XMLNodeBuff.AddElement(ResultCollectionNodeBuff, 'OrderLimitValidationMessages', '');
+        MessageCreated := false;
 
         CustomOperations.GetPeriodDates(CurrentPeriodStartDate, CurrentPeriodEndDate, NextPeriodStartDate, NextPeriodEndDate);
         CustomOperations.GetQuarterDates(CurrentPeriodStartDate, CurrentQuarterStartDate, CurrentQuarterEndDate, NextQuarterStartDate, NextQuarterEndDate);
@@ -66,7 +67,7 @@ codeunit 50118 ICPSCOrderFunctionsHandler
         if (CurrentPeriodOpenFoodOrderTotal + BasketFoodTotal) > -CurrentPeriodFoodBalance then begin
             ResultCollectionNodeBuff.AddElement(CollectionNodeBuff, 'MessageItem', '');
             CollectionNodeBuff.AddFieldElement('Message', StrSubstNo('This order exceeds your Food Balance by $%1', (CurrentPeriodOpenFoodOrderTotal + BasketFoodTotal + CurrentPeriodFoodBalance)));
-
+            MessageCreated := true;
         end;
 
         BasketNonFoodTotal := GetBasketTotalByAllocationType(SalesHeader."No.", false);
@@ -74,11 +75,13 @@ codeunit 50118 ICPSCOrderFunctionsHandler
         if (CurrentQuarterOpenNonFoodOrderTotal + BasketNonFoodTotal) > -CurrentQuarterNonFoodBalance then begin
             ResultCollectionNodeBuff.AddElement(CollectionNodeBuff, 'MessageItem', '');
             CollectionNodeBuff.AddFieldElement('Message', StrSubstNo('This order exceeds your Non-Food Balance by $%1', (CurrentQuarterOpenNonFoodOrderTotal + BasketNonFoodTotal + CurrentQuarterNonFoodBalance)));
+            MessageCreated := true;
         end;
 
         if OrderTypeExistForToday(SalesHeader."Sell-to Customer No.", true) then begin
             ResultCollectionNodeBuff.AddElement(CollectionNodeBuff, 'MessageItem', '');
             CollectionNodeBuff.AddFieldElement('Message', 'You are only allowed to place one Food order per day');
+            MessageCreated := true;
         end;
 
         if OrderTypeExistForToday(SalesHeader."Sell-to Customer No.", false) then begin
@@ -96,10 +99,77 @@ codeunit 50118 ICPSCOrderFunctionsHandler
                 if Message <> '' then begin
                     ResultCollectionNodeBuff.AddElement(CollectionNodeBuff, 'MessageItem', '');
                     CollectionNodeBuff.AddFieldElement('Message', Message);
+                    MessageCreated := true;
                 end;
 
             until (SalesLine.next() = 0);
 
+        if not Params.IsBasket(XMLNodeBuff) and not MessageCreated then begin
+            SalesLine.Reset();
+            SalesLine.setRange("Document Type", SalesHeader."Document Type");
+            SalesLine.SetRange("Document No.", SalesHeader."No.");
+
+            if SalesLine.FindFirst() then begin
+                SalesLine.CalcFields(FoodItem);
+
+                if SalesLine.FoodItem then
+                    SalesHeader."Allocated Type" := SalesHeader."Allocated Type"::Food
+                else
+                    SalesHeader."Allocated Type" := SalesHeader."Allocated Type"::"Non-Food";
+
+                SalesHeader.Modify();
+
+                SplitOrderByAllocatedType(SalesHeader, SalesLine);
+            end;
+        end;
+    end;
+
+    local procedure SplitOrderByAllocatedType(var SalesHeader: Record "Sales Header"; var SalesLine: record "Sales Line")
+    var
+        NewSalesHeader: Record "Sales Header";
+        FoodItem: Boolean;
+    begin
+        FoodItem := (SalesHeader."Allocated Type" = SaLesHeader."Allocated Type"::Food);
+
+        SalesLine.Reset();
+        SalesLine.setRange("Document Type", SalesHeader."Document Type");
+        SalesLine.SetRange("Document No.", SalesHeader."No.");
+        SalesLine.SetFilter(FoodItem, '<>%1', FoodItem);
+
+        IF SalesLine.FindSet() THEN begin
+            CreateSalesHeader(SalesHeader, NewSalesHeader, FoodItem);
+            CreateSalesLine(SalesLine, SalesHeader."No.", FoodItem);
+            SalesLine.Delete();
+        end;
+    end;
+
+    local procedure CreateSalesHeader(SalesHeader: Record "Sales Header"; var NewSalesHeader: Record "Sales Header"; FoodItem: Boolean)
+    var
+    begin
+        NewSalesHeader.Init();
+        NewSalesHeader."Document Type" := SalesHeader."Document Type";
+        NewSalesHeader.Validate("Sell-to Customer No.", SalesHeader."Sell-to Customer No.");
+        NewSalesHeader.InitFromSalesHeader(SalesHeader);
+
+        if FoodItem then
+            NewSalesHeader."Allocated Type" := NewSalesHeader."Allocated Type"::Food
+        ELSE
+            NewSalesHeader."Allocated Type" := NewSalesHeader."Allocated Type"::"Non-Food";
+
+        NewSalesHeader.Insert();
+    end;
+
+    local procedure CreateSalesLine(SalesLine: Record "Sales Line"; DocumentNo: code[20]; FoodItem: Boolean)
+    var
+        NewSalesLine: Record "Sales Line";
+    begin
+        NewSalesLine.Init();
+        NewSalesLine."Document Type" := SalesLine."Document Type";
+        NewSalesLine."Document No." := DocumentNo;
+        NewSalesLine.Validate("No.", SalesLine."No.");
+        NewSalesLine.Validate(Quantity, SalesLine.Quantity);
+        NewSalesLine.FoodItem := FoodItem;
+        NewSalesLine.Insert();
     end;
 
     local procedure GetBasketTotalByAllocationType(OrderNo: code[20]; Food: Boolean): Decimal
@@ -166,10 +236,10 @@ codeunit 50118 ICPSCOrderFunctionsHandler
             end;
 
         If SalesLine.Quantity < MinimumQty then
-            Message := StrSubstNo('The minimum order quatity for %1 is %2', SalesLine."No.", MinimumQty)
+            Message := StrSubstNo('The minimum order quantity for %1 is %2', SalesLine."No.", MinimumQty)
         else
             if (SalesLine.Quantity > MaximumQty) and (MaximumQty > 0) then
-                Message := StrSubstNo('The maximum order quatity for %1 is %2', SalesLine."No.", MaximumQty);
+                Message := StrSubstNo('The maximum order quantity for %1 is %2', SalesLine."No.", MaximumQty);
 
         exit(message);
     end;

@@ -20,7 +20,7 @@ TableExtension 50107 ICPSalesLine extends "Sales Line"
             TableRelation = "Customer Menu Details".MenuID where(CustomerNo = field("Sell-to Customer No."));
         }
 
-        field(5016; FoodItem; Boolean)
+        field(57016; FoodItem; Boolean)
         {
             CalcFormula = lookup(Item.FoodItem where("No." = field("No.")));
             Caption = 'Food Item';
@@ -30,6 +30,8 @@ TableExtension 50107 ICPSalesLine extends "Sales Line"
 
 
     }
+
+
     keys
     {
         // Unsupported feature: Key containing base fields
@@ -52,5 +54,19 @@ TableExtension 50107 ICPSalesLine extends "Sales Line"
         // {
         // }
     }
+
+    trigger OnAfterModify()
+    var
+        Customer: Record Customer;
+
+    begin
+        if Customer.Get(Rec."Sell-to Customer No.") then begin
+            Rec."Student Home Initials" := Customer."Student Home Initials";
+            Rec."Route No." := Customer."Route No.";
+            Rec."Delivery Stop" := Customer."Delivery Stop";
+            Rec."Student Allergies" := Customer."Student Allergies";
+        end;
+    end;
+
 }
 
